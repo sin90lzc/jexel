@@ -1,0 +1,22 @@
+package com.gadberry.utility.expression;
+
+import com.gadberry.utility.expression.operator.AdditionOperatorTests;
+import com.gadberry.utility.expression.operator.CeilOperatorTests;
+import com.gadberry.utility.expression.operator.SubtractionOperatorTests;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
+public class AllTests {
+
+	public static Test suite() {
+		TestSuite suite = new TestSuite(
+				"Test for com.gadberry.utility.expression");
+		suite.addTestSuite(AdditionOperatorTests.class);
+		suite.addTestSuite(SubtractionOperatorTests.class);
+		suite.addTestSuite(CeilOperatorTests.class);
+		// suite.addTestSuite(ExpressionTests.class);
+		return suite;
+	}
+
+}
