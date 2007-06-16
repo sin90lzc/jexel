@@ -3,6 +3,7 @@ package com.gadberry.utility.expression.operator;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gadberry.utility.FuzzyEquals;
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
@@ -10,8 +11,6 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 import junit.framework.TestCase;
 
 public class AdditionOperatorTests extends TestCase {
-
-	public static double TOLERANCE = .0001;
 
 	private AdditionOperator op = null;
 
@@ -246,11 +245,6 @@ public class AdditionOperatorTests extends TestCase {
 	 * determining equality.
 	 */
 	public boolean assertEquals(double d1, double d2) {
-		if (d1 == d2) {
-			return true;
-		} else if (Math.abs(d2 - d1) < TOLERANCE) {
-			return true;
-		}
-		return false;
+		return FuzzyEquals.equals(d1, d2);
 	}
 }

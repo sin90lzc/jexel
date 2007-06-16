@@ -10,13 +10,13 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 
 import junit.framework.TestCase;
 
-public class CeilOperatorTests extends TestCase {
+public class FloorOperatorTests extends TestCase {
 
-	private CeilOperator op = null;
+	private FloorOperator op = null;
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		op = new CeilOperator();
+		op = new FloorOperator();
 	}
 
 	protected void tearDown() throws Exception {
@@ -25,16 +25,16 @@ public class CeilOperatorTests extends TestCase {
 	}
 
 	/**
-	 * This checks basic rounding up
+	 * This checks basic functionality
 	 * 
-	 * Test: ceil( 1.1 )
+	 * Test: floor( 1.1 )
 	 */
 	public void testResolve1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1.1), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2d);
+			assertEquals(op.resolve(null).toDouble(), 1d);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -47,7 +47,7 @@ public class CeilOperatorTests extends TestCase {
 	/**
 	 * This checks whole number operation
 	 * 
-	 * Test: ceil( 3.0 )
+	 * Test: floor( 3.0 )
 	 */
 	public void testResolve2() {
 		List<Argument> args = new ArrayList<Argument>();
@@ -67,11 +67,31 @@ public class CeilOperatorTests extends TestCase {
 	/**
 	 * This checks a very small number
 	 * 
-	 * Test: ceil( 0.001 )
+	 * Test: floor( 0.001 )
 	 */
 	public void testResolve3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(0.001), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve(null).toDouble(), 0d);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks a number close to it's ceil
+	 * 
+	 * Test: floor( 1.999 )
+	 */
+	public void testResolve4() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(1.999), null));
 		try {
 			op.setArguments(args);
 			assertEquals(op.resolve(null).toDouble(), 1d);
@@ -85,36 +105,16 @@ public class CeilOperatorTests extends TestCase {
 	}
 
 	/**
-	 * This checks a number close to it's ceil
-	 * 
-	 * Test: ceil( 1.999 )
-	 */
-	public void testResolve4() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(1.999), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2d);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
 	 * This checks a small negetive small number
 	 * 
-	 * Test: ceil( -0.11 )
+	 * Test: floor( -0.11 )
 	 */
 	public void testResolve5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Float(-0.11), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0d);
+			assertEquals(op.resolve(null).toDouble(), -1d);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
