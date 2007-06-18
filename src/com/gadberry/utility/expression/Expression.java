@@ -8,10 +8,14 @@ import com.gadberry.utility.expression.operator.OperatorSet;
 
 public class Expression {
 
-	public static OperatorSet opSet = OperatorSet.getStandardOperatorSet();
+	private static OperatorSet opSet = OperatorSet.getStandardOperatorSet();
 
 	public static void setOperatorSet(OperatorSet os) {
 		opSet = os;
+	}
+	
+	public static OperatorSet getOperatorSet() {
+		return opSet;
 	}
 
 	/**
