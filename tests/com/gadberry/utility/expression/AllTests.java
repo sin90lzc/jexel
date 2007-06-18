@@ -25,6 +25,7 @@ public class AllTests {
 		suite.addTestSuite(ArgumentTests.class);
 		suite.addTestSuite(OperatorTests.class);
 		suite.addTestSuite(OperatorSetTests.class);
+		suite.addTestSuite(ExpressionTests.class);
 		
 		// Standard Operators
 		suite.addTestSuite(AdditionOperatorTests.class);
@@ -39,7 +40,7 @@ public class AllTests {
 		suite.addTestSuite(CeilOperatorTests.class);
 		suite.addTestSuite(FloorOperatorTests.class);
 		
-		// suite.addTestSuite(ExpressionTests.class);
+		
 		return suite;
 	}
 
