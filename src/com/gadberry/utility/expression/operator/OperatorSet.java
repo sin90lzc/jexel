@@ -70,15 +70,27 @@ public class OperatorSet {
 	
 	public static OperatorSet getStandardOperatorSet(){
 		OperatorSet os = new OperatorSet();
+		// Standard Operators
 		os.addOperator("+", AdditionOperator.class);
 		os.addOperator("-", SubtractionOperator.class);
+		os.addOperator("*", MultiplicationOperator.class);
+		os.addOperator("/", DivisionOperator.class);
+		os.addOperator("%", ModuloOperator.class);
+		
+		// Functions
 		os.addOperator("max", MaxOperator.class);
 		os.addOperator("min", MinOperator.class);
 		os.addOperator("floor", FloorOperator.class);
 		os.addOperator("ceil", CeilOperator.class);
-		os.addOperator("*", MultiplicationOperator.class);
-		os.addOperator("/", DivisionOperator.class);
-		os.addOperator("%", ModuloOperator.class);
+		os.addOperator("neg", NegOperator.class);
+		os.addOperator("abs", AbsOperator.class);
+		os.addOperator("cos", CosOperator.class);
+		os.addOperator("sin", SinOperator.class);
+		os.addOperator("tan", TanOperator.class);
+		os.addOperator("acos", AcosOperator.class);
+		os.addOperator("asin", AcosOperator.class);
+		os.addOperator("atan", AcosOperator.class);
+		
 		return os;
 	}
 
