@@ -34,7 +34,7 @@ public class CeilOperatorTests extends TestCase {
 		args.add(new Argument(new Double(1.1), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2d);
+			assertEquals(op.resolve(null).toDouble(), 2d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -54,7 +54,7 @@ public class CeilOperatorTests extends TestCase {
 		args.add(new Argument(new Double(3.0), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 3d);
+			assertEquals(op.resolve(null).toDouble(), 3d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -74,7 +74,7 @@ public class CeilOperatorTests extends TestCase {
 		args.add(new Argument(new Double(0.001), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 1d);
+			assertEquals(op.resolve(null).toDouble(), 1d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -94,7 +94,7 @@ public class CeilOperatorTests extends TestCase {
 		args.add(new Argument(new Double(1.999), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2d);
+			assertEquals(op.resolve(null).toDouble(), 2d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -114,7 +114,7 @@ public class CeilOperatorTests extends TestCase {
 		args.add(new Argument(new Float(-0.11), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0d);
+			assertEquals(op.resolve(null).toDouble(), 0d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -186,13 +186,5 @@ public class CeilOperatorTests extends TestCase {
 	 */
 	public void testGetType() {
 		assertEquals(op.getType(), Operator.FUNCTION);
-	}
-
-	/**
-	 * Overridden equals for doubles that takes a tolerance into account when
-	 * determining equality.
-	 */
-	public boolean assertEquals(double d1, double d2) {
-		return FuzzyEquals.equals(d1, d2);
 	}
 }

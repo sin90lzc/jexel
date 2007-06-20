@@ -35,7 +35,7 @@ public class AdditionOperatorTests extends TestCase {
 		args.add(new Argument(new Integer(2), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 3d);
+			assertEquals(op.resolve(null).toDouble(), 3d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -56,7 +56,7 @@ public class AdditionOperatorTests extends TestCase {
 		args.add(new Argument(new Float(2.22), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 3.33d);
+			assertEquals(op.resolve(null).toDouble(), 3.33d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -77,7 +77,7 @@ public class AdditionOperatorTests extends TestCase {
 		args.add(new Argument(new Float(2.22), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 1003.22d);
+			assertEquals(op.resolve(null).toDouble(), 1003.22d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -98,7 +98,7 @@ public class AdditionOperatorTests extends TestCase {
 		args.add(new Argument(new Float(0.11), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 1111.11);
+			assertEquals(op.resolve(null).toDouble(), 1111.11, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -119,7 +119,7 @@ public class AdditionOperatorTests extends TestCase {
 		args.add(new Argument(new Float(-0.11), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0.04);
+			assertEquals(op.resolve(null).toDouble(), 0.04, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -238,13 +238,5 @@ public class AdditionOperatorTests extends TestCase {
 	 */
 	public void testGetType() {
 		assertEquals(op.getType(), Operator.STANDARD);
-	}
-
-	/**
-	 * Overridden equals for doubles that takes a tolerance into account when
-	 * determining equality.
-	 */
-	public boolean assertEquals(double d1, double d2) {
-		return FuzzyEquals.equals(d1, d2);
 	}
 }

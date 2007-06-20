@@ -35,7 +35,7 @@ public class ModuloOperatorTests extends TestCase {
 		args.add(new Argument(new Integer(3), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2d);
+			assertEquals(op.resolve(null).toDouble(), 2d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -56,7 +56,7 @@ public class ModuloOperatorTests extends TestCase {
 		args.add(new Argument(new Float(2), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0d);
+			assertEquals(op.resolve(null).toDouble(), 0d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -77,7 +77,7 @@ public class ModuloOperatorTests extends TestCase {
 		args.add(new Argument(new Float(2.5), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0d);
+			assertEquals(op.resolve(null).toDouble(), 0d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -98,7 +98,7 @@ public class ModuloOperatorTests extends TestCase {
 		args.add(new Argument(new Float(0.27), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0.22d);
+			assertEquals(op.resolve(null).toDouble(), 0.22d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -119,7 +119,7 @@ public class ModuloOperatorTests extends TestCase {
 		args.add(new Argument(new Float(-0.11), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0.04d);
+			assertEquals(op.resolve(null).toDouble(), 0.04d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -237,13 +237,5 @@ public class ModuloOperatorTests extends TestCase {
 	 */
 	public void testGetType() {
 		assertEquals(op.getType(), Operator.STANDARD);
-	}
-
-	/**
-	 * Overridden equals for doubles that takes a tolerance into account when
-	 * determining equality.
-	 */
-	public boolean assertEquals(double d1, double d2) {
-		return FuzzyEquals.equals(d1, d2);
 	}
 }

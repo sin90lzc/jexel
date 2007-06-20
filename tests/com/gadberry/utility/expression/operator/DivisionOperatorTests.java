@@ -35,11 +35,10 @@ public class DivisionOperatorTests extends TestCase {
 		args.add(new Argument(new Integer(4), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2d);
+			assertEquals(op.resolve(null).toDouble(), 2d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
+			fail();		} catch (ArgumentCastException e) {
 			e.printStackTrace();
 			fail();
 		}
@@ -56,7 +55,7 @@ public class DivisionOperatorTests extends TestCase {
 		args.add(new Argument(new Float(2), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2.5d);
+			assertEquals(op.resolve(null).toDouble(), 2.5d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -77,7 +76,7 @@ public class DivisionOperatorTests extends TestCase {
 		args.add(new Argument(new Float(2.5), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2d);
+			assertEquals(op.resolve(null).toDouble(), 2d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -98,7 +97,7 @@ public class DivisionOperatorTests extends TestCase {
 		args.add(new Argument(new Float(5), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0.5d);
+			assertEquals(op.resolve(null).toDouble(), 0.5d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -119,7 +118,7 @@ public class DivisionOperatorTests extends TestCase {
 		args.add(new Argument(new Float(0.25), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 4444);
+			assertEquals(op.resolve(null).toDouble(), 4444d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -132,15 +131,15 @@ public class DivisionOperatorTests extends TestCase {
 	/**
 	 * This checks a positive small number and a negetive small number
 	 * 
-	 * Test: 0.15 / -0.11
+	 * Test: 0.15 / -0.10
 	 */
 	public void testResolve6() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(0.15), null));
-		args.add(new Argument(new Float(-0.11), null));
+		args.add(new Argument(new Float(-0.10), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), -0.04d);
+			assertEquals(op.resolve(null).toDouble(), -1.5d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -259,13 +258,5 @@ public class DivisionOperatorTests extends TestCase {
 	 */
 	public void testGetType() {
 		assertEquals(op.getType(), Operator.STANDARD);
-	}
-
-	/**
-	 * Overridden equals for doubles that takes a tolerance into account when
-	 * determining equality.
-	 */
-	public boolean assertEquals(double d1, double d2) {
-		return FuzzyEquals.equals(d1, d2);
 	}
 }
