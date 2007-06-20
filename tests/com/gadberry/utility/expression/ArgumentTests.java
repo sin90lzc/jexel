@@ -37,7 +37,7 @@ public class ArgumentTests extends TestCase {
 	public void testToDouble() {
 		arg = new Argument(new Integer(0), new MockResolver());
 		try {
-			assertEquals(arg.toDouble(), 0d);
+			assertEquals(arg.toDouble(), 0d, FuzzyEquals.TOLERANCE);
 		} catch (ArgumentCastException e) {
 			e.printStackTrace();
 			fail();
@@ -45,7 +45,7 @@ public class ArgumentTests extends TestCase {
 
 		arg = new Argument(new Float(1.1), new MockResolver());
 		try {
-			assertEquals(arg.toDouble(), 1.1d);
+			assertEquals(arg.toDouble(), 1.1d, FuzzyEquals.TOLERANCE);
 		} catch (ArgumentCastException e) {
 			e.printStackTrace();
 			fail();
@@ -53,7 +53,7 @@ public class ArgumentTests extends TestCase {
 
 		arg = new Argument(new Double(1.2), new MockResolver());
 		try {
-			assertEquals(arg.toDouble(), 1.2d);
+			assertEquals(arg.toDouble(), 1.2d, FuzzyEquals.TOLERANCE);
 		} catch (ArgumentCastException e) {
 			e.printStackTrace();
 			fail();
@@ -100,13 +100,5 @@ public class ArgumentTests extends TestCase {
 		arg = new Argument("abc", new MockResolver());
 		arg2 = new Argument("def", new MockResolver());
 		assertFalse(arg.equals(arg2));
-	}
-
-	/**
-	 * Overridden equals for doubles that takes a tolerance into account when
-	 * determining equality.
-	 */
-	public boolean assertEquals(double d1, double d2) {
-		return FuzzyEquals.equals(d1, d2);
 	}
 }
