@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
-import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 import com.gadberry.utility.expression.Resolver;
 
@@ -28,16 +27,13 @@ public class MaxOperator extends Operator {
 
 	public Argument resolve(Resolver resolver) {
 		double max = 0;
-		try {
-			Iterator<Argument> iter = getArguments().iterator();
-			max = iter.next().toDouble();
-			while (iter.hasNext()) {
-				Argument arg = iter.next();
-				if (max < arg.toDouble()) {
-					max = arg.toDouble();
-				}
+		Iterator<Argument> iter = getArguments().iterator();
+		max = iter.next().toDouble();
+		while (iter.hasNext()) {
+			Argument arg = iter.next();
+			if (max < arg.toDouble()) {
+				max = arg.toDouble();
 			}
-		} catch (ArgumentCastException e) {
 		}
 		return new Argument(new Double(max), resolver);
 	}

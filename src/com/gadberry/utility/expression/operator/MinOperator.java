@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
-import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 import com.gadberry.utility.expression.Resolver;
 
@@ -28,16 +27,13 @@ public class MinOperator extends Operator {
 
 	public Argument resolve(Resolver resolver) {
 		double min = 0;
-		try {
-			Iterator<Argument> iter = getArguments().iterator();
-			min = iter.next().toDouble();
-			while (iter.hasNext()) {
-				Argument arg = iter.next();
-				if (min > arg.toDouble()) {
-					min = arg.toDouble();
-				}
+		Iterator<Argument> iter = getArguments().iterator();
+		min = iter.next().toDouble();
+		while (iter.hasNext()) {
+			Argument arg = iter.next();
+			if (min > arg.toDouble()) {
+				min = arg.toDouble();
 			}
-		} catch (ArgumentCastException e) {
 		}
 		return new Argument(new Double(min), resolver);
 	}

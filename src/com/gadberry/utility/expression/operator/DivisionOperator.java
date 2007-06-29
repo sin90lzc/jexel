@@ -3,7 +3,6 @@ package com.gadberry.utility.expression.operator;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
-import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 import com.gadberry.utility.expression.Resolver;
 
@@ -23,14 +22,9 @@ public class DivisionOperator extends Operator {
 	}
 
 	public Argument resolve(Resolver resolver) {
-		try {
-			double lhs = getArgument(0).toDouble();
-			double rhs = getArgument(1).toDouble();
-			return new Argument(new Double(lhs / rhs), resolver);
-		} catch (ArgumentCastException e) {
-		}
-		return null;
-
+		double lhs = getArgument(0).toDouble();
+		double rhs = getArgument(1).toDouble();
+		return new Argument(new Double(lhs / rhs), resolver);
 	}
 
 	public int getPriority() {
