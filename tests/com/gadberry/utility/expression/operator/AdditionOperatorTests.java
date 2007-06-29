@@ -25,11 +25,11 @@ public class AdditionOperatorTests extends TestCase {
 	}
 
 	/**
-	 * This checks basic addition
+	 * This checks basic double addition
 	 * 
 	 * Test: 1 + 2
 	 */
-	public void testResolve1() {
+	public void testResolveDouble1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Integer(1), null));
 		args.add(new Argument(new Integer(2), null));
@@ -50,7 +50,7 @@ public class AdditionOperatorTests extends TestCase {
 	 * 
 	 * Test: 1.11 + 2.22
 	 */
-	public void testResolve2() {
+	public void testResolveDouble2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1.11), null));
 		args.add(new Argument(new Float(2.22), null));
@@ -71,7 +71,7 @@ public class AdditionOperatorTests extends TestCase {
 	 * 
 	 * Test: 1001 + 2.22
 	 */
-	public void testResolve3() {
+	public void testResolveDouble3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1001), null));
 		args.add(new Argument(new Float(2.22), null));
@@ -92,7 +92,7 @@ public class AdditionOperatorTests extends TestCase {
 	 * 
 	 * Test: 1111 + 0.11
 	 */
-	public void testResolve4() {
+	public void testResolveDouble4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1111), null));
 		args.add(new Argument(new Float(0.11), null));
@@ -113,7 +113,7 @@ public class AdditionOperatorTests extends TestCase {
 	 * 
 	 * Test: 0.15 + -0.11
 	 */
-	public void testResolve5() {
+	public void testResolveDouble5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(0.15), null));
 		args.add(new Argument(new Float(-0.11), null));
@@ -124,6 +124,42 @@ public class AdditionOperatorTests extends TestCase {
 			e.printStackTrace();
 			fail();
 		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+	/**
+	 * This checks basic string addition
+	 * 
+	 * Test: abc + def
+	 */
+	public void testResolveString1() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument("abc", null));
+		args.add(new Argument("def", null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve(null).toString(), "abcdef");
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+	/**
+	 * This checks basic string addition
+	 * 
+	 * Test: abc + 1.0
+	 */
+	public void testResolveString2() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument("abc", null));
+		args.add(new Argument(new Double(1), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve(null).toString(), "abc1.0");
+		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
 		}
@@ -179,46 +215,6 @@ public class AdditionOperatorTests extends TestCase {
 		args.add(new Argument(new Double(1), null));
 		args.add(new Argument(new Float(1), null));
 		args.add(new Argument(new Integer(1), null));
-		try {
-			op.setArguments(args);
-			fail();
-		} catch (InvalidArgumentsException e) {
-		}
-	}
-
-	/**
-	 * This checks non-double arguments. Should throw an exception for a
-	 * non-double argument.
-	 * 
-	 * Argument 1: 1
-	 * 
-	 * Argument 2: abc
-	 */
-	public void testCheckArgs4() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(1), null));
-		args.add(new Argument("abc", null));
-		try {
-			op.setArguments(args);
-			fail();
-		} catch (InvalidArgumentsException e) {
-		}
-	}
-
-	/**
-	 * This checks non-double arguments. Should throw an exception for a
-	 * non-double argument.
-	 * 
-	 * Same as the previous test but the arguments are in reverse order.
-	 * 
-	 * Argument 1: abc
-	 * 
-	 * Argument 2: 1
-	 */
-	public void testCheckArgs5() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument("abc", null));
-		args.add(new Argument(new Double(1), null));
 		try {
 			op.setArguments(args);
 			fail();
