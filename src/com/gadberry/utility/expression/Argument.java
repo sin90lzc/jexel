@@ -41,6 +41,34 @@ public class Argument {
 				"Argument can not be interpreted as an double.  Arg: "
 						+ this.arg.toString());
 	}
+	
+	public boolean isInteger() {
+		try {
+			toInteger();
+			return true;
+		} catch (ArgumentCastException e) {
+			return false;
+		}
+	}
+	
+	public int toInteger() throws ArgumentCastException {
+		if (this.arg instanceof Integer) {
+			return ((Integer) this.arg).intValue();
+		} else if (this.arg instanceof Double) {
+			return ((Double) this.arg).intValue();
+		} else if (this.arg instanceof Float) {
+			return ((Float) this.arg).intValue();
+		} else if (this.arg instanceof String) {
+			try {
+				return Integer.parseInt(((String) this.arg));
+			} catch (NumberFormatException e) {
+				// Allow to pass through to ArgumentCastException
+			}
+		}
+		throw new ArgumentCastException(
+				"Argument can not be interpreted as an integer.  Arg: "
+						+ this.arg.toString());
+	}
 
 	public String toString() {
 		return this.arg.toString();
