@@ -1,6 +1,6 @@
 package com.gadberry.utility.expression;
 
-public class ArgumentCastException extends Exception {
+public class ArgumentCastException extends RuntimeException {
 	/**
 	 * 
 	 */
