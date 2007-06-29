@@ -17,6 +17,7 @@ import com.gadberry.utility.expression.operator.NegOperatorTests;
 import com.gadberry.utility.expression.operator.OperatorSetTests;
 import com.gadberry.utility.expression.operator.OperatorTests;
 import com.gadberry.utility.expression.operator.SinOperatorTests;
+import com.gadberry.utility.expression.operator.SubstrOperatorTests;
 import com.gadberry.utility.expression.operator.SubtractionOperatorTests;
 import com.gadberry.utility.expression.operator.TanOperatorTests;
 
@@ -34,6 +35,8 @@ public class AllTests {
 		suite.addTestSuite(OperatorTests.class);
 		suite.addTestSuite(OperatorSetTests.class);
 		suite.addTestSuite(ExpressionTests.class);
+		
+		// Math Operators
 		
 		// Standard Operators
 		suite.addTestSuite(AdditionOperatorTests.class);
@@ -57,6 +60,10 @@ public class AllTests {
 		suite.addTestSuite(AcosOperatorTests.class);
 		suite.addTestSuite(AsinOperatorTests.class);
 		suite.addTestSuite(AtanOperatorTests.class);
+		
+		
+		//String Operators
+		suite.addTestSuite(SubstrOperatorTests.class);
 		
 		
 		return suite;
