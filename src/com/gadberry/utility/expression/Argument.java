@@ -1,5 +1,8 @@
 package com.gadberry.utility.expression;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class Argument {
 	private Object arg = null;
 
@@ -26,6 +29,8 @@ public class Argument {
 	public double toDouble() throws ArgumentCastException {
 		if (this.arg instanceof Integer) {
 			return ((Integer) this.arg).doubleValue();
+		} else if (this.arg instanceof Long) {
+			return ((Long) this.arg).doubleValue();
 		} else if (this.arg instanceof Double) {
 			return ((Double) this.arg).doubleValue();
 		} else if (this.arg instanceof Float) {
@@ -41,7 +46,7 @@ public class Argument {
 				"Argument can not be interpreted as an double.  Arg: "
 						+ this.arg.toString());
 	}
-	
+
 	public boolean isInteger() {
 		try {
 			toInteger();
@@ -50,10 +55,12 @@ public class Argument {
 			return false;
 		}
 	}
-	
+
 	public int toInteger() throws ArgumentCastException {
 		if (this.arg instanceof Integer) {
 			return ((Integer) this.arg).intValue();
+		} else if (this.arg instanceof Long) {
+			return ((Long) this.arg).intValue();
 		} else if (this.arg instanceof Double) {
 			return ((Double) this.arg).intValue();
 		} else if (this.arg instanceof Float) {
@@ -70,14 +77,34 @@ public class Argument {
 						+ this.arg.toString());
 	}
 
+	public boolean isDate() {
+		try {
+			toDate();
+			return true;
+		} catch (ArgumentCastException e) {
+			return false;
+		}
+	}
+
+	public Date toDate() throws ArgumentCastException {
+		if (this.arg instanceof Date) {
+			return ((Date) this.arg);
+		} else if (this.arg instanceof Calendar) {
+			return ((Calendar) this.arg).getTime();
+		}
+		throw new ArgumentCastException(
+				"Argument can not be interpreted as an integer.  Arg: "
+						+ this.arg.toString());
+	}
+
 	public String toString() {
 		return this.arg.toString();
 	}
-	
-	public boolean equals(Object o){
-		if(o instanceof Argument){
+
+	public boolean equals(Object o) {
+		if (o instanceof Argument) {
 			Argument a = (Argument) o;
-			if(isDouble() && a.isDouble()){
+			if (isDouble() && a.isDouble()) {
 				try {
 					return toDouble() == a.toDouble();
 				} catch (ArgumentCastException e) {
@@ -87,5 +114,9 @@ public class Argument {
 			}
 		}
 		return false;
+	}
+
+	public boolean isResolved() {
+		return isDate() || isDouble() || isInteger();
 	}
 }
