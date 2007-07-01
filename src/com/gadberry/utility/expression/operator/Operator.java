@@ -18,7 +18,8 @@ public abstract class Operator {
 
 	private List<Argument> arguments = null;
 
-	public void setArguments(List<Argument> args) throws InvalidArgumentsException {
+	public void setArguments(List<Argument> args)
+			throws InvalidArgumentsException {
 		List<Argument> resolvedArgs = resolveArgs(args);
 		checkArgs(resolvedArgs);
 		this.arguments = resolvedArgs;
@@ -28,11 +29,12 @@ public abstract class Operator {
 		List<Argument> resolvedArgs = new ArrayList<Argument>(args.size());
 		Iterator<Argument> iter = args.iterator();
 		while (iter.hasNext()) {
-			Argument arg = null;
-			try {
-				arg = Expression.evaluate(iter.next().toString());
-			} catch (InvalidExpressionException e) {
-				e.printStackTrace();
+			Argument arg = iter.next();
+			if (!arg.isResolved()) {
+				try {
+					arg = Expression.evaluate(arg.toString());
+				} catch (InvalidExpressionException e) {
+				}
 			}
 			resolvedArgs.add(arg);
 		}
