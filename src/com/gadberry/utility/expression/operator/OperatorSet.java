@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-
 public class OperatorSet {
 
 	private Map<String, Class<? extends Operator>> operators = new HashMap<String, Class<? extends Operator>>();
@@ -67,8 +66,8 @@ public class OperatorSet {
 	public int getOperatorLength(Class<? extends Operator> c) {
 		return getSymbol(c).length();
 	}
-	
-	public static OperatorSet getStandardOperatorSet(){
+
+	public static OperatorSet getStandardOperatorSet() {
 		OperatorSet os = new OperatorSet();
 		// Standard Operators
 		os.addOperator("+", AdditionOperator.class);
@@ -76,7 +75,7 @@ public class OperatorSet {
 		os.addOperator("*", MultiplicationOperator.class);
 		os.addOperator("/", DivisionOperator.class);
 		os.addOperator("%", ModuloOperator.class);
-		
+
 		// Functions
 		os.addOperator("max", MaxOperator.class);
 		os.addOperator("min", MinOperator.class);
@@ -90,7 +89,11 @@ public class OperatorSet {
 		os.addOperator("acos", AcosOperator.class);
 		os.addOperator("asin", AcosOperator.class);
 		os.addOperator("atan", AcosOperator.class);
+
+		os.addOperator("substr", SubstrOperator.class);
 		
+		os.addOperator("dateDifference", DateDifferenceOperator.class);
+
 		return os;
 	}
 
