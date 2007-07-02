@@ -105,10 +105,7 @@ public class Argument {
 		if (o instanceof Argument) {
 			Argument a = (Argument) o;
 			if (isDouble() && a.isDouble()) {
-				try {
-					return toDouble() == a.toDouble();
-				} catch (ArgumentCastException e) {
-				}
+				return toDouble() == a.toDouble();
 			} else {
 				return toString().equals(a.toString());
 			}
