@@ -42,6 +42,14 @@ public class ArgumentTests extends TestCase {
 			e.printStackTrace();
 			fail();
 		}
+		
+		arg = new Argument(new Long(1), new MockResolver());
+		try {
+			assertEquals(arg.toDouble(), 1d, FuzzyEquals.TOLERANCE);
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
 
 		arg = new Argument(new Float(1.1), new MockResolver());
 		try {
@@ -58,10 +66,67 @@ public class ArgumentTests extends TestCase {
 			e.printStackTrace();
 			fail();
 		}
+		
+		arg = new Argument("123.45", new MockResolver());
+		try {
+			assertEquals(arg.toDouble(), 123.45d, FuzzyEquals.TOLERANCE);
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
 
 		arg = new Argument("abc", new MockResolver());
 		try {
 			arg.toDouble();
+			fail();
+		} catch (ArgumentCastException e) {
+		}
+	}
+	
+	public void testToInteger() {
+		arg = new Argument(new Integer(0), new MockResolver());
+		try {
+			assertEquals(arg.toInteger(), 0, FuzzyEquals.TOLERANCE);
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+		
+		arg = new Argument(new Long(1), new MockResolver());
+		try {
+			assertEquals(arg.toInteger(), 1, FuzzyEquals.TOLERANCE);
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+
+		arg = new Argument(new Float(1.1), new MockResolver());
+		try {
+			assertEquals(arg.toInteger(), 1, FuzzyEquals.TOLERANCE);
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+
+		arg = new Argument(new Double(1.2), new MockResolver());
+		try {
+			assertEquals(arg.toInteger(), 1, FuzzyEquals.TOLERANCE);
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+		
+		arg = new Argument("123", new MockResolver());
+		try {
+			assertEquals(arg.toInteger(), 123, FuzzyEquals.TOLERANCE);
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+
+		arg = new Argument("abc", new MockResolver());
+		try {
+			arg.toInteger();
 			fail();
 		} catch (ArgumentCastException e) {
 		}
@@ -100,5 +165,9 @@ public class ArgumentTests extends TestCase {
 		arg = new Argument("abc", new MockResolver());
 		arg2 = new Argument("def", new MockResolver());
 		assertFalse(arg.equals(arg2));
+		
+		arg = new Argument("abc", new MockResolver());
+		String s = "abc";
+		assertFalse(arg.equals(s));
 	}
 }
