@@ -9,6 +9,44 @@ public class CalendarUtilsTests extends TestCase {
 	/**
 	 * Test for exactly one unit difference between two calendars
 	 */
+	public void testDifferenceInvalidUnit() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 0);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2000);
+		c2.set(Calendar.MONTH, 0);
+		c2.set(Calendar.DAY_OF_MONTH, 1);
+		c2.set(Calendar.HOUR_OF_DAY, 0);
+		c2.set(Calendar.MINUTE, 0);
+		c2.set(Calendar.SECOND, 0);
+		c2.set(Calendar.MILLISECOND, 0);
+
+		try {
+			assertEquals(
+					CalendarUtils.difference(c1, c2, Calendar.DAY_OF_WEEK), 1);
+			fail();
+		} catch (RuntimeException e) {
+		}
+
+		try {
+			assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
+					Calendar.DAY_OF_WEEK), 1);
+			fail();
+		} catch (RuntimeException e) {
+		}
+
+	}
+
+	/**
+	 * Test for exactly one unit difference between two calendars
+	 */
 	public void testDifferenceYear1() {
 		Calendar c1 = Calendar.getInstance();
 		c1.set(Calendar.YEAR, 2000);
