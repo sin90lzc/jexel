@@ -5,6 +5,7 @@ import com.gadberry.utility.expression.ExpressionTests;
 import com.gadberry.utility.expression.operator.AbsOperatorTests;
 import com.gadberry.utility.expression.operator.AcosOperatorTests;
 import com.gadberry.utility.expression.operator.AdditionOperatorTests;
+import com.gadberry.utility.expression.operator.AndOperatorTests;
 import com.gadberry.utility.expression.operator.AsinOperatorTests;
 import com.gadberry.utility.expression.operator.AtanOperatorTests;
 import com.gadberry.utility.expression.operator.CeilOperatorTests;
@@ -17,8 +18,10 @@ import com.gadberry.utility.expression.operator.MinOperatorTests;
 import com.gadberry.utility.expression.operator.ModuloOperatorTests;
 import com.gadberry.utility.expression.operator.MultiplicationOperatorTests;
 import com.gadberry.utility.expression.operator.NegOperatorTests;
+import com.gadberry.utility.expression.operator.NotOperatorTests;
 import com.gadberry.utility.expression.operator.OperatorSetTests;
 import com.gadberry.utility.expression.operator.OperatorTests;
+import com.gadberry.utility.expression.operator.OrOperatorTests;
 import com.gadberry.utility.expression.operator.SinOperatorTests;
 import com.gadberry.utility.expression.operator.SubstrOperatorTests;
 import com.gadberry.utility.expression.operator.SubtractionOperatorTests;
@@ -67,9 +70,14 @@ public class AllTests {
 		suite.addTestSuite(AsinOperatorTests.class);
 		suite.addTestSuite(AtanOperatorTests.class);
 
+		// Boolean Operators
+		suite.addTestSuite(AndOperatorTests.class);
+		suite.addTestSuite(OrOperatorTests.class);
+		suite.addTestSuite(NotOperatorTests.class);
+
 		// String Operators
 		suite.addTestSuite(SubstrOperatorTests.class);
-		
+
 		// Date Operators
 		suite.addTestSuite(DateDifferenceOperatorTests.class);
 

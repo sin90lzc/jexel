@@ -89,6 +89,12 @@ public class OperatorSet {
 		os.addOperator("acos", AcosOperator.class);
 		os.addOperator("asin", AcosOperator.class);
 		os.addOperator("atan", AcosOperator.class);
+		
+		os.addOperator("AND", AndOperator.class);
+		os.addOperator("&&", AndOperator.class);
+		os.addOperator("OR", OrOperator.class);
+		os.addOperator("||", OrOperator.class);
+		os.addOperator("not", NotOperator.class);
 
 		os.addOperator("substr", SubstrOperator.class);
 		

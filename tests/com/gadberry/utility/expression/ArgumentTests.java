@@ -9,8 +9,7 @@ public class ArgumentTests extends TestCase {
 	private Argument arg = null;
 
 	/**
-	 * Testing constructor
-	 * and getObject
+	 * Testing constructor and getObject
 	 */
 	public void testConstructor() {
 		Object o = new Integer(0);
@@ -42,7 +41,7 @@ public class ArgumentTests extends TestCase {
 			e.printStackTrace();
 			fail();
 		}
-		
+
 		arg = new Argument(new Long(1), new MockResolver());
 		try {
 			assertEquals(arg.toDouble(), 1d, FuzzyEquals.TOLERANCE);
@@ -66,7 +65,7 @@ public class ArgumentTests extends TestCase {
 			e.printStackTrace();
 			fail();
 		}
-		
+
 		arg = new Argument("123.45", new MockResolver());
 		try {
 			assertEquals(arg.toDouble(), 123.45d, FuzzyEquals.TOLERANCE);
@@ -82,7 +81,7 @@ public class ArgumentTests extends TestCase {
 		} catch (ArgumentCastException e) {
 		}
 	}
-	
+
 	public void testToInteger() {
 		arg = new Argument(new Integer(0), new MockResolver());
 		try {
@@ -91,7 +90,7 @@ public class ArgumentTests extends TestCase {
 			e.printStackTrace();
 			fail();
 		}
-		
+
 		arg = new Argument(new Long(1), new MockResolver());
 		try {
 			assertEquals(arg.toInteger(), 1, FuzzyEquals.TOLERANCE);
@@ -115,7 +114,7 @@ public class ArgumentTests extends TestCase {
 			e.printStackTrace();
 			fail();
 		}
-		
+
 		arg = new Argument("123", new MockResolver());
 		try {
 			assertEquals(arg.toInteger(), 123, FuzzyEquals.TOLERANCE);
@@ -129,6 +128,21 @@ public class ArgumentTests extends TestCase {
 			arg.toInteger();
 			fail();
 		} catch (ArgumentCastException e) {
+		}
+	}
+
+	public void testToBoolean() {
+		arg = new Argument(new Boolean(true), new MockResolver());
+		assertTrue(arg.toBoolean());
+
+		arg = new Argument(new Boolean(false), new MockResolver());
+		assertFalse(arg.toBoolean());
+
+		arg = new Argument(new String("abc"), new MockResolver());
+		try{
+			arg.toBoolean();
+			fail();
+		}catch(ArgumentCastException e){
 		}
 	}
 
@@ -153,7 +167,7 @@ public class ArgumentTests extends TestCase {
 		arg = new Argument(new Double(1.2), new MockResolver());
 		arg2 = new Argument(new Double(1.2), new MockResolver());
 		assertTrue(arg.equals(arg2));
-		
+
 		arg = new Argument(new Double(1.3), new MockResolver());
 		arg2 = new Argument(new Double(1.2), new MockResolver());
 		assertFalse(arg.equals(arg2));
@@ -161,11 +175,11 @@ public class ArgumentTests extends TestCase {
 		arg = new Argument("abc", new MockResolver());
 		arg2 = new Argument("abc", new MockResolver());
 		assertTrue(arg.equals(arg2));
-		
+
 		arg = new Argument("abc", new MockResolver());
 		arg2 = new Argument("def", new MockResolver());
 		assertFalse(arg.equals(arg2));
-		
+
 		arg = new Argument("abc", new MockResolver());
 		String s = "abc";
 		assertFalse(arg.equals(s));

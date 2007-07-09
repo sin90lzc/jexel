@@ -77,6 +77,30 @@ public class Argument {
 						+ this.arg.toString());
 	}
 
+	public boolean isBoolean() {
+		try {
+			toBoolean();
+			return true;
+		} catch (ArgumentCastException e) {
+			return false;
+		}
+	}
+
+	public boolean toBoolean() throws ArgumentCastException {
+		if (this.arg instanceof Boolean) {
+			return ((Boolean) this.arg).booleanValue();
+		} else if (this.arg instanceof String) {
+			if (((String) this.arg).equalsIgnoreCase("true")) {
+				return true;
+			} else if (((String) this.arg).equalsIgnoreCase("false")) {
+				return false;
+			}
+		}
+		throw new ArgumentCastException(
+				"Argument can not be interpreted as an boolean.  Arg: "
+						+ this.arg.getClass().toString() + this.arg.toString());
+	}
+
 	public boolean isDate() {
 		try {
 			toDate();
@@ -114,6 +138,6 @@ public class Argument {
 	}
 
 	public boolean isResolved() {
-		return isDate() || isDouble() || isInteger();
+		return isDate() || isDouble() || isInteger() || isBoolean();
 	}
 }
