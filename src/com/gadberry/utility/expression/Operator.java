@@ -12,4 +12,8 @@ public interface Operator {
 	Argument resolve(Resolver resolver);
 	
 	abstract int getPriority();
+	
+	abstract List<Argument> getArguments();
+	
+	abstract Argument getArgument(int i);
 }
