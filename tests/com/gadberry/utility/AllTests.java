@@ -5,6 +5,8 @@ import junit.framework.TestSuite;
 
 import com.gadberry.utility.expression.ArgumentTests;
 import com.gadberry.utility.expression.ExpressionTests;
+import com.gadberry.utility.expression.OperatorSetTests;
+import com.gadberry.utility.expression.OperatorTests;
 import com.gadberry.utility.expression.function.AbsFunctionTests;
 import com.gadberry.utility.expression.function.AcosFunctionTests;
 import com.gadberry.utility.expression.function.AsinFunctionTests;
@@ -25,8 +27,6 @@ import com.gadberry.utility.expression.symbol.AndOperatorTests;
 import com.gadberry.utility.expression.symbol.DivisionOperatorTests;
 import com.gadberry.utility.expression.symbol.ModuloOperatorTests;
 import com.gadberry.utility.expression.symbol.MultiplicationOperatorTests;
-import com.gadberry.utility.expression.symbol.OperatorSetTests;
-import com.gadberry.utility.expression.symbol.OperatorTests;
 import com.gadberry.utility.expression.symbol.OrOperatorTests;
 import com.gadberry.utility.expression.symbol.SubtractionOperatorTests;
 
