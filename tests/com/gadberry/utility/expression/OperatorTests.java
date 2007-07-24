@@ -1,4 +1,4 @@
-package com.gadberry.utility.expression.operator;
+package com.gadberry.utility.expression;
 
 import java.util.ArrayList;
 import java.util.List;

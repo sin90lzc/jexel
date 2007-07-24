@@ -1,4 +1,4 @@
-package com.gadberry.utility.expression.operator;
+package com.gadberry.utility.expression.symbol;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -251,12 +251,5 @@ public class DivisionOperatorTests extends TestCase {
 	 */
 	public void testGetPriority() {
 		assertEquals(op.getPriority(), 10);
-	}
-	
-	/**
-	 * Verify the type
-	 */
-	public void testGetType() {
-		assertEquals(op.getType(), Operator.STANDARD);
 	}
 }
