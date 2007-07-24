@@ -10,13 +10,13 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 
 import junit.framework.TestCase;
 
-public class ModuloOperatorTests extends TestCase {
+public class SubtractionSymbolTests extends TestCase {
 
-	private ModuloOperator op = null;
+	private SubtractionSymbol op = null;
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		op = new ModuloOperator();
+		op = new SubtractionSymbol();
 	}
 
 	protected void tearDown() throws Exception {
@@ -25,17 +25,17 @@ public class ModuloOperatorTests extends TestCase {
 	}
 
 	/**
-	 * This checks basic modulo
+	 * This checks basic subtraction
 	 * 
-	 * Test: 8 % 3
+	 * Test: 2 - 1
 	 */
 	public void testResolve1() {
 		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Integer(8), null));
-		args.add(new Argument(new Integer(3), null));
+		args.add(new Argument(new Integer(2), null));
+		args.add(new Argument(new Integer(1), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve(null).toDouble(), 1d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -46,17 +46,17 @@ public class ModuloOperatorTests extends TestCase {
 	}
 
 	/**
-	 * This checks even result
+	 * This checks floating point subtraction
 	 * 
-	 * Test: 4 / 2
+	 * Test: 3.33 - 2.22
 	 */
 	public void testResolve2() {
 		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(4), null));
-		args.add(new Argument(new Float(2), null));
+		args.add(new Argument(new Float(3.33), null));
+		args.add(new Argument(new Double(2.22), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve(null).toDouble(), 1.11d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -67,17 +67,17 @@ public class ModuloOperatorTests extends TestCase {
 	}
 
 	/**
-	 * This checks floating point modulo with one floating point
+	 * This checks floating point subtraction with one floating point
 	 * 
-	 * Test: 5 % 2.5
+	 * Test: 1001 - 2.22
 	 */
 	public void testResolve3() {
 		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(5), null));
-		args.add(new Argument(new Float(2.5), null));
+		args.add(new Argument(new Double(1001), null));
+		args.add(new Argument(new Float(2.22), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve(null).toDouble(), 998.78d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -86,19 +86,19 @@ public class ModuloOperatorTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This checks a large number and a number < 1
 	 * 
-	 * Test: 1111 / 0.27
+	 * Test: 1111 - 0.11
 	 */
-	public void testResolve5() {
+	public void testResolve4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1111), null));
-		args.add(new Argument(new Float(0.27), null));
+		args.add(new Argument(new Float(0.11), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0.22d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve(null).toDouble(), 1110.89, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -111,15 +111,15 @@ public class ModuloOperatorTests extends TestCase {
 	/**
 	 * This checks a positive small number and a negetive small number
 	 * 
-	 * Test: 0.15 % -0.11
+	 * Test: 0.15 - -0.11
 	 */
-	public void testResolve6() {
+	public void testResolve5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(0.15), null));
 		args.add(new Argument(new Float(-0.11), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0.04d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve(null).toDouble(), 0.26, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -185,6 +185,7 @@ public class ModuloOperatorTests extends TestCase {
 		} catch (InvalidArgumentsException e) {
 		}
 	}
+
 	/**
 	 * This checks non-double arguments. Should throw an exception for a
 	 * non-double argument.
@@ -229,6 +230,6 @@ public class ModuloOperatorTests extends TestCase {
 	 * Verify the priority
 	 */
 	public void testGetPriority() {
-		assertEquals(op.getPriority(), 10);
+		assertEquals(op.getPriority(), 1);
 	}
 }

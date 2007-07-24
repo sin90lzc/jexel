@@ -6,29 +6,29 @@ import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 import com.gadberry.utility.expression.Resolver;
 
-public class SubtractionOperator extends Symbol {
+public class AndSymbol extends Symbol {
 
 	protected void checkArgs(List<Argument> args)
 			throws InvalidArgumentsException {
 		if (args.size() != 2) {
 			throw new InvalidArgumentsException(
-					"SubtractionOperator requires two doubles.  Wrong number of arguments provided.");
+					"AndOperator requires two booleans.  Wrong number of arguments provided.");
 		}
 
-		if (!args.get(0).isDouble() || !args.get(1).isDouble()) {
+		if (!args.get(0).isBoolean() || !args.get(1).isBoolean()) {
 			throw new InvalidArgumentsException(
-					"SubtractionOperator requires two doubles.  Wrong type of arguments provided.");
+					"AndOperator requires two booleans.  Wrong type of arguments provided.");
 		}
 	}
 
 	public Argument resolve(Resolver resolver) {
-		double lhs = getArgument(0).toDouble();
-		double rhs = getArgument(1).toDouble();
-		return new Argument(new Double(lhs - rhs), resolver);
+		boolean lhs = getArgument(0).toBoolean();
+		boolean rhs = getArgument(1).toBoolean();
+		return new Argument(new Boolean(lhs && rhs), resolver);
 	}
 
 	public int getPriority() {
-		return 1;
+		return 10;
 	}
 
 }

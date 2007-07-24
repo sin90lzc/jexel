@@ -6,7 +6,7 @@ import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 import com.gadberry.utility.expression.Resolver;
 
-public class AdditionOperator extends Symbol {
+public class AdditionSymbol extends Symbol {
 
 	protected void checkArgs(List<Argument> args)
 			throws InvalidArgumentsException {

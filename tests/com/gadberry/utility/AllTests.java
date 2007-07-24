@@ -22,13 +22,13 @@ import com.gadberry.utility.expression.function.NotFunctionTests;
 import com.gadberry.utility.expression.function.SinFunctionTests;
 import com.gadberry.utility.expression.function.SubstrFunctionTests;
 import com.gadberry.utility.expression.function.TanFunctionTests;
-import com.gadberry.utility.expression.symbol.AdditionOperatorTests;
-import com.gadberry.utility.expression.symbol.AndOperatorTests;
-import com.gadberry.utility.expression.symbol.DivisionOperatorTests;
-import com.gadberry.utility.expression.symbol.ModuloOperatorTests;
-import com.gadberry.utility.expression.symbol.MultiplicationOperatorTests;
-import com.gadberry.utility.expression.symbol.OrOperatorTests;
-import com.gadberry.utility.expression.symbol.SubtractionOperatorTests;
+import com.gadberry.utility.expression.symbol.AdditionSymbolTests;
+import com.gadberry.utility.expression.symbol.AndSymbolTests;
+import com.gadberry.utility.expression.symbol.DivisionSymbolTests;
+import com.gadberry.utility.expression.symbol.ModuloSymbolTests;
+import com.gadberry.utility.expression.symbol.MultiplicationSymbolTests;
+import com.gadberry.utility.expression.symbol.OrSymbolTests;
+import com.gadberry.utility.expression.symbol.SubtractionSymbolTests;
 
 public class AllTests {
 
@@ -48,11 +48,11 @@ public class AllTests {
 		// Math Operators
 
 		// Standard Operators
-		suite.addTestSuite(AdditionOperatorTests.class);
-		suite.addTestSuite(SubtractionOperatorTests.class);
-		suite.addTestSuite(MultiplicationOperatorTests.class);
-		suite.addTestSuite(DivisionOperatorTests.class);
-		suite.addTestSuite(ModuloOperatorTests.class);
+		suite.addTestSuite(AdditionSymbolTests.class);
+		suite.addTestSuite(SubtractionSymbolTests.class);
+		suite.addTestSuite(MultiplicationSymbolTests.class);
+		suite.addTestSuite(DivisionSymbolTests.class);
+		suite.addTestSuite(ModuloSymbolTests.class);
 
 		// Function Operators
 		suite.addTestSuite(MaxFunctionTests.class);
@@ -71,8 +71,8 @@ public class AllTests {
 		suite.addTestSuite(AtanFunctionTests.class);
 
 		// Boolean Operators
-		suite.addTestSuite(AndOperatorTests.class);
-		suite.addTestSuite(OrOperatorTests.class);
+		suite.addTestSuite(AndSymbolTests.class);
+		suite.addTestSuite(OrSymbolTests.class);
 		suite.addTestSuite(NotFunctionTests.class);
 
 		// String Operators

@@ -19,13 +19,13 @@ import com.gadberry.utility.expression.function.NotFunction;
 import com.gadberry.utility.expression.function.SinFunction;
 import com.gadberry.utility.expression.function.SubstrFunction;
 import com.gadberry.utility.expression.function.TanFunction;
-import com.gadberry.utility.expression.symbol.AdditionOperator;
-import com.gadberry.utility.expression.symbol.AndOperator;
-import com.gadberry.utility.expression.symbol.DivisionOperator;
-import com.gadberry.utility.expression.symbol.ModuloOperator;
-import com.gadberry.utility.expression.symbol.MultiplicationOperator;
-import com.gadberry.utility.expression.symbol.OrOperator;
-import com.gadberry.utility.expression.symbol.SubtractionOperator;
+import com.gadberry.utility.expression.symbol.AdditionSymbol;
+import com.gadberry.utility.expression.symbol.AndSymbol;
+import com.gadberry.utility.expression.symbol.DivisionSymbol;
+import com.gadberry.utility.expression.symbol.ModuloSymbol;
+import com.gadberry.utility.expression.symbol.MultiplicationSymbol;
+import com.gadberry.utility.expression.symbol.OrSymbol;
+import com.gadberry.utility.expression.symbol.SubtractionSymbol;
 
 public class OperatorSet {
 
@@ -91,11 +91,11 @@ public class OperatorSet {
 	public static OperatorSet getStandardOperatorSet() {
 		OperatorSet os = new OperatorSet();
 		// Standard Operators
-		os.addOperator("+", AdditionOperator.class);
-		os.addOperator("-", SubtractionOperator.class);
-		os.addOperator("*", MultiplicationOperator.class);
-		os.addOperator("/", DivisionOperator.class);
-		os.addOperator("%", ModuloOperator.class);
+		os.addOperator("+", AdditionSymbol.class);
+		os.addOperator("-", SubtractionSymbol.class);
+		os.addOperator("*", MultiplicationSymbol.class);
+		os.addOperator("/", DivisionSymbol.class);
+		os.addOperator("%", ModuloSymbol.class);
 
 		// Functions
 		os.addOperator("max", MaxFunction.class);
@@ -111,10 +111,10 @@ public class OperatorSet {
 		os.addOperator("asin", AcosFunction.class);
 		os.addOperator("atan", AcosFunction.class);
 		
-		os.addOperator("AND", AndOperator.class);
-		os.addOperator("&&", AndOperator.class);
-		os.addOperator("OR", OrOperator.class);
-		os.addOperator("||", OrOperator.class);
+		os.addOperator("AND", AndSymbol.class);
+		os.addOperator("&&", AndSymbol.class);
+		os.addOperator("OR", OrSymbol.class);
+		os.addOperator("||", OrSymbol.class);
 		os.addOperator("not", NotFunction.class);
 
 		os.addOperator("substr", SubstrFunction.class);

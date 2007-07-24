@@ -3,8 +3,8 @@ package com.gadberry.utility.expression;
 import java.util.List;
 
 import com.gadberry.utility.expression.function.MaxFunction;
-import com.gadberry.utility.expression.symbol.AdditionOperator;
-import com.gadberry.utility.expression.symbol.SubtractionOperator;
+import com.gadberry.utility.expression.symbol.AdditionSymbol;
+import com.gadberry.utility.expression.symbol.SubtractionSymbol;
 
 import junit.framework.TestCase;
 
@@ -28,7 +28,7 @@ public class OperatorSetTests extends TestCase {
 		Operator op = null;
 
 		op = opSet.findOperator("+");
-		if (!(op instanceof AdditionOperator)) {
+		if (!(op instanceof AdditionSymbol)) {
 			fail();
 		}
 
@@ -42,7 +42,7 @@ public class OperatorSetTests extends TestCase {
 		Operator op = null;
 
 		op = opSet.findOperator("+");
-		if (!(op instanceof AdditionOperator)) {
+		if (!(op instanceof AdditionSymbol)) {
 			fail();
 		}
 		
@@ -53,23 +53,23 @@ public class OperatorSetTests extends TestCase {
 			fail();
 		}
 		
-		opSet.addOperator("+", AdditionOperator.class);
+		opSet.addOperator("+", AdditionSymbol.class);
 		op = opSet.findOperator("+");
-		if (!(op instanceof AdditionOperator)) {
+		if (!(op instanceof AdditionSymbol)) {
 			fail();
 		}
 	}
 	
 	public void testGetSymbol(){
-		assertEquals(opSet.getOperator(AdditionOperator.class), "+");
+		assertEquals(opSet.getOperator(AdditionSymbol.class), "+");
 		
 		assertNull(opSet.getOperator(Operator.class));
 	}
 	
 	public void testGetSymbols(){
 		opSet = new OperatorSet();
-		opSet.addOperator("+", AdditionOperator.class);
-		opSet.addOperator("-", SubtractionOperator.class);
+		opSet.addOperator("+", AdditionSymbol.class);
+		opSet.addOperator("-", SubtractionSymbol.class);
 		
 		List symbols = opSet.getOperators();
 		if(!symbols.contains("+")){
@@ -82,7 +82,7 @@ public class OperatorSetTests extends TestCase {
 	}
 	
 	public void testGetOperatorLength(){
-		assertEquals(opSet.getOperatorLength(AdditionOperator.class), 1);
+		assertEquals(opSet.getOperatorLength(AdditionSymbol.class), 1);
 		assertEquals(opSet.getOperatorLength(MaxFunction.class), 3);
 	}
 	

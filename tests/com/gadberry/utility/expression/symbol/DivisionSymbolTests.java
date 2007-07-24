@@ -10,13 +10,13 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 
 import junit.framework.TestCase;
 
-public class SubtractionOperatorTests extends TestCase {
+public class DivisionSymbolTests extends TestCase {
 
-	private SubtractionOperator op = null;
+	private DivisionSymbol op = null;
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		op = new SubtractionOperator();
+		op = new DivisionSymbol();
 	}
 
 	protected void tearDown() throws Exception {
@@ -25,38 +25,37 @@ public class SubtractionOperatorTests extends TestCase {
 	}
 
 	/**
-	 * This checks basic subtraction
+	 * This checks basic division
 	 * 
-	 * Test: 2 - 1
+	 * Test: 8 / 4
 	 */
 	public void testResolve1() {
 		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Integer(2), null));
-		args.add(new Argument(new Integer(1), null));
+		args.add(new Argument(new Integer(8), null));
+		args.add(new Argument(new Integer(4), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 1d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve(null).toDouble(), 2d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
+			fail();		} catch (ArgumentCastException e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
 
 	/**
-	 * This checks floating point subtraction
+	 * This checks floating point division
 	 * 
-	 * Test: 3.33 - 2.22
+	 * Test: 5 / 2
 	 */
 	public void testResolve2() {
 		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Float(3.33), null));
-		args.add(new Argument(new Double(2.22), null));
+		args.add(new Argument(new Double(5), null));
+		args.add(new Argument(new Float(2), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 1.11d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve(null).toDouble(), 2.5d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -67,17 +66,38 @@ public class SubtractionOperatorTests extends TestCase {
 	}
 
 	/**
-	 * This checks floating point subtraction with one floating point
+	 * This checks floating point division with one floating point
 	 * 
-	 * Test: 1001 - 2.22
+	 * Test: 5 / 2.5
 	 */
 	public void testResolve3() {
 		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(1001), null));
-		args.add(new Argument(new Float(2.22), null));
+		args.add(new Argument(new Double(5), null));
+		args.add(new Argument(new Float(2.5), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 998.78d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve(null).toDouble(), 2d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+	/**
+	 * This checks floating point division with one floating point and a divisior greater than a dividend
+	 * 
+	 * Test: 2.5 / 5
+	 */
+	public void testResolve4() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(2.5), null));
+		args.add(new Argument(new Float(5), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve(null).toDouble(), 0.5d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -90,15 +110,15 @@ public class SubtractionOperatorTests extends TestCase {
 	/**
 	 * This checks a large number and a number < 1
 	 * 
-	 * Test: 1111 - 0.11
+	 * Test: 1111 / 0.25
 	 */
-	public void testResolve4() {
+	public void testResolve5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1111), null));
-		args.add(new Argument(new Float(0.11), null));
+		args.add(new Argument(new Float(0.25), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 1110.89, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve(null).toDouble(), 4444d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -111,15 +131,15 @@ public class SubtractionOperatorTests extends TestCase {
 	/**
 	 * This checks a positive small number and a negetive small number
 	 * 
-	 * Test: 0.15 - -0.11
+	 * Test: 0.15 / -0.10
 	 */
-	public void testResolve5() {
+	public void testResolve6() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(0.15), null));
-		args.add(new Argument(new Float(-0.11), null));
+		args.add(new Argument(new Float(-0.10), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0.26, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve(null).toDouble(), -1.5d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -230,6 +250,6 @@ public class SubtractionOperatorTests extends TestCase {
 	 * Verify the priority
 	 */
 	public void testGetPriority() {
-		assertEquals(op.getPriority(), 1);
+		assertEquals(op.getPriority(), 10);
 	}
 }

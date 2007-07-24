@@ -9,13 +9,13 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 
 import junit.framework.TestCase;
 
-public class OrOperatorTests extends TestCase {
+public class OrSymbolTests extends TestCase {
 
-	private OrOperator op = null;
+	private OrSymbol op = null;
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		op = new OrOperator();
+		op = new OrSymbol();
 	}
 
 	protected void tearDown() throws Exception {

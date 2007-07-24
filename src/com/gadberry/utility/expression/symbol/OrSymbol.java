@@ -6,7 +6,7 @@ import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 import com.gadberry.utility.expression.Resolver;
 
-public class OrOperator extends Symbol {
+public class OrSymbol extends Symbol {
 
 	protected void checkArgs(List<Argument> args)
 			throws InvalidArgumentsException {
