@@ -10,8 +10,38 @@ public class ExpressionTests extends TestCase {
 
 	public void testEvaluate() {
 		try {
-			assertEquals(Expression.evaluate("max( ( 1 + 2 ), 2 + 3 )"),
+			assertEquals(Expression.evaluate("max( ( 1 + 2 ), 2 + 3 ) + 1"),
+					new Argument(new Double(6), null));
+		} catch (InvalidExpressionException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+	public void testEvaluateInvalidExpression() {
+		try {
+			assertEquals(Expression.evaluate("max( ( 1 + 2 , 2 + 3 )"),
 					new Argument(new Double(5), null));
+			fail();
+		} catch (InvalidExpressionException e) {
+		}
+	}
+	
+	public void testEvaluateExpressionWithInvalidArguments() {
+		try {
+			assertEquals(Expression.evaluate("max( 1, a, 2 )"),
+					new Argument("max( 1, a, 2 )", null));
+		} catch (InvalidExpressionException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+	public void testEvaluateNonExpression() {
+		try {
+			assertEquals(Expression.evaluate("1"),
+					new Argument(new Double(1), null));
+			
 		} catch (InvalidExpressionException e) {
 			e.printStackTrace();
 			fail();

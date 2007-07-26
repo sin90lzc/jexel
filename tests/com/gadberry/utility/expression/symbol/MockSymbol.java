@@ -1,4 +1,4 @@
-package com.gadberry.utility.expression.function;
+package com.gadberry.utility.expression.symbol;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 import com.gadberry.utility.expression.Resolver;
 
-public class MockFunction extends Function {
+public class MockSymbol extends Symbol {
 	
 	@Override
 	protected void checkArgs(List<Argument> args)
@@ -18,4 +18,12 @@ public class MockFunction extends Function {
 	public Argument resolve(Resolver resolver) {
 		return new Argument(1, resolver);
 	}
+
+	@Override
+	public int getPriority() {
+		return 10;
+	}
+
+	
+
 }

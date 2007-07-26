@@ -8,7 +8,7 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 
 import junit.framework.TestCase;
 
-public class OperatorTests extends TestCase {
+public class OperatorImplTests extends TestCase {
 
 	public static double TOLERANCE = .0001;
 
@@ -42,10 +42,10 @@ public class OperatorTests extends TestCase {
 	}
 	
 	/**
-	 * Testing argument resolution and getArgument(int)
+	 * Testing getArgument(int) and argument resolution
 	 *
 	 */
-	public void testResolveArguments() {
+	public void testGetArgument() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("1 + 1", null));
 		args.add(new Argument(new Integer(2), null));
@@ -53,6 +53,23 @@ public class OperatorTests extends TestCase {
 			op.setArguments(args);
 			assertEquals(op.getArgument(0), new Argument(new Double(2), null));
 			assertEquals(op.getArgument(1), new Argument(new Double(2), null));
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+	/**
+	 * Testing getArguments()
+	 *
+	 */
+	public void testGetArguments() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument("4", null));
+		args.add(new Argument(new Integer(2), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.getArguments(), args);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();

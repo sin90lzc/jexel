@@ -42,13 +42,13 @@ public class SubstrFunction extends Function {
 	public Argument resolve(Resolver resolver) {
 		String s = getArgument(0).toString();
 		int start = getArgument(1).toInteger();
+		Argument result = null;
 		if (getArguments().size() == 2) {
-			return new Argument(s.substring(start), resolver);
+			result = new Argument(s.substring(start), resolver);
 		} else if (getArguments().size() == 3) {
 			int end = getArgument(2).toInteger();
-			return new Argument(s.substring(start, end), resolver);
+			result = new Argument(s.substring(start, end), resolver);
 		}
-		return null;
-
+		return result;
 	}
 }

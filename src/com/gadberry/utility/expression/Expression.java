@@ -75,7 +75,7 @@ public class Expression {
 	private static Operator chooseDelimeter(String expression, Resolver resolver) {
 		List<Operator> potentialDelimeters = getPotentialDelimeters(expression,
 				resolver);
-		return getLowestPriorityDelimeter(potentialDelimeters);
+		return getLowestPriorityOperator(potentialDelimeters);
 
 	}
 
@@ -107,7 +107,7 @@ public class Expression {
 	}
 	
 
-	private static Operator getLowestPriorityDelimeter(
+	private static Operator getLowestPriorityOperator(
 			List<Operator> potentialOperators) {
 		Operator lowestPriorityOperator = null;
 		for (Operator op : potentialOperators) {

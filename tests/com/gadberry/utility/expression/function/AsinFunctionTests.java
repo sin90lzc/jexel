@@ -155,12 +155,4 @@ public class AsinFunctionTests extends TestCase {
 		} catch (InvalidArgumentsException e) {
 		}
 	}
-
-	/**
-	 * Verify the priority
-	 */
-	public void testGetPriority() {
-		assertEquals(op.getPriority(), 20);
-	}
-
 }

@@ -6,7 +6,7 @@ import junit.framework.TestSuite;
 import com.gadberry.utility.expression.ArgumentTests;
 import com.gadberry.utility.expression.ExpressionTests;
 import com.gadberry.utility.expression.OperatorSetTests;
-import com.gadberry.utility.expression.OperatorTests;
+import com.gadberry.utility.expression.OperatorImplTests;
 import com.gadberry.utility.expression.function.AbsFunctionTests;
 import com.gadberry.utility.expression.function.AcosFunctionTests;
 import com.gadberry.utility.expression.function.AsinFunctionTests;
@@ -41,7 +41,7 @@ public class AllTests {
 
 		// Expression Package Tests
 		suite.addTestSuite(ArgumentTests.class);
-		suite.addTestSuite(OperatorTests.class);
+		suite.addTestSuite(OperatorImplTests.class);
 		suite.addTestSuite(OperatorSetTests.class);
 		suite.addTestSuite(ExpressionTests.class);
 

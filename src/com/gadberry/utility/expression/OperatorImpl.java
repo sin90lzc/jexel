@@ -11,12 +11,12 @@ public abstract class OperatorImpl implements Operator {
 
 	public void setArguments(List<Argument> args)
 			throws InvalidArgumentsException {
-		List<Argument> resolvedArgs = resolveArgs(args);
+		List<Argument> resolvedArgs = resolveArguments(args);
 		checkArgs(resolvedArgs);
 		this.arguments = resolvedArgs;
 	}
 
-	private List<Argument> resolveArgs(List<Argument> args) {
+	private List<Argument> resolveArguments(List<Argument> args) {
 		List<Argument> resolvedArgs = new ArrayList<Argument>(args.size());
 		Iterator<Argument> iter = args.iterator();
 		while (iter.hasNext()) {
