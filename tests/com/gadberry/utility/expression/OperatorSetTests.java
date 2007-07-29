@@ -2,15 +2,12 @@ package com.gadberry.utility.expression;
 
 import java.util.List;
 
-import com.gadberry.utility.expression.function.MaxFunction;
+import junit.framework.TestCase;
+
 import com.gadberry.utility.expression.symbol.AdditionSymbol;
 import com.gadberry.utility.expression.symbol.SubtractionSymbol;
 
-import junit.framework.TestCase;
-
 public class OperatorSetTests extends TestCase {
-
-	public static double TOLERANCE = .0001;
 
 	private OperatorSet opSet = null;
 
@@ -28,6 +25,11 @@ public class OperatorSetTests extends TestCase {
 		Operator op = null;
 
 		op = opSet.findOperator("+");
+		if (!(op instanceof AdditionSymbol)) {
+			fail();
+		}
+		
+		op = opSet.findOperator("+a");
 		if (!(op instanceof AdditionSymbol)) {
 			fail();
 		}
@@ -53,25 +55,19 @@ public class OperatorSetTests extends TestCase {
 			fail();
 		}
 		
-		opSet.addOperator("+", AdditionSymbol.class);
+		opSet.addOperator("+", new AdditionSymbol());
 		op = opSet.findOperator("+");
 		if (!(op instanceof AdditionSymbol)) {
 			fail();
 		}
 	}
 	
-	public void testGetSymbol(){
-		assertEquals(opSet.getOperator(AdditionSymbol.class), "+");
-		
-		assertNull(opSet.getOperator(Operator.class));
-	}
-	
 	public void testGetSymbols(){
 		opSet = new OperatorSet();
-		opSet.addOperator("+", AdditionSymbol.class);
-		opSet.addOperator("-", SubtractionSymbol.class);
+		opSet.addOperator("+", new AdditionSymbol());
+		opSet.addOperator("-", new SubtractionSymbol());
 		
-		List symbols = opSet.getOperators();
+		List symbols = opSet.getDelimeters();
 		if(!symbols.contains("+")){
 			fail();
 		} else if(!symbols.contains("-")){
@@ -80,11 +76,4 @@ public class OperatorSetTests extends TestCase {
 			fail();
 		}
 	}
-	
-	public void testGetOperatorLength(){
-		assertEquals(opSet.getOperatorLength(AdditionSymbol.class), 1);
-		assertEquals(opSet.getOperatorLength(MaxFunction.class), 3);
-	}
-	
-
 }

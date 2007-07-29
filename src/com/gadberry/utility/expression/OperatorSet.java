@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.gadberry.utility.expression.function.AbsFunction;
 import com.gadberry.utility.expression.function.AcosFunction;
@@ -29,18 +28,18 @@ import com.gadberry.utility.expression.symbol.SubtractionSymbol;
 
 public class OperatorSet {
 
-	private Map<String, Class<? extends Operator>> operators = new HashMap<String, Class<? extends Operator>>();
+	private Map<String, Operator> operators = new HashMap<String, Operator>();
 
-	private Class<? extends Operator> findOperatorClass(String symbol) {
+	public Operator findOperator(String symbol) {
 		// If we have a direct match
 		if (operators.get(symbol) != null) {
-			return operators.get(symbol);
+			return createOperator(operators.get(symbol).getClass());
 		}
 
 		// If we have a starts with match (functions)
 		for (String s : operators.keySet()) {
 			if (symbol.startsWith(s)) {
-				return operators.get(s);
+				return createOperator(operators.get(s).getClass());
 			}
 		}
 
@@ -58,70 +57,56 @@ public class OperatorSet {
 		return null;
 	}
 
-	public Operator findOperator(String symbol) {
-		Class<? extends Operator> operatorClass = findOperatorClass(symbol);
-		if (operatorClass != null) {
-			return createOperator(operatorClass);
-		}
-		return null;
+	public void addOperator(String delimeter, Operator o) {
+		operators.put(delimeter, o);
 	}
 
-	public void addOperator(String symbol, Class<? extends Operator> c) {
-		operators.put(symbol, c);
-	}
-
-	public String getOperator(Class<? extends Operator> c) {
-		for (Entry<String, Class<? extends Operator>> entry : operators
-				.entrySet()) {
-			if (entry.getValue().equals(c)) {
-				return entry.getKey();
-			}
-		}
-		return null;
-	}
-
-	public List<String> getOperators() {
+	public List<String> getDelimeters() {
 		return new ArrayList<String>(operators.keySet());
 	}
 
-	public int getOperatorLength(Class<? extends Operator> c) {
-		return getOperator(c).length();
-	}
-
+	public static OperatorSet opSet = null;
+	
 	public static OperatorSet getStandardOperatorSet() {
-		OperatorSet os = new OperatorSet();
-		// Standard Operators
-		os.addOperator("+", AdditionSymbol.class);
-		os.addOperator("-", SubtractionSymbol.class);
-		os.addOperator("*", MultiplicationSymbol.class);
-		os.addOperator("/", DivisionSymbol.class);
-		os.addOperator("%", ModuloSymbol.class);
+		if(opSet == null){
+			opSet = new OperatorSet();
+			
+			// Standard Operators
+			opSet.addOperator("+", new AdditionSymbol());
+			opSet.addOperator("-", new SubtractionSymbol());
+			opSet.addOperator("*", new MultiplicationSymbol());
+			opSet.addOperator("/", new DivisionSymbol());
+			opSet.addOperator("%", new ModuloSymbol());
+			
+			// Boolean
+			opSet.addOperator("AND", new AndSymbol());
+			opSet.addOperator("&&", new AndSymbol());
+			opSet.addOperator("OR", new OrSymbol());
+			opSet.addOperator("||", new OrSymbol());
+			opSet.addOperator("not", new NotFunction());
+			
+			// Math
+			opSet.addOperator("max", new MaxFunction());
+			opSet.addOperator("min", new MinFunction());
+			opSet.addOperator("floor", new FloorFunction());
+			opSet.addOperator("ceil", new CeilFunction());
+			opSet.addOperator("neg", new NegFunction());
+			opSet.addOperator("abs", new AbsFunction());
+			opSet.addOperator("cos", new CosFunction());
+			opSet.addOperator("sin", new SinFunction());
+			opSet.addOperator("tan", new TanFunction());
+			opSet.addOperator("acos", new AcosFunction());
+			opSet.addOperator("asin", new AcosFunction());
+			opSet.addOperator("atan", new AcosFunction());
+			
+			// String
+			opSet.addOperator("substr", new SubstrFunction());
+			
+			// Date
+			opSet.addOperator("dateDifference", new DateDifferenceFunction());
+		}
 
-		// Functions
-		os.addOperator("max", MaxFunction.class);
-		os.addOperator("min", MinFunction.class);
-		os.addOperator("floor", FloorFunction.class);
-		os.addOperator("ceil", CeilFunction.class);
-		os.addOperator("neg", NegFunction.class);
-		os.addOperator("abs", AbsFunction.class);
-		os.addOperator("cos", CosFunction.class);
-		os.addOperator("sin", SinFunction.class);
-		os.addOperator("tan", TanFunction.class);
-		os.addOperator("acos", AcosFunction.class);
-		os.addOperator("asin", AcosFunction.class);
-		os.addOperator("atan", AcosFunction.class);
-		
-		os.addOperator("AND", AndSymbol.class);
-		os.addOperator("&&", AndSymbol.class);
-		os.addOperator("OR", OrSymbol.class);
-		os.addOperator("||", OrSymbol.class);
-		os.addOperator("not", NotFunction.class);
-
-		os.addOperator("substr", SubstrFunction.class);
-		
-		os.addOperator("dateDifference", DateDifferenceFunction.class);
-
-		return os;
+		return opSet;
 	}
 
 }

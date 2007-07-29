@@ -23,7 +23,7 @@ public abstract class OperatorImpl implements Operator {
 			Argument arg = iter.next();
 			if (!arg.isResolved()) {
 				try {
-					arg = Expression.evaluate(arg.toString());
+					arg = new Expression(arg.toString()).evaluate();
 				} catch (InvalidExpressionException e) {
 				}
 			}

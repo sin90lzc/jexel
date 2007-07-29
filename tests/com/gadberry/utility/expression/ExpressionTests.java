@@ -8,7 +8,37 @@ import junit.framework.TestCase;
  */
 public class ExpressionTests extends TestCase {
 
+	public void testConstructor() {
+		try {
+			assertEquals(new Expression("max( ( 1 + 2 ), 2 + 3 ) + 1",
+					new MockResolver()).evaluate(), new Argument(new Double(6),
+					null));
+		} catch (InvalidExpressionException e) {
+			e.printStackTrace();
+			fail();
+		}
+
+		try {
+			assertEquals(new Expression("max( ( 1 + 2 ), 2 + 3 ) + 1",
+					OperatorSet.getStandardOperatorSet()).evaluate(),
+					new Argument(new Double(6), null));
+		} catch (InvalidExpressionException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
 	public void testEvaluate() {
+		try {
+			assertEquals(new Expression("max( ( 1 + 2 ), 2 + 3 ) + 1")
+					.evaluate(), new Argument(new Double(6), null));
+		} catch (InvalidExpressionException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	public void testStaticEvaluate() {
 		try {
 			assertEquals(Expression.evaluate("max( ( 1 + 2 ), 2 + 3 ) + 1"),
 					new Argument(new Double(6), null));
@@ -17,7 +47,7 @@ public class ExpressionTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	public void testEvaluateInvalidExpression() {
 		try {
 			assertEquals(Expression.evaluate("max( ( 1 + 2 , 2 + 3 )"),
@@ -26,22 +56,22 @@ public class ExpressionTests extends TestCase {
 		} catch (InvalidExpressionException e) {
 		}
 	}
-	
+
 	public void testEvaluateExpressionWithInvalidArguments() {
 		try {
-			assertEquals(Expression.evaluate("max( 1, a, 2 )"),
-					new Argument("max( 1, a, 2 )", null));
+			assertEquals(Expression.evaluate("max( 1, a, 2 )"), new Argument(
+					"max( 1, a, 2 )", null));
 		} catch (InvalidExpressionException e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
-	
+
 	public void testEvaluateNonExpression() {
 		try {
-			assertEquals(Expression.evaluate("1"),
-					new Argument(new Double(1), null));
-			
+			assertEquals(Expression.evaluate("1"), new Argument(new Double(1),
+					null));
+
 		} catch (InvalidExpressionException e) {
 			e.printStackTrace();
 			fail();

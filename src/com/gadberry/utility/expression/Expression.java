@@ -4,15 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Expression {
-
-	private static OperatorSet opSet = OperatorSet.getStandardOperatorSet();
-
-	public static void setOperatorSet(OperatorSet os) {
-		opSet = os;
+	
+	public static Argument evaluate(String stringExpression) throws InvalidExpressionException{
+		return new Expression(stringExpression).evaluate();
+	}
+	
+	public static double evaluateToDouble(String stringExpression) throws InvalidExpressionException{
+		return new Expression(stringExpression).evaluateToDouble();
 	}
 
-	public static OperatorSet getOperatorSet() {
-		return opSet;
+	private OperatorSet opSet = null;
+	private Resolver resolver = null;
+	
+	private String stringExpression = null;
+	
+	
+	public Expression(String stringExpression){
+		this(stringExpression, null, null);
+	}
+	
+	public Expression(String stringExpression, Resolver resolver){
+		this(stringExpression, resolver, null);
+	}
+
+	public Expression(String stringExpression, OperatorSet operators){
+		this(stringExpression, null, operators);
+	}
+	
+	public Expression(String stringExpression, Resolver resolver, OperatorSet operators){
+		if(operators == null){
+			opSet = OperatorSet.getStandardOperatorSet();
+		} else {
+			opSet = operators;
+		}
+		
+		this.resolver = resolver;
+		
+		this.stringExpression = stringExpression;
 	}
 
 	/**
@@ -25,23 +53,9 @@ public class Expression {
 	 * @throws InvalidExpressionException
 	 * @throws ArgumentCastException
 	 */
-	public static Double evaluateToDouble(String expression)
+	public Double evaluateToDouble()
 			throws InvalidExpressionException, ArgumentCastException {
-		return new Double(Expression.evaluate(expression, null).toDouble());
-	}
-
-	/**
-	 * This is an access method for evaluating an expression. It is equilivent
-	 * to Expression.evaluate(stringExpression, null). Use this if you have no
-	 * variables in your expression.
-	 * 
-	 * @param expression
-	 * @return
-	 * @throws InvalidExpressionException
-	 */
-	public static Argument evaluate(String expression)
-			throws InvalidExpressionException {
-		return Expression.evaluate(expression, null);
+		return new Double(evaluate().toDouble());
 	}
 
 	/**
@@ -53,38 +67,34 @@ public class Expression {
 	 * @return
 	 * @throws InvalidExpressionException
 	 */
-	static Argument evaluate(String expression, Resolver resolver)
+	Argument evaluate()
 			throws InvalidExpressionException {
-		if (!hasValidParenthesees(expression)) {
+		if (!hasValidParenthesees(stringExpression)) {
 			throw new InvalidExpressionException("Invalid parenthesees in: "
-					+ expression);
+					+ stringExpression);
 		}
-		Operator operator = chooseDelimeter(expression, resolver);
+		Operator operator = chooseDelimeter(stringExpression, resolver);
 		Argument result = null;
 		if (operator == null) {
-			result = new Argument(expression, resolver);
+			result = new Argument(stringExpression, resolver);
 		} else {
 			result = operator.resolve(resolver);
 		}
 
-		// System.out.println(expression + " -> " + result.toString());
-
 		return result;
 	}
 
-	private static Operator chooseDelimeter(String expression, Resolver resolver) {
-		List<Operator> potentialDelimeters = getPotentialDelimeters(expression,
+	private Operator chooseDelimeter(String expression, Resolver resolver) {
+		List<Operator> potentialOperators = getPotentialOperators(expression,
 				resolver);
-		return getLowestPriorityOperator(potentialDelimeters);
-
+		return getLowestPriorityOperator(potentialOperators);
 	}
 
-	private static List<Operator> getPotentialDelimeters(String expression,
+	private List<Operator> getPotentialOperators(String expression,
 			Resolver resolver) {
 		List<Operator> potentialDelimeters = new ArrayList<Operator>();
 
-		List<String> tokens = tokenize(expression, opSet.getOperators());
-		//System.out.println(tokens.toString());
+		List<String> tokens = tokenize(expression, opSet.getDelimeters());
 
 		for (int i = 0; i < tokens.size(); i++) {
 			String token = tokens.get(i);
@@ -102,7 +112,6 @@ public class Expression {
 				}
 			}
 		}
-
 		return potentialDelimeters;
 	}
 	
@@ -130,27 +139,17 @@ public class Expression {
 		for (int i = 0; i < expression.length(); i++) {
 			String s = expression.substring(i);
 			boolean add = true;
-			// System.out.println("string " + i + ": " + s);
 			if (s.startsWith("(")) {
 				parentheticalDepth++;
-				//System.out.println(s + "|" + parentheticalDepth);
 			} else if (s.startsWith(")")) {
 				parentheticalDepth--;
 			} else if (parentheticalDepth == 0) {
 				for (String symbol : symbols) {
 					if (s.startsWith(symbol)) {
-						/*
-						 * System.out.println("Adding token 1: " +
-						 * currentToken.toString());
-						 */
 						if (!currentToken.toString().trim().equals("")) {
 							tokens.add(currentToken.toString().trim());
 							currentToken = new StringBuffer();
 						}
-						/*
-						 * System.out.println("Adding token 2: " +
-						 * currentToken.toString());
-						 */
 						tokens.add(symbol);
 						i += symbol.length() - 1;
 						add = false;
@@ -161,7 +160,6 @@ public class Expression {
 				currentToken.append(s.charAt(0));
 			}
 		}
-		/* System.out.println("Adding token 3: " + currentToken.toString()); */
 		tokens.add(currentToken.toString().trim());
 		return tokens;
 	}
