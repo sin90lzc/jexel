@@ -10,17 +10,16 @@ public class ExpressionTests extends TestCase {
 
 	public void testConstructor() {
 		try {
-			assertEquals(new Expression("max( ( 1 + 2 ), 2 + 3 ) + 1",
-					new MockResolver()).evaluate(), new Argument(new Double(6),
-					null));
+			assertEquals(new Expression("max( ( 1 + 2 ), 2 + 3 ) + 1", new MockResolver()).evaluate(), new Argument(
+					new Double(6), null));
 		} catch (InvalidExpressionException e) {
 			e.printStackTrace();
 			fail();
 		}
 
 		try {
-			assertEquals(new Expression("max( ( 1 + 2 ), 2 + 3 ) + 1",
-					OperatorSet.getStandardOperatorSet()).evaluate(),
+			assertEquals(
+					new Expression("max( ( 1 + 2 ), 2 + 3 ) + 1", OperatorSet.getStandardOperatorSet()).evaluate(),
 					new Argument(new Double(6), null));
 		} catch (InvalidExpressionException e) {
 			e.printStackTrace();
@@ -30,8 +29,7 @@ public class ExpressionTests extends TestCase {
 
 	public void testEvaluate() {
 		try {
-			assertEquals(new Expression("max( ( 1 + 2 ), 2 + 3 ) + 1")
-					.evaluate(), new Argument(new Double(6), null));
+			assertEquals(new Expression("max( ( 1 + 2 ), 2 + 3 ) + 1").evaluate(), new Argument(new Double(6), null));
 		} catch (InvalidExpressionException e) {
 			e.printStackTrace();
 			fail();
@@ -40,8 +38,7 @@ public class ExpressionTests extends TestCase {
 
 	public void testStaticEvaluate() {
 		try {
-			assertEquals(Expression.evaluate("max( ( 1 + 2 ), 2 + 3 ) + 1"),
-					new Argument(new Double(6), null));
+			assertEquals(Expression.evaluate("max( ( 1 + 2 ), 2 + 3 ) + 1"), new Argument(new Double(6), null));
 		} catch (InvalidExpressionException e) {
 			e.printStackTrace();
 			fail();
@@ -50,8 +47,7 @@ public class ExpressionTests extends TestCase {
 
 	public void testEvaluateInvalidExpression() {
 		try {
-			assertEquals(Expression.evaluate("max( ( 1 + 2 , 2 + 3 )"),
-					new Argument(new Double(5), null));
+			assertEquals(Expression.evaluate("max( ( 1 + 2 , 2 + 3 )"), new Argument(new Double(5), null));
 			fail();
 		} catch (InvalidExpressionException e) {
 		}
@@ -59,8 +55,7 @@ public class ExpressionTests extends TestCase {
 
 	public void testEvaluateExpressionWithInvalidArguments() {
 		try {
-			assertEquals(Expression.evaluate("max( 1, a, 2 )"), new Argument(
-					"max( 1, a, 2 )", null));
+			assertEquals(Expression.evaluate("max( 1, a, 2 )"), new Argument("max( 1, a, 2 )", null));
 		} catch (InvalidExpressionException e) {
 			e.printStackTrace();
 			fail();
@@ -69,8 +64,7 @@ public class ExpressionTests extends TestCase {
 
 	public void testEvaluateNonExpression() {
 		try {
-			assertEquals(Expression.evaluate("1"), new Argument(new Double(1),
-					null));
+			assertEquals(Expression.evaluate("1"), new Argument(new Double(1), null));
 
 		} catch (InvalidExpressionException e) {
 			e.printStackTrace();
@@ -80,8 +74,7 @@ public class ExpressionTests extends TestCase {
 
 	public void testEvaluateToDouble() {
 		try {
-			assertEquals(
-					Expression.evaluateToDouble("max( ( 1 + 2 ), 2 + 3 )"), 5d);
+			assertEquals(Expression.evaluateToDouble("max( ( 1 + 2 ), 2 + 3 )"), 5d);
 		} catch (InvalidExpressionException e) {
 			e.printStackTrace();
 			fail();
@@ -93,24 +86,29 @@ public class ExpressionTests extends TestCase {
 
 	public void testParenthesees() {
 		try {
-			assertEquals(
-					Expression.evaluateToDouble("max( ( 1 + 2 ), 2 + 3 )"),
-					new Double(5));
-			assertEquals(Expression.evaluateToDouble("min(max(1,2),2 + 3)"),
-					new Double(2));
-			assertEquals(Expression.evaluateToDouble("2 * ( 2 + 3 )"),
-					new Double(10));
-			assertEquals(Expression.evaluateToDouble("( 1 + 1 ) * ( 2 + 3 )"),
-					new Double(10));
+			assertEquals(Expression.evaluateToDouble("max( ( 1 + 2 ), 2 + 3 )"), new Double(5));
+			assertEquals(Expression.evaluateToDouble("min(max(1,2),2 + 3)"), new Double(2));
+			assertEquals(Expression.evaluateToDouble("2 * ( 2 + 3 )"), new Double(10));
+			assertEquals(Expression.evaluateToDouble("( 1 + 1 ) * ( 2 + 3 )"), new Double(10));
+			assertEquals(Expression.evaluateToDouble("( 1 * 5 ) + ( 6 / 3 )"), new Double(7));
+			assertEquals(Expression.evaluateToDouble("1 + 2 * 6 / 3"), new Double(5));
+			assertEquals(Expression.evaluateToDouble("( 1 + 2) * 6 / 3"), new Double(6));
+		} catch (InvalidExpressionException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
-			assertEquals(Expression.evaluateToDouble("( 1 * 5 ) + ( 6 / 3 )"),
-					new Double(7));
-
-			assertEquals(Expression.evaluateToDouble("1 + 2 * 6 / 3"),
-					new Double(5));
-
-			assertEquals(Expression.evaluateToDouble("( 1 + 2) * 6 / 3"),
-					new Double(6));
+	public void testLiterals() {
+		try {
+			assertEquals(Expression.evaluate("'abc + def'").toString(), "abc + def");
+			assertEquals(Expression.evaluate("'a +b' + c").toString(), "a +bc");
+			assertEquals(Expression.evaluate("'1+ 2' + 3").toString(), "1+ 23");
+			assertEquals(Expression.evaluate("substr('1 + 3', 2, 3)").toString(), "+");
+			assertEquals(Expression.evaluate("a''bc + d").toString(), "a'bcd");
 		} catch (InvalidExpressionException e) {
 			e.printStackTrace();
 			fail();
