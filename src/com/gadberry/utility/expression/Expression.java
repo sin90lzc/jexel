@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Expression {
 	
+	public static final String LITERAL_CHARACTER = "'";
+	
 	public static Argument evaluate(String stringExpression) throws InvalidExpressionException{
 		return new Expression(stringExpression).evaluate();
 	}
@@ -133,7 +135,9 @@ public class Expression {
 
 	private static List<String> tokenize(String expression, List<String> symbols) {
 		expression = trim(expression);
+
 		int parentheticalDepth = 0;
+		boolean insideLiteral = false;
 		List<String> tokens = new ArrayList<String>();
 		StringBuffer currentToken = new StringBuffer();
 		for (int i = 0; i < expression.length(); i++) {
@@ -143,7 +147,9 @@ public class Expression {
 				parentheticalDepth++;
 			} else if (s.startsWith(")")) {
 				parentheticalDepth--;
-			} else if (parentheticalDepth == 0) {
+			} else if (s.startsWith(LITERAL_CHARACTER)) {
+				insideLiteral = !insideLiteral;
+			} else if (parentheticalDepth == 0 && !insideLiteral) {
 				for (String symbol : symbols) {
 					if (s.startsWith(symbol)) {
 						if (!currentToken.toString().trim().equals("")) {
