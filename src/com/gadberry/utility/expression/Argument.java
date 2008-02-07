@@ -4,6 +4,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Argument {
+	private static String stripLiteral(String string) {
+		if (string.startsWith(Expression.LITERAL_CHARACTER) && string.endsWith(Expression.LITERAL_CHARACTER)) {
+			return string.substring(1, string.length() - 1);
+		}
+		return string.replaceAll("''", "'");
+	}
+
 	private Object arg = null;
 
 	public Argument(Object object, Resolver resolver) {
@@ -13,8 +20,38 @@ public class Argument {
 		arg = object;
 	}
 
+	public boolean equals(Object o) {
+		if (o instanceof Argument) {
+			Argument a = (Argument) o;
+			if (isDouble() && a.isDouble()) {
+				return toDouble() == a.toDouble();
+			} else {
+				return toString().equals(a.toString());
+			}
+		}
+		return false;
+	}
+
 	Object getObject() {
 		return arg;
+	}
+
+	public boolean isBoolean() {
+		try {
+			toBoolean();
+			return true;
+		} catch (ArgumentCastException e) {
+			return false;
+		}
+	}
+
+	public boolean isDate() {
+		try {
+			toDate();
+			return true;
+		} catch (ArgumentCastException e) {
+			return false;
+		}
 	}
 
 	public boolean isDouble() {
@@ -24,6 +61,46 @@ public class Argument {
 		} catch (ArgumentCastException e) {
 			return false;
 		}
+	}
+
+	public boolean isInteger() {
+		try {
+			toInteger();
+			return true;
+		} catch (ArgumentCastException e) {
+			return false;
+		}
+	}
+
+	public boolean isLiteral() {
+		return !stripLiteral(this.arg.toString()).equals(this.arg.toString());
+	}
+
+	public boolean isResolved() {
+		return isDate() || isDouble() || isInteger() || isBoolean() || isLiteral();
+	}
+
+	public boolean toBoolean() throws ArgumentCastException {
+		if (this.arg instanceof Boolean) {
+			return ((Boolean) this.arg).booleanValue();
+		} else if (this.arg instanceof String) {
+			if (((String) this.arg).equalsIgnoreCase("true")) {
+				return true;
+			} else if (((String) this.arg).equalsIgnoreCase("false")) {
+				return false;
+			}
+		}
+		throw new ArgumentCastException("Argument can not be interpreted as an boolean.  Arg: "
+				+ this.arg.getClass().toString() + this.arg.toString());
+	}
+
+	public Date toDate() throws ArgumentCastException {
+		if (this.arg instanceof Date) {
+			return ((Date) this.arg);
+		} else if (this.arg instanceof Calendar) {
+			return ((Calendar) this.arg).getTime();
+		}
+		throw new ArgumentCastException("Argument can not be interpreted as an integer.  Arg: " + this.arg.toString());
 	}
 
 	public double toDouble() throws ArgumentCastException {
@@ -42,18 +119,7 @@ public class Argument {
 				// Allow to pass through to ArgumentCastException
 			}
 		}
-		throw new ArgumentCastException(
-				"Argument can not be interpreted as an double.  Arg: "
-						+ this.arg.toString());
-	}
-
-	public boolean isInteger() {
-		try {
-			toInteger();
-			return true;
-		} catch (ArgumentCastException e) {
-			return false;
-		}
+		throw new ArgumentCastException("Argument can not be interpreted as an double.  Arg: " + this.arg.toString());
 	}
 
 	public int toInteger() throws ArgumentCastException {
@@ -72,72 +138,10 @@ public class Argument {
 				// Allow to pass through to ArgumentCastException
 			}
 		}
-		throw new ArgumentCastException(
-				"Argument can not be interpreted as an integer.  Arg: "
-						+ this.arg.toString());
-	}
-
-	public boolean isBoolean() {
-		try {
-			toBoolean();
-			return true;
-		} catch (ArgumentCastException e) {
-			return false;
-		}
-	}
-
-	public boolean toBoolean() throws ArgumentCastException {
-		if (this.arg instanceof Boolean) {
-			return ((Boolean) this.arg).booleanValue();
-		} else if (this.arg instanceof String) {
-			if (((String) this.arg).equalsIgnoreCase("true")) {
-				return true;
-			} else if (((String) this.arg).equalsIgnoreCase("false")) {
-				return false;
-			}
-		}
-		throw new ArgumentCastException(
-				"Argument can not be interpreted as an boolean.  Arg: "
-						+ this.arg.getClass().toString() + this.arg.toString());
-	}
-
-	public boolean isDate() {
-		try {
-			toDate();
-			return true;
-		} catch (ArgumentCastException e) {
-			return false;
-		}
-	}
-
-	public Date toDate() throws ArgumentCastException {
-		if (this.arg instanceof Date) {
-			return ((Date) this.arg);
-		} else if (this.arg instanceof Calendar) {
-			return ((Calendar) this.arg).getTime();
-		}
-		throw new ArgumentCastException(
-				"Argument can not be interpreted as an integer.  Arg: "
-						+ this.arg.toString());
+		throw new ArgumentCastException("Argument can not be interpreted as an integer.  Arg: " + this.arg.toString());
 	}
 
 	public String toString() {
-		return this.arg.toString();
-	}
-
-	public boolean equals(Object o) {
-		if (o instanceof Argument) {
-			Argument a = (Argument) o;
-			if (isDouble() && a.isDouble()) {
-				return toDouble() == a.toDouble();
-			} else {
-				return toString().equals(a.toString());
-			}
-		}
-		return false;
-	}
-
-	public boolean isResolved() {
-		return isDate() || isDouble() || isInteger() || isBoolean();
+		return stripLiteral(this.arg.toString());
 	}
 }
