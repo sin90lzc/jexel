@@ -165,6 +165,39 @@ public class CalendarUtilsTests extends TestCase {
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
 				Calendar.MONTH), 1);
 	}
+	
+	/**
+	 * Test for the month of February
+	 */
+	public void testDifferenceMonth3() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 1);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2000);
+		c2.set(Calendar.MONTH, 1);
+		c2.set(Calendar.DAY_OF_MONTH, 29);
+		c2.set(Calendar.HOUR_OF_DAY, 23);
+		c2.set(Calendar.MINUTE, 59);
+		c2.set(Calendar.SECOND, 59);
+		c2.set(Calendar.MILLISECOND, 999);
+		
+		assertEquals(CalendarUtils.difference(c1, c2, Calendar.MONTH), 0);
+		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
+				Calendar.MONTH), 0);
+
+		c2.add(Calendar.MILLISECOND, 1);
+
+		assertEquals(CalendarUtils.difference(c1, c2, Calendar.MONTH), 1);
+		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
+				Calendar.MONTH), 1);
+	}
 
 	/**
 	 * Test for exactly one unit difference between two calendars
