@@ -67,7 +67,7 @@ public class OperatorSetTests extends TestCase {
 		opSet.addOperator("+", new AdditionSymbol());
 		opSet.addOperator("-", new SubtractionSymbol());
 		
-		List symbols = opSet.getDelimeters();
+		List<String> symbols = opSet.getDelimeters();
 		if(!symbols.contains("+")){
 			fail();
 		} else if(!symbols.contains("-")){
