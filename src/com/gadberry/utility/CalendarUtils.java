@@ -27,10 +27,12 @@ public class CalendarUtils {
 
 		Calendar first = (Calendar) c1.clone();
 		Calendar last = (Calendar) c2.clone();
+		
+		long difference = c2.getTimeInMillis() - c1.getTimeInMillis();
 
-		long increment = (long) Math.floor((c2.getTimeInMillis() - c1
-				.getTimeInMillis())
-				/ unitEstimates.get(unit).longValue());
+		long unitEstimate = unitEstimates.get(unit).longValue();
+		long increment = (long) Math.floor((double) difference / (double) unitEstimate);
+		increment = Math.max(increment, 1);
 
 		long total = 0;
 
