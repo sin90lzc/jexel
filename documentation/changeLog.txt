@@ -1,0 +1,33 @@
+################################################
+############## JExel-1_0_0-beta_5 ##############
+################################################
+
+Added CalendarUtils.exactDifference method.  Same as CalendarUtils.difference except it returns a decimal remainder.
+Added CalendarUtils.Unit enum and updated CalendarUtils.difference to use this type as the third argument.
+Removed testDifferenceInvalidUnit unit test because there is no chance of an invalid unit anymore since CalendarUtils.difference accepts an enum.
+Corrected error in exception text in Argument.toDate() method.
+Made Argument.getObject() public to allow use in argument checking in functions and operators.
+
+################################################
+############## JExel-1_0_0-beta_4 ##############
+################################################
+
+Fixed a small bug fix in CalendarUtils.difference. Documented as Issue 3.
+
+################################################
+############## JExel-1_0_0-beta_3 ##############
+################################################
+
+Allows the use of a string literal character '. The string literal character can be escaped with itself ''.  Documented as Issue 2.
+
+################################################
+############## JExel-1_0_0-beta_2 ##############
+################################################
+
+Allows better extension of the language through OperatorSets and clarified the Operators through subclasses of Functions and Symbols.  Documented as Issue 1.
+
+################################################
+############## JExel-1_0_0-beta_1 ##############
+################################################
+
+Initial Release
