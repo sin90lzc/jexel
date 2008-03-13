@@ -5,13 +5,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import junit.framework.TestCase;
+
 import com.gadberry.utility.CalendarUtils;
+import com.gadberry.utility.CalendarUtils.Unit;
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.function.DateDifferenceFunction;
-
-import junit.framework.TestCase;
 
 public class DateDifferenceFunctionTests extends TestCase {
 
@@ -26,7 +26,7 @@ public class DateDifferenceFunctionTests extends TestCase {
 		op = null;
 		super.tearDown();
 	}
-
+	
 	/**
 	 * This checks basic date difference
 	 * 
@@ -54,11 +54,11 @@ public class DateDifferenceFunctionTests extends TestCase {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(c1, null));
 		args.add(new Argument(c2, null));
-		args.add(new Argument(Calendar.MONTH, null));
+		args.add(new Argument(Unit.MONTH, null));
 		try {
 			op.setArguments(args);
 			assertEquals(op.resolve(null).toDouble(), (double) CalendarUtils
-					.difference(c1, c2, Calendar.MONTH));
+					.difference(c1, c2, Unit.MONTH));
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -95,11 +95,11 @@ public class DateDifferenceFunctionTests extends TestCase {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(c1, null));
 		args.add(new Argument(c2, null));
-		args.add(new Argument(Calendar.MILLISECOND, null));
+		args.add(new Argument(Unit.MILLISECOND, null));
 		try {
 			op.setArguments(args);
 			assertEquals(op.resolve(null).toDouble(), (double) CalendarUtils
-					.difference(c1, c2, Calendar.MILLISECOND));
+					.difference(c1, c2, Unit.MILLISECOND));
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -116,13 +116,13 @@ public class DateDifferenceFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: Calendar
 	 * 
-	 * Argument 3: Calendar.YEAR
+	 * Argument 3: Unit.YEAR
 	 */
 	public void testCheckArgs1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(Calendar.getInstance(), null));
 		args.add(new Argument(Calendar.getInstance(), null));
-		args.add(new Argument(Calendar.YEAR, null));
+		args.add(new Argument(Unit.YEAR, null));
 		try {
 			op.setArguments(args);
 		} catch (InvalidArgumentsException e) {
@@ -138,13 +138,13 @@ public class DateDifferenceFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: Date
 	 * 
-	 * Argument 3: Calendar.YEAR
+	 * Argument 3: Unit.YEAR
 	 */
 	public void testCheckArgs2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Date(), null));
 		args.add(new Argument(new Date(), null));
-		args.add(new Argument(Calendar.YEAR, null));
+		args.add(new Argument(Unit.YEAR, null));
 		try {
 			op.setArguments(args);
 		} catch (InvalidArgumentsException e) {
@@ -161,13 +161,13 @@ public class DateDifferenceFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: Date
 	 * 
-	 * Argument 3: Calendar.YEAR
+	 * Argument 3: Unit.YEAR
 	 */
 	public void testCheckArgs3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(Calendar.getInstance(), null));
 		args.add(new Argument(new Date(), null));
-		args.add(new Argument(Calendar.YEAR, null));
+		args.add(new Argument(Unit.YEAR, null));
 		try {
 			op.setArguments(args);
 		} catch (InvalidArgumentsException e) {
@@ -183,13 +183,13 @@ public class DateDifferenceFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: Calendar
 	 * 
-	 * Argument 3: Calendar.DAY_OF_WEEK
+	 * Argument 3: "DAYS"
 	 */
 	public void testCheckArgs4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(Calendar.getInstance(), null));
 		args.add(new Argument(Calendar.getInstance(), null));
-		args.add(new Argument(Calendar.DAY_OF_WEEK, null));
+		args.add(new Argument("DAYS", null));
 		try {
 			op.setArguments(args);
 			fail();
@@ -204,13 +204,13 @@ public class DateDifferenceFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: Date
 	 * 
-	 * Argument 3: Calendar.DAY_OF_WEEK
+	 * Argument 3: Unit.YEAR
 	 */
 	public void testCheckArgs5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));
 		args.add(new Argument(Calendar.getInstance(), null));
-		args.add(new Argument(Calendar.YEAR, null));
+		args.add(new Argument(Unit.YEAR, null));
 		try {
 			op.setArguments(args);
 			fail();

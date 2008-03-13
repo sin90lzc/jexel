@@ -2,47 +2,11 @@ package com.gadberry.utility;
 
 import java.util.Calendar;
 
+import com.gadberry.utility.CalendarUtils.Unit;
+
 import junit.framework.TestCase;
 
 public class CalendarUtilsTests extends TestCase {
-
-	/**
-	 * Test for exactly one unit difference between two calendars
-	 */
-	public void testDifferenceInvalidUnit() {
-		Calendar c1 = Calendar.getInstance();
-		c1.set(Calendar.YEAR, 2000);
-		c1.set(Calendar.MONTH, 0);
-		c1.set(Calendar.DAY_OF_MONTH, 1);
-		c1.set(Calendar.HOUR_OF_DAY, 0);
-		c1.set(Calendar.MINUTE, 0);
-		c1.set(Calendar.SECOND, 0);
-		c1.set(Calendar.MILLISECOND, 0);
-
-		Calendar c2 = Calendar.getInstance();
-		c2.set(Calendar.YEAR, 2000);
-		c2.set(Calendar.MONTH, 0);
-		c2.set(Calendar.DAY_OF_MONTH, 1);
-		c2.set(Calendar.HOUR_OF_DAY, 0);
-		c2.set(Calendar.MINUTE, 0);
-		c2.set(Calendar.SECOND, 0);
-		c2.set(Calendar.MILLISECOND, 0);
-
-		try {
-			assertEquals(
-					CalendarUtils.difference(c1, c2, Calendar.DAY_OF_WEEK), 1);
-			fail();
-		} catch (RuntimeException e) {
-		}
-
-		try {
-			assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-					Calendar.DAY_OF_WEEK), 1);
-			fail();
-		} catch (RuntimeException e) {
-		}
-
-	}
 
 	/**
 	 * Test for exactly one unit difference between two calendars
@@ -66,9 +30,9 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 0);
 		c2.set(Calendar.MILLISECOND, 0);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.YEAR), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.YEAR), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.YEAR), 1);
+				Unit.YEAR), 1);
 	}
 
 	/**
@@ -94,15 +58,15 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 59);
 		c2.set(Calendar.MILLISECOND, 999);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.YEAR), 0);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.YEAR), 0);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.YEAR), 0);
+				Unit.YEAR), 0);
 
 		c2.add(Calendar.MILLISECOND, 1);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.YEAR), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.YEAR), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.YEAR), 1);
+				Unit.YEAR), 1);
 	}
 
 	/**
@@ -127,9 +91,9 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 0);
 		c2.set(Calendar.MILLISECOND, 0);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.MONTH), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.MONTH), 1);
+				Unit.MONTH), 1);
 	}
 
 	/**
@@ -155,15 +119,15 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 59);
 		c2.set(Calendar.MILLISECOND, 999);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.MONTH), 0);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 0);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.MONTH), 0);
+				Unit.MONTH), 0);
 
 		c2.add(Calendar.MILLISECOND, 1);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.MONTH), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.MONTH), 1);
+				Unit.MONTH), 1);
 	}
 	
 	/**
@@ -188,15 +152,15 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 59);
 		c2.set(Calendar.MILLISECOND, 999);
 		
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.MONTH), 0);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 0);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.MONTH), 0);
+				Unit.MONTH), 0);
 
 		c2.add(Calendar.MILLISECOND, 1);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.MONTH), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.MONTH), 1);
+				Unit.MONTH), 1);
 	}
 
 	/**
@@ -221,9 +185,9 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 0);
 		c2.set(Calendar.MILLISECOND, 0);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.DAY_OF_MONTH), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.DAY), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.DAY_OF_MONTH), 1);
+				Unit.DAY), 1);
 	}
 
 	/**
@@ -249,15 +213,15 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 59);
 		c2.set(Calendar.MILLISECOND, 999);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.DAY_OF_MONTH), 0);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.DAY), 0);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.DAY_OF_MONTH), 0);
+				Unit.DAY), 0);
 
 		c2.add(Calendar.MILLISECOND, 1);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.DAY_OF_MONTH), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.DAY), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.DAY_OF_MONTH), 1);
+				Unit.DAY), 1);
 	}
 
 	/**
@@ -282,9 +246,9 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 0);
 		c2.set(Calendar.MILLISECOND, 0);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.HOUR_OF_DAY), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.HOUR), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.HOUR_OF_DAY), 1);
+				Unit.HOUR), 1);
 	}
 
 	/**
@@ -310,15 +274,15 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 59);
 		c2.set(Calendar.MILLISECOND, 999);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.HOUR_OF_DAY), 0);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.HOUR), 0);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.HOUR_OF_DAY), 0);
+				Unit.HOUR), 0);
 
 		c2.add(Calendar.MILLISECOND, 1);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.HOUR_OF_DAY), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.HOUR), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.HOUR_OF_DAY), 1);
+				Unit.HOUR), 1);
 	}
 
 	/**
@@ -343,9 +307,9 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 0);
 		c2.set(Calendar.MILLISECOND, 0);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.MINUTE), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MINUTE), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.MINUTE), 1);
+				Unit.MINUTE), 1);
 	}
 
 	/**
@@ -371,15 +335,15 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 59);
 		c2.set(Calendar.MILLISECOND, 999);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.MINUTE), 0);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MINUTE), 0);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.MINUTE), 0);
+				Unit.MINUTE), 0);
 
 		c2.add(Calendar.MILLISECOND, 1);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.MINUTE), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MINUTE), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.MINUTE), 1);
+				Unit.MINUTE), 1);
 	}
 
 	/**
@@ -404,9 +368,9 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 1);
 		c2.set(Calendar.MILLISECOND, 0);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.SECOND), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.SECOND), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.SECOND), 1);
+				Unit.SECOND), 1);
 	}
 
 	/**
@@ -432,15 +396,15 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 0);
 		c2.set(Calendar.MILLISECOND, 999);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.SECOND), 0);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.SECOND), 0);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.SECOND), 0);
+				Unit.SECOND), 0);
 
 		c2.add(Calendar.MILLISECOND, 1);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.SECOND), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.SECOND), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.SECOND), 1);
+				Unit.SECOND), 1);
 	}
 
 	/**
@@ -465,9 +429,9 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 0);
 		c2.set(Calendar.MILLISECOND, 1);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.MILLISECOND), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MILLISECOND), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.MILLISECOND), 1);
+				Unit.MILLISECOND), 1);
 	}
 
 	/**
@@ -493,15 +457,15 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.SECOND, 0);
 		c2.set(Calendar.MILLISECOND, 0);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.MILLISECOND), 0);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MILLISECOND), 0);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.MILLISECOND), 0);
+				Unit.MILLISECOND), 0);
 
 		c2.add(Calendar.MILLISECOND, 1);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Calendar.MILLISECOND), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MILLISECOND), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(),
-				Calendar.MILLISECOND), 1);
+				Unit.MILLISECOND), 1);
 	}
 
 	public void testAdd() {
@@ -535,5 +499,105 @@ public class CalendarUtilsTests extends TestCase {
 		CalendarUtils.add(c2, Calendar.MILLISECOND, increment);
 
 		assertEquals(c1, c2);
+	}
+	
+	/**
+	 * Test for exactly 1.5 unit difference between two calendars
+	 */
+	public void testExactDifferenceMinute1() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 0);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2000);
+		c2.set(Calendar.MONTH, 0);
+		c2.set(Calendar.DAY_OF_MONTH, 1);
+		c2.set(Calendar.HOUR_OF_DAY, 0);
+		c2.set(Calendar.MINUTE, 1);
+		c2.set(Calendar.SECOND, 30);
+		c2.set(Calendar.MILLISECOND, 0);
+
+		assertEquals(CalendarUtils.exactDifference(c1, c2, Unit.MINUTE), 1.5);
+	}
+	
+	/**
+	 * Test for exactly 2.55 unit difference between two calendars
+	 */
+	public void testExactDifferenceMinute2() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 0);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2000);
+		c2.set(Calendar.MONTH, 0);
+		c2.set(Calendar.DAY_OF_MONTH, 1);
+		c2.set(Calendar.HOUR_OF_DAY, 0);
+		c2.set(Calendar.MINUTE, 2);
+		c2.set(Calendar.SECOND, 33);
+		c2.set(Calendar.MILLISECOND, 0);
+
+		assertEquals(CalendarUtils.exactDifference(c1, c2, Unit.MINUTE), 2.55);
+	}
+	
+	/**
+	 * Test for exactly 1.5 unit difference between two calendars
+	 */
+	public void testExactDifferenceSecond1() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 0);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2000);
+		c2.set(Calendar.MONTH, 0);
+		c2.set(Calendar.DAY_OF_MONTH, 1);
+		c2.set(Calendar.HOUR_OF_DAY, 0);
+		c2.set(Calendar.MINUTE, 0);
+		c2.set(Calendar.SECOND, 1);
+		c2.set(Calendar.MILLISECOND, 500);
+
+		assertEquals(CalendarUtils.exactDifference(c1, c2, Unit.SECOND), 1.5);
+	}
+	
+	/**
+	 * Test for exactly 2.501 unit difference between two calendars
+	 */
+	public void testExactDifferenceSecond2() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 0);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2000);
+		c2.set(Calendar.MONTH, 0);
+		c2.set(Calendar.DAY_OF_MONTH, 1);
+		c2.set(Calendar.HOUR_OF_DAY, 0);
+		c2.set(Calendar.MINUTE, 0);
+		c2.set(Calendar.SECOND, 2);
+		c2.set(Calendar.MILLISECOND, 501);
+
+		assertEquals(CalendarUtils.exactDifference(c1, c2, Unit.SECOND), 2.501);
 	}
 }
