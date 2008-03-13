@@ -32,7 +32,7 @@ public class Argument {
 		return false;
 	}
 
-	Object getObject() {
+	public Object getObject() {
 		return arg;
 	}
 
@@ -100,7 +100,7 @@ public class Argument {
 		} else if (this.arg instanceof Calendar) {
 			return ((Calendar) this.arg).getTime();
 		}
-		throw new ArgumentCastException("Argument can not be interpreted as an integer.  Arg: " + this.arg.toString());
+		throw new ArgumentCastException("Argument can not be interpreted as a date.  Arg: " + this.arg.toString());
 	}
 
 	public double toDouble() throws ArgumentCastException {
