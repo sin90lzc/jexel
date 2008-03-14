@@ -7,6 +7,7 @@ Added CalendarUtils.Unit enum and updated CalendarUtils.difference to use this t
 Removed testDifferenceInvalidUnit unit test because there is no chance of an invalid unit anymore since CalendarUtils.difference accepts an enum.
 Corrected error in exception text in Argument.toDate() method.
 Made Argument.getObject() public to allow use in argument checking in functions and operators.
+Added CalendarUtils.tieredDifference method that allows the calculation of the difference between two calendars broken down by either all or just selected units.
 
 ################################################
 ############## JExel-1_0_0-beta_4 ##############

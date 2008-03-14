@@ -1,6 +1,9 @@
 package com.gadberry.utility;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 
 import com.gadberry.utility.CalendarUtils.Unit;
 
@@ -599,5 +602,102 @@ public class CalendarUtilsTests extends TestCase {
 		c2.set(Calendar.MILLISECOND, 501);
 
 		assertEquals(CalendarUtils.exactDifference(c1, c2, Unit.SECOND), 2.501);
+	}
+	
+	/**
+	 * Test for exactly one of each unit difference between two calendars
+	 */
+	public void testTieredDifferenceAll1() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 0);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2001);
+		c2.set(Calendar.MONTH, 1);
+		c2.set(Calendar.DAY_OF_MONTH, 2);
+		c2.set(Calendar.HOUR_OF_DAY, 1);
+		c2.set(Calendar.MINUTE, 1);
+		c2.set(Calendar.SECOND, 1);
+		c2.set(Calendar.MILLISECOND, 1);
+		
+		Map<Unit, Long> differences = CalendarUtils.tieredDifference(c1, c2);
+		
+		assertTrue(differences.containsKey(Unit.YEAR));
+		assertEquals(differences.get(Unit.YEAR), new Long(1));
+		
+		assertTrue(differences.containsKey(Unit.MONTH));
+		assertEquals(differences.get(Unit.MONTH), new Long(1));
+		
+		assertTrue(differences.containsKey(Unit.DAY));
+		assertEquals(differences.get(Unit.DAY), new Long(1));
+		
+		assertTrue(differences.containsKey(Unit.HOUR));
+		assertEquals(differences.get(Unit.HOUR), new Long(1));
+		
+		assertTrue(differences.containsKey(Unit.MINUTE));
+		assertEquals(differences.get(Unit.MINUTE), new Long(1));
+		
+		assertTrue(differences.containsKey(Unit.SECOND));
+		assertEquals(differences.get(Unit.SECOND), new Long(1));
+		
+		assertTrue(differences.containsKey(Unit.MILLISECOND));
+		assertEquals(differences.get(Unit.MILLISECOND), new Long(1));
+	}
+	
+	/**
+	 * Test for exactly one of each unit difference between two calendars
+	 */
+	public void testTieredDifferenceSome1() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 0);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2001);
+		c2.set(Calendar.MONTH, 1);
+		c2.set(Calendar.DAY_OF_MONTH, 2);
+		c2.set(Calendar.HOUR_OF_DAY, 1);
+		c2.set(Calendar.MINUTE, 1);
+		c2.set(Calendar.SECOND, 1);
+		c2.set(Calendar.MILLISECOND, 1);
+		
+		List<Unit> someUnits = new ArrayList<Unit>();
+		someUnits.add(Unit.YEAR);
+		someUnits.add(Unit.MONTH);
+		someUnits.add(Unit.DAY);
+		someUnits.add(Unit.MINUTE);
+		someUnits.add(Unit.MILLISECOND);
+		
+		Map<Unit, Long> differences = CalendarUtils.tieredDifference(c1, c2, someUnits);
+		
+		assertTrue(differences.containsKey(Unit.YEAR));
+		assertEquals(differences.get(Unit.YEAR), new Long(1));
+		
+		assertTrue(differences.containsKey(Unit.MONTH));
+		assertEquals(differences.get(Unit.MONTH), new Long(1));
+		
+		assertTrue(differences.containsKey(Unit.DAY));
+		assertEquals(differences.get(Unit.DAY), new Long(1));
+		
+		assertFalse(differences.containsKey(Unit.HOUR));
+		
+		assertTrue(differences.containsKey(Unit.MINUTE));
+		assertEquals(differences.get(Unit.MINUTE), new Long(61));
+		
+		assertFalse(differences.containsKey(Unit.SECOND));
+		
+		assertTrue(differences.containsKey(Unit.MILLISECOND));
+		assertEquals(differences.get(Unit.MILLISECOND), new Long(1001));
 	}
 }

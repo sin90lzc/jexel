@@ -1,7 +1,12 @@
 package com.gadberry.utility;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CalendarUtils {
 
@@ -80,6 +85,36 @@ public class CalendarUtils {
 		double remainder = (double) millisPassed / (double) millisTotal;
 
 		return unitDifference + remainder;
+	}
+	
+	public static Map<Unit, Long> tieredDifference(Calendar c1, Calendar c2) {
+		return tieredDifference(c1, c2,Arrays.asList(Unit.values()));		
+	}
+
+	public static Map<Unit, Long> tieredDifference(Calendar c1, Calendar c2, List<Unit> units) {
+		Calendar first = (Calendar) c1.clone();
+		Calendar last = (Calendar) c2.clone();
+		
+		Map<Unit, Long> differences = new HashMap<Unit, Long>();
+		
+		List<Unit> allUnits = new ArrayList<Unit>();
+		allUnits.add(Unit.YEAR);
+		allUnits.add(Unit.MONTH);
+		allUnits.add(Unit.DAY);
+		allUnits.add(Unit.HOUR);
+		allUnits.add(Unit.MINUTE);
+		allUnits.add(Unit.SECOND);
+		allUnits.add(Unit.MILLISECOND);
+		
+		for(Unit unit : allUnits){
+			if(units.contains(unit)){
+				long difference = difference(first, last, unit);
+				differences.put(unit, difference);
+				CalendarUtils.add(first, unit.calendarUnit, difference);
+			}
+		}
+		
+		return differences;
 	}
 
 }
