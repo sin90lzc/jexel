@@ -16,17 +16,18 @@ public class Argument {
 	public Argument(Object object, Resolver resolver) {
 		if (resolver != null && resolver.canResolve(object.toString())) {
 			arg = resolver.resolve(object.toString());
+		} else {
+			arg = object;
 		}
-		arg = object;
 	}
 
 	public boolean equals(Object o) {
 		if (o instanceof Argument) {
 			Argument a = (Argument) o;
-			if (isDouble() && a.isDouble()) {
+			if(isDouble() && a.isDouble()){
 				return toDouble() == a.toDouble();
 			} else {
-				return toString().equals(a.toString());
+				return getObject().equals(a.getObject());
 			}
 		}
 		return false;
@@ -133,7 +134,8 @@ public class Argument {
 			return ((Float) this.arg).intValue();
 		} else if (this.arg instanceof String) {
 			try {
-				return Integer.parseInt(((String) this.arg));
+				Double parsed = Double.parseDouble(((String) this.arg));
+				return parsed.intValue();
 			} catch (NumberFormatException e) {
 				// Allow to pass through to ArgumentCastException
 			}
