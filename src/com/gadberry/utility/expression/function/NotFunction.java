@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.Resolver;
 
 public class NotFunction extends Function {
 
@@ -21,7 +20,7 @@ public class NotFunction extends Function {
 		}
 	}
 
-	public Argument resolve(Resolver resolver) {
+	public Argument resolve() {
 		boolean arg = getArgument(0).toBoolean();
 		return new Argument(new Boolean(!arg), resolver);
 	}

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.Resolver;
 
 public class SubstrFunction extends Function {
 
@@ -39,7 +38,7 @@ public class SubstrFunction extends Function {
 
 	}
 
-	public Argument resolve(Resolver resolver) {
+	public Argument resolve() {
 		String s = getArgument(0).toString();
 		int start = getArgument(1).toInteger();
 		Argument result = null;

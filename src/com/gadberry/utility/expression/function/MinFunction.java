@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.Resolver;
 
 public class MinFunction extends Function {
 
@@ -25,7 +24,7 @@ public class MinFunction extends Function {
 		}
 	}
 
-	public Argument resolve(Resolver resolver) {
+	public Argument resolve() {
 		double min = 0;
 		Iterator<Argument> iter = getArguments().iterator();
 		min = iter.next().toDouble();

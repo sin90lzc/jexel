@@ -9,7 +9,7 @@ import com.gadberry.utility.expression.Resolver;
 
 public abstract class Symbol extends OperatorImpl {
 
-	public abstract Argument resolve(Resolver resolver);
+	public abstract Argument resolve();
 
 	public abstract int getPriority();
 

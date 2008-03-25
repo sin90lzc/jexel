@@ -10,7 +10,7 @@ import com.gadberry.utility.expression.Resolver;
 
 public abstract class Function extends OperatorImpl {
 
-	public abstract Argument resolve(Resolver resolver);
+	public abstract Argument resolve();
 
 	@Override
 	public List<Argument> parseArgs(List<String> tokens, int position,

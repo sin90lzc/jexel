@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.Resolver;
 
 public class DivisionSymbol extends Symbol {
 
@@ -21,7 +20,7 @@ public class DivisionSymbol extends Symbol {
 		}
 	}
 
-	public Argument resolve(Resolver resolver) {
+	public Argument resolve() {
 		double lhs = getArgument(0).toDouble();
 		double rhs = getArgument(1).toDouble();
 		return new Argument(new Double(lhs / rhs), resolver);

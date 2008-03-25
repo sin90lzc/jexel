@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.Resolver;
 
 public class MaxFunction extends Function {
 
@@ -25,7 +24,7 @@ public class MaxFunction extends Function {
 		}
 	}
 
-	public Argument resolve(Resolver resolver) {
+	public Argument resolve() {
 		double max = 0;
 		Iterator<Argument> iter = getArguments().iterator();
 		max = iter.next().toDouble();

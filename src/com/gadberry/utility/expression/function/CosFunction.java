@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.Resolver;
 
 public class CosFunction extends Function {
 
@@ -24,7 +23,7 @@ public class CosFunction extends Function {
 		}
 	}
 
-	public Argument resolve(Resolver resolver) {
+	public Argument resolve() {
 		return new Argument(Math.cos(getArgument(0).toDouble()), resolver);
 	}
 }
