@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
+import com.gadberry.utility.expression.symbol.AdditionSymbol;
+import com.gadberry.utility.expression.symbol.SubtractionSymbol;
 
 import junit.framework.TestCase;
 
@@ -74,5 +76,41 @@ public class OperatorImplTests extends TestCase {
 			e.printStackTrace();
 			fail();
 		}
+	}
+	
+	public void testGetResolver(){
+		Resolver resolver = new MockResolver();
+		
+		op.setResolver(resolver);
+		
+		assertEquals(op.getResolver(), resolver);
+	}
+	
+	public void testSetResolver(){
+		Resolver resolver = new MockResolver();
+		
+		op.setResolver(resolver);
+		
+		assertEquals(op.getResolver(), resolver);
+	}
+	
+	public void testGetOperatorSet(){
+		OperatorSet operatorSet = new OperatorSet();
+		operatorSet.addOperator("+", new AdditionSymbol());
+		operatorSet.addOperator("-", new SubtractionSymbol());
+		
+		op.setOperatorSet(operatorSet);
+		
+		assertEquals(op.getOperatorSet(), operatorSet);
+	}
+	
+	public void testSetOperatorSet(){
+		OperatorSet operatorSet = new OperatorSet();
+		operatorSet.addOperator("+", new AdditionSymbol());
+		operatorSet.addOperator("-", new SubtractionSymbol());
+		
+		op.setOperatorSet(operatorSet);
+		
+		assertEquals(op.getOperatorSet(), operatorSet);
 	}
 }
