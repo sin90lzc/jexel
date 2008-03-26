@@ -35,7 +35,7 @@ public class MultiplicationSymbolTests extends TestCase {
 		args.add(new Argument(new Integer(4), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 32d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 32d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -56,7 +56,7 @@ public class MultiplicationSymbolTests extends TestCase {
 		args.add(new Argument(new Float(2.5), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 15d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 15d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -77,7 +77,7 @@ public class MultiplicationSymbolTests extends TestCase {
 		args.add(new Argument(new Float(6), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 15d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 15d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -98,7 +98,7 @@ public class MultiplicationSymbolTests extends TestCase {
 		args.add(new Argument(new Float(0.25), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 275d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 275d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -119,7 +119,7 @@ public class MultiplicationSymbolTests extends TestCase {
 		args.add(new Argument(new Float(-0.11), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), -0.0165d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), -0.0165d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();

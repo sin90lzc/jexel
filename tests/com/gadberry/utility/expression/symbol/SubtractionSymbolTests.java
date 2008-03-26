@@ -35,7 +35,7 @@ public class SubtractionSymbolTests extends TestCase {
 		args.add(new Argument(new Integer(1), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 1d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 1d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -56,7 +56,7 @@ public class SubtractionSymbolTests extends TestCase {
 		args.add(new Argument(new Double(2.22), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 1.11d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 1.11d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -77,7 +77,7 @@ public class SubtractionSymbolTests extends TestCase {
 		args.add(new Argument(new Float(2.22), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 998.78d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 998.78d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -98,7 +98,7 @@ public class SubtractionSymbolTests extends TestCase {
 		args.add(new Argument(new Float(0.11), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 1110.89, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 1110.89, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -119,7 +119,7 @@ public class SubtractionSymbolTests extends TestCase {
 		args.add(new Argument(new Float(-0.11), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0.26, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 0.26, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -230,6 +230,6 @@ public class SubtractionSymbolTests extends TestCase {
 	 * Verify the priority
 	 */
 	public void testGetPriority() {
-		assertEquals(op.getPriority(), 1);
+		assertEquals(op.getPriority(), 6);
 	}
 }

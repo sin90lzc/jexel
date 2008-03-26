@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.Resolver;
 
 public class MockSymbol extends Symbol {
 	
@@ -15,7 +14,7 @@ public class MockSymbol extends Symbol {
 	}
 	
 	@Override
-	public Argument resolve(Resolver resolver) {
+	public Argument resolve() {
 		return new Argument(1, resolver);
 	}
 

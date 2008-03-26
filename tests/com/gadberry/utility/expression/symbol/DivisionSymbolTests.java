@@ -35,7 +35,7 @@ public class DivisionSymbolTests extends TestCase {
 		args.add(new Argument(new Integer(4), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 2d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();		} catch (ArgumentCastException e) {
@@ -55,7 +55,7 @@ public class DivisionSymbolTests extends TestCase {
 		args.add(new Argument(new Float(2), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2.5d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 2.5d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -76,7 +76,7 @@ public class DivisionSymbolTests extends TestCase {
 		args.add(new Argument(new Float(2.5), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 2d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -97,7 +97,7 @@ public class DivisionSymbolTests extends TestCase {
 		args.add(new Argument(new Float(5), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0.5d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 0.5d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -118,7 +118,7 @@ public class DivisionSymbolTests extends TestCase {
 		args.add(new Argument(new Float(0.25), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 4444d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 4444d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -139,7 +139,7 @@ public class DivisionSymbolTests extends TestCase {
 		args.add(new Argument(new Float(-0.10), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), -1.5d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), -1.5d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
