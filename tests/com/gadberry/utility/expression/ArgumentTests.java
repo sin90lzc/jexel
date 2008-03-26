@@ -91,7 +91,7 @@ public class ArgumentTests extends TestCase {
 	}
 
 	public void testToInteger() {
-		arg = new Argument(new Integer(0), new MockResolver());
+		arg = new Argument(new Integer(0), null);
 		try {
 			assertEquals(arg.toInteger(), 0, FuzzyEquals.TOLERANCE);
 		} catch (ArgumentCastException e) {
@@ -99,7 +99,7 @@ public class ArgumentTests extends TestCase {
 			fail();
 		}
 
-		arg = new Argument(new Long(1), new MockResolver());
+		arg = new Argument(new Long(1), null);
 		try {
 			assertEquals(arg.toInteger(), 1, FuzzyEquals.TOLERANCE);
 		} catch (ArgumentCastException e) {
@@ -107,7 +107,7 @@ public class ArgumentTests extends TestCase {
 			fail();
 		}
 
-		arg = new Argument(new Float(1.1), new MockResolver());
+		arg = new Argument(new Float(1.1), null);
 		try {
 			assertEquals(arg.toInteger(), 1, FuzzyEquals.TOLERANCE);
 		} catch (ArgumentCastException e) {
@@ -115,7 +115,7 @@ public class ArgumentTests extends TestCase {
 			fail();
 		}
 
-		arg = new Argument(new Double(1.2), new MockResolver());
+		arg = new Argument(new Double(1.2), null);
 		try {
 			assertEquals(arg.toInteger(), 1, FuzzyEquals.TOLERANCE);
 		} catch (ArgumentCastException e) {
