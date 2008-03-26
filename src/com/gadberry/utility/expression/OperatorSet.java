@@ -21,6 +21,11 @@ import com.gadberry.utility.expression.function.TanFunction;
 import com.gadberry.utility.expression.symbol.AdditionSymbol;
 import com.gadberry.utility.expression.symbol.AndSymbol;
 import com.gadberry.utility.expression.symbol.DivisionSymbol;
+import com.gadberry.utility.expression.symbol.EqualSymbol;
+import com.gadberry.utility.expression.symbol.GreaterThanOrEqualSymbol;
+import com.gadberry.utility.expression.symbol.GreaterThanSymbol;
+import com.gadberry.utility.expression.symbol.LessThanOrEqualSymbol;
+import com.gadberry.utility.expression.symbol.LessThanSymbol;
 import com.gadberry.utility.expression.symbol.ModuloSymbol;
 import com.gadberry.utility.expression.symbol.MultiplicationSymbol;
 import com.gadberry.utility.expression.symbol.OrSymbol;
@@ -48,7 +53,9 @@ public class OperatorSet {
 
 	private Operator createOperator(Class<? extends Operator> c) {
 		try {
-			return c.newInstance();
+			Operator o = c.newInstance();
+			o.setOperatorSet(this);
+			return o;
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -98,6 +105,14 @@ public class OperatorSet {
 			opSet.addOperator("acos", new AcosFunction());
 			opSet.addOperator("asin", new AcosFunction());
 			opSet.addOperator("atan", new AcosFunction());
+			
+			// Comparison
+			opSet.addOperator("==", new EqualSymbol());
+			opSet.addOperator(">=", new GreaterThanOrEqualSymbol());
+			opSet.addOperator(">", new GreaterThanSymbol());
+			opSet.addOperator("<=", new LessThanOrEqualSymbol());
+			opSet.addOperator("<", new LessThanSymbol());
+			
 			
 			// String
 			opSet.addOperator("substr", new SubstrFunction());
