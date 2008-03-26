@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.Resolver;
 
 public class OrSymbol extends Symbol {
 
@@ -21,14 +20,14 @@ public class OrSymbol extends Symbol {
 		}
 	}
 
-	public Argument resolve(Resolver resolver) {
+	public Argument resolve() {
 		boolean lhs = getArgument(0).toBoolean();
 		boolean rhs = getArgument(1).toBoolean();
 		return new Argument(new Boolean(lhs || rhs), resolver);
 	}
 
 	public int getPriority() {
-		return 0;
+		return 5;
 	}
 
 }

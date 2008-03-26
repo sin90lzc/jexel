@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.Resolver;
 
 public class AdditionSymbol extends Symbol {
 
@@ -17,7 +16,7 @@ public class AdditionSymbol extends Symbol {
 
 	}
 
-	public Argument resolve(Resolver resolver) {
+	public Argument resolve() {
 		if (getArgument(0).isDouble() && getArgument(1).isDouble()) {
 			double lhs = getArgument(0).toDouble();
 			double rhs = getArgument(1).toDouble();
@@ -30,7 +29,7 @@ public class AdditionSymbol extends Symbol {
 	}
 
 	public int getPriority() {
-		return 0;
+		return 5;
 	}
 
 }
