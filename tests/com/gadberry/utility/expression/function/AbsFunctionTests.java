@@ -35,7 +35,7 @@ public class AbsFunctionTests extends TestCase {
 		args.add(new Argument(new Integer(1), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 1d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 1d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -55,7 +55,7 @@ public class AbsFunctionTests extends TestCase {
 		args.add(new Argument(new Double(180), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 180d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 180d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -75,7 +75,7 @@ public class AbsFunctionTests extends TestCase {
 		args.add(new Argument(new Double(-180), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 180d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 180d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -95,7 +95,7 @@ public class AbsFunctionTests extends TestCase {
 		args.add(new Argument(new Double(-0.234), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0.234d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 0.234d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();

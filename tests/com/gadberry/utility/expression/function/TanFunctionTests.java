@@ -35,7 +35,7 @@ public class TanFunctionTests extends TestCase {
 		args.add(new Argument(new Double(Math.toRadians(45)), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 1d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 1d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -55,7 +55,7 @@ public class TanFunctionTests extends TestCase {
 		args.add(new Argument(new Double(Math.toRadians(-45)), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), -1d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), -1d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();

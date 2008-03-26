@@ -35,7 +35,7 @@ public class SubstrFunctionTests extends TestCase {
 		args.add(new Argument(new Integer(2), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toString(), "cd");
+			assertEquals(op.resolve().toString(), "cd");
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -56,7 +56,7 @@ public class SubstrFunctionTests extends TestCase {
 		args.add(new Argument(new Integer(0), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toString(), "abcd");
+			assertEquals(op.resolve().toString(), "abcd");
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -78,7 +78,7 @@ public class SubstrFunctionTests extends TestCase {
 		args.add(new Argument(new Integer(0), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toString(), "");
+			assertEquals(op.resolve().toString(), "");
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();

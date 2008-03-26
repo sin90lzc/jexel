@@ -57,7 +57,7 @@ public class DateDifferenceFunctionTests extends TestCase {
 		args.add(new Argument(Unit.MONTH, null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), (double) CalendarUtils
+			assertEquals(op.resolve().toDouble(), (double) CalendarUtils
 					.difference(c1, c2, Unit.MONTH));
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
@@ -98,7 +98,7 @@ public class DateDifferenceFunctionTests extends TestCase {
 		args.add(new Argument(Unit.MILLISECOND, null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), (double) CalendarUtils
+			assertEquals(op.resolve().toDouble(), (double) CalendarUtils
 					.difference(c1, c2, Unit.MILLISECOND));
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();

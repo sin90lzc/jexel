@@ -35,7 +35,7 @@ public class AcosFunctionTests extends TestCase {
 		args.add(new Argument(new Integer(0), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), Math.PI/2, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), Math.PI/2, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -55,7 +55,7 @@ public class AcosFunctionTests extends TestCase {
 		args.add(new Argument(new Double(1), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 0d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -75,7 +75,7 @@ public class AcosFunctionTests extends TestCase {
 		args.add(new Argument(new Double(-1), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), Math.PI, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), Math.PI, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();

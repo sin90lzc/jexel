@@ -34,7 +34,7 @@ public class NotFunctionTests extends TestCase {
 		args.add(new Argument(new Boolean(true), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toBoolean(), false);
+			assertEquals(op.resolve().toBoolean(), false);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -54,7 +54,7 @@ public class NotFunctionTests extends TestCase {
 		args.add(new Argument(new Boolean(false), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toBoolean(), true);
+			assertEquals(op.resolve().toBoolean(), true);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();

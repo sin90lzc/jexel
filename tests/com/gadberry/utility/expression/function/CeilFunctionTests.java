@@ -35,7 +35,7 @@ public class CeilFunctionTests extends TestCase {
 		args.add(new Argument(new Double(1.1), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 2d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -55,7 +55,7 @@ public class CeilFunctionTests extends TestCase {
 		args.add(new Argument(new Double(3.0), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 3d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 3d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -75,7 +75,7 @@ public class CeilFunctionTests extends TestCase {
 		args.add(new Argument(new Double(0.001), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 1d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 1d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -95,7 +95,7 @@ public class CeilFunctionTests extends TestCase {
 		args.add(new Argument(new Double(1.999), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 2d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -115,7 +115,7 @@ public class CeilFunctionTests extends TestCase {
 		args.add(new Argument(new Float(-0.11), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 0d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();

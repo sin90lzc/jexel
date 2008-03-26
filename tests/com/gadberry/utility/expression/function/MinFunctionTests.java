@@ -37,7 +37,7 @@ public class MinFunctionTests extends TestCase {
 		args.add(new Argument(new Integer(7), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 3d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 3d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -59,7 +59,7 @@ public class MinFunctionTests extends TestCase {
 		args.add(new Argument(new Float(7), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), -8d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), -8d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -81,7 +81,7 @@ public class MinFunctionTests extends TestCase {
 		args.add(new Argument(new Float(7), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 2.5d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 2.5d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -102,7 +102,7 @@ public class MinFunctionTests extends TestCase {
 		args.add(new Argument(new Float(0.27), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), 0.27d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), 0.27d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -123,7 +123,7 @@ public class MinFunctionTests extends TestCase {
 		args.add(new Argument(new Float(-0.11), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve(null).toDouble(), -0.11d, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), -0.11d, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
