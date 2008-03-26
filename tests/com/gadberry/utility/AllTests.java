@@ -25,6 +25,11 @@ import com.gadberry.utility.expression.function.TanFunctionTests;
 import com.gadberry.utility.expression.symbol.AdditionSymbolTests;
 import com.gadberry.utility.expression.symbol.AndSymbolTests;
 import com.gadberry.utility.expression.symbol.DivisionSymbolTests;
+import com.gadberry.utility.expression.symbol.EqualSymbolTests;
+import com.gadberry.utility.expression.symbol.GreaterThanOrEqualSymbolTests;
+import com.gadberry.utility.expression.symbol.GreaterThanSymbolTests;
+import com.gadberry.utility.expression.symbol.LessThanOrEqualSymbolTests;
+import com.gadberry.utility.expression.symbol.LessThanSymbolTests;
 import com.gadberry.utility.expression.symbol.ModuloSymbolTests;
 import com.gadberry.utility.expression.symbol.MultiplicationSymbolTests;
 import com.gadberry.utility.expression.symbol.OrSymbolTests;
@@ -74,6 +79,14 @@ public class AllTests {
 		suite.addTestSuite(AndSymbolTests.class);
 		suite.addTestSuite(OrSymbolTests.class);
 		suite.addTestSuite(NotFunctionTests.class);
+		
+		//Comparison Operators
+		suite.addTestSuite(EqualSymbolTests.class);
+		suite.addTestSuite(GreaterThanOrEqualSymbolTests.class);
+		suite.addTestSuite(GreaterThanSymbolTests.class);
+		suite.addTestSuite(LessThanOrEqualSymbolTests.class);
+		suite.addTestSuite(LessThanSymbolTests.class);
+		
 
 		// String Operators
 		suite.addTestSuite(SubstrFunctionTests.class);
