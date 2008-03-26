@@ -10,7 +10,14 @@ import com.gadberry.utility.CalendarUtils.Unit;
 import junit.framework.TestCase;
 
 public class CalendarUtilsTests extends TestCase {
-
+	
+	/**
+	 * Test the constructor.  This is just for coverage
+	 */
+	public void testConstructor() {
+		new CalendarUtils();
+	}
+	
 	/**
 	 * Test for exactly one unit difference between two calendars
 	 */
