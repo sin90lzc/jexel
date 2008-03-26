@@ -4,17 +4,35 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
 public abstract class OperatorImpl implements Operator {
 
 	private List<Argument> arguments = null;
 
-	public void setArguments(List<Argument> args)
-			throws InvalidArgumentsException {
-		List<Argument> resolvedArgs = resolveArguments(args);
-		checkArgs(resolvedArgs);
-		this.arguments = resolvedArgs;
+	protected OperatorSet operatorSet = OperatorSet.getStandardOperatorSet();
+
+	protected Resolver resolver = null;
+
+	protected abstract void checkArgs(List<Argument> args)
+			throws InvalidArgumentsException;
+
+	public Argument getArgument(int i) {
+		return this.arguments.get(i);
 	}
+
+	public List<Argument> getArguments() {
+		return this.arguments;
+	}
+
+	public OperatorSet getOperatorSet() {
+		return operatorSet;
+	}
+
+	public Resolver getResolver() {
+		return resolver;
+	}
+
+	public abstract List<Argument> parseArgs(List<String> tokens, int position,
+			Resolver resolver);
 
 	private List<Argument> resolveArguments(List<Argument> args) {
 		List<Argument> resolvedArgs = new ArrayList<Argument>(args.size());
@@ -23,7 +41,11 @@ public abstract class OperatorImpl implements Operator {
 			Argument arg = iter.next();
 			if (!arg.isResolved()) {
 				try {
-					arg = new Expression(arg.toString()).evaluate();
+					Expression expression = new Expression(arg.toString());
+					expression.setOperatorSet(operatorSet);
+					expression.setResolver(resolver);
+					
+					arg = expression.evaluate();
 				} catch (InvalidExpressionException e) {
 				}
 			}
@@ -32,16 +54,18 @@ public abstract class OperatorImpl implements Operator {
 		return resolvedArgs;
 	}
 
-	public List<Argument> getArguments() {
-		return this.arguments;
+	public void setArguments(List<Argument> args)
+			throws InvalidArgumentsException {
+		List<Argument> resolvedArgs = resolveArguments(args);
+		checkArgs(resolvedArgs);
+		this.arguments = resolvedArgs;
 	}
-	
-	public Argument getArgument(int i) {
-		return this.arguments.get(i);
+
+	public void setOperatorSet(OperatorSet operatorSet) {
+		this.operatorSet = operatorSet;
 	}
-	
-	protected abstract void checkArgs(List<Argument> args) throws InvalidArgumentsException;
-	
-	public abstract List<Argument> parseArgs(List<String> tokens, int position,
-			Resolver resolver);
+
+	public void setResolver(Resolver resolver) {
+		this.resolver = resolver;
+	}
 }
