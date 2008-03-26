@@ -4,16 +4,24 @@ import java.util.List;
 
 public interface Operator {
 
-	void setArguments(List<Argument> args) throws InvalidArgumentsException;
+	abstract Argument getArgument(int i);
 
-	abstract List<Argument> parseArgs(List<String> tokens, int position,
-			Resolver resolver);
+	abstract List<Argument> getArguments();
 
-	Argument resolve(Resolver resolver);
+	abstract OperatorSet getOperatorSet();
 	
 	abstract int getPriority();
 	
-	abstract List<Argument> getArguments();
+	abstract Resolver getResolver();
 	
-	abstract Argument getArgument(int i);
+	abstract List<Argument> parseArgs(List<String> tokens, int position,
+			Resolver resolver);
+	
+	Argument resolve();
+	
+	void setArguments(List<Argument> args) throws InvalidArgumentsException;
+	
+	abstract void setOperatorSet(OperatorSet operators);
+	
+	abstract void setResolver(Resolver resolver);
 }
