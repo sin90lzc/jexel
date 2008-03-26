@@ -17,7 +17,7 @@ public class MockOperator extends OperatorImpl {
 		return 0;
 	}
 
-	public Argument resolve(Resolver resolver) {
+	public Argument resolve() {
 		return null;
 	}
 
