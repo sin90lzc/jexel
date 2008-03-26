@@ -4,119 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Expression {
-	
+
 	public static final String LITERAL_CHARACTER = "'";
-	
-	public static Argument evaluate(String stringExpression) throws InvalidExpressionException{
+
+	public static Argument evaluate(String stringExpression)
+			throws InvalidExpressionException {
 		return new Expression(stringExpression).evaluate();
 	}
-	
-	public static double evaluateToDouble(String stringExpression) throws InvalidExpressionException{
+
+	public static double evaluateToDouble(String stringExpression)
+			throws InvalidExpressionException {
 		return new Expression(stringExpression).evaluateToDouble();
 	}
-
-	private OperatorSet opSet = null;
-	private Resolver resolver = null;
-	
-	private String stringExpression = null;
-	
-	
-	public Expression(String stringExpression){
-		this(stringExpression, null, null);
-	}
-	
-	public Expression(String stringExpression, Resolver resolver){
-		this(stringExpression, resolver, null);
-	}
-
-	public Expression(String stringExpression, OperatorSet operators){
-		this(stringExpression, null, operators);
-	}
-	
-	public Expression(String stringExpression, Resolver resolver, OperatorSet operators){
-		if(operators == null){
-			opSet = OperatorSet.getStandardOperatorSet();
-		} else {
-			opSet = operators;
-		}
-		
-		this.resolver = resolver;
-		
-		this.stringExpression = stringExpression;
-	}
-
-	/**
-	 * This is an access method for evaluating an expression. It is equilivent
-	 * to Expression.evaluate(stringExpression, null). Use this if you have no
-	 * variables in your expression.
-	 * 
-	 * @param expression
-	 * @return
-	 * @throws InvalidExpressionException
-	 * @throws ArgumentCastException
-	 */
-	public Double evaluateToDouble()
-			throws InvalidExpressionException, ArgumentCastException {
-		return new Double(evaluate().toDouble());
-	}
-
-	/**
-	 * This is an access method for evaluating an expression with a resolver.
-	 * Use this if you have variables in your expression.
-	 * 
-	 * @param expression
-	 * @param resolver
-	 * @return
-	 * @throws InvalidExpressionException
-	 */
-	Argument evaluate()
-			throws InvalidExpressionException {
-		if (!hasValidParenthesees(stringExpression)) {
-			throw new InvalidExpressionException("Invalid parenthesees in: "
-					+ stringExpression);
-		}
-		Operator operator = chooseDelimeter(stringExpression, resolver);
-		Argument result = null;
-		if (operator == null) {
-			result = new Argument(stringExpression, resolver);
-		} else {
-			result = operator.resolve(resolver);
-		}
-
-		return result;
-	}
-
-	private Operator chooseDelimeter(String expression, Resolver resolver) {
-		List<Operator> potentialOperators = getPotentialOperators(expression,
-				resolver);
-		return getLowestPriorityOperator(potentialOperators);
-	}
-
-	private List<Operator> getPotentialOperators(String expression,
-			Resolver resolver) {
-		List<Operator> potentialDelimeters = new ArrayList<Operator>();
-
-		List<String> tokens = tokenize(expression, opSet.getDelimeters());
-
-		for (int i = 0; i < tokens.size(); i++) {
-			String token = tokens.get(i);
-			Operator operator = opSet.findOperator(token);
-			if (operator != null) {
-				List<Argument> args = operator.parseArgs(tokens, i, resolver);
-
-				try {
-					operator.setArguments(args);
-					potentialDelimeters.add(operator);
-				} catch (InvalidArgumentsException e) {
-					/*
-					 * Arguments are invalid for this operator. Move on.
-					 */
-				}
-			}
-		}
-		return potentialDelimeters;
-	}
-	
 
 	private static Operator getLowestPriorityOperator(
 			List<Operator> potentialOperators) {
@@ -131,7 +30,24 @@ public class Expression {
 		return lowestPriorityOperator;
 	}
 
-	
+	private static boolean hasValidParenthesees(String expression) {
+		int parentheticalDepth = 0;
+		for (int i = 0; i < expression.length(); i++) {
+			char c = expression.charAt(i);
+			if (c == '(') {
+				parentheticalDepth++;
+			} else if (c == ')') {
+				if (parentheticalDepth == 0) {
+					return false;
+				}
+				parentheticalDepth--;
+			}
+		}
+		if (parentheticalDepth != 0) {
+			return false;
+		}
+		return true;
+	}
 
 	private static List<String> tokenize(String expression, List<String> symbols) {
 		expression = trim(expression);
@@ -180,22 +96,101 @@ public class Expression {
 		return expression;
 	}
 
-	private static boolean hasValidParenthesees(String expression) {
-		int parentheticalDepth = 0;
-		for (int i = 0; i < expression.length(); i++) {
-			char c = expression.charAt(i);
-			if (c == '(') {
-				parentheticalDepth++;
-			} else if (c == ')') {
-				if (parentheticalDepth == 0) {
-					return false;
+	private OperatorSet opSet = OperatorSet.getStandardOperatorSet();
+
+	private Resolver resolver = null;
+
+	private String stringExpression = null;
+
+	public Expression(String stringExpression) {
+		this.stringExpression = stringExpression;
+	}
+
+	private Operator chooseDelimeter(String expression) {
+		List<Operator> potentialOperators = getPotentialOperators(expression);
+		return getLowestPriorityOperator(potentialOperators);
+	}
+
+	/**
+	 * This is an access method for evaluating an expression with a resolver.
+	 * Use this if you have variables in your expression.
+	 * 
+	 * @param expression
+	 * @param resolver
+	 * @return
+	 * @throws InvalidExpressionException
+	 */
+	Argument evaluate() throws InvalidExpressionException {
+		if (!hasValidParenthesees(stringExpression)) {
+			throw new InvalidExpressionException("Invalid parenthesees in: "
+					+ stringExpression);
+		}
+		Operator operator = chooseDelimeter(stringExpression);
+		Argument result = null;
+		if (operator == null) {
+			result = new Argument(stringExpression, resolver);
+		} else {
+			result = operator.resolve();
+		}
+
+		return result;
+	}
+
+	/**
+	 * This is an access method for evaluating an expression. It is equilivent
+	 * to Expression.evaluate(stringExpression, null). Use this if you have no
+	 * variables in your expression.
+	 * 
+	 * @param expression
+	 * @return
+	 * @throws InvalidExpressionException
+	 * @throws ArgumentCastException
+	 */
+	public Double evaluateToDouble() throws InvalidExpressionException,
+			ArgumentCastException {
+		return new Double(evaluate().toDouble());
+	}
+
+	public OperatorSet getOperatorSet() {
+		return this.opSet;
+	}
+
+	private List<Operator> getPotentialOperators(String expression) {
+		List<Operator> potentialDelimeters = new ArrayList<Operator>();
+
+		List<String> tokens = tokenize(expression, opSet.getDelimeters());
+
+		for (int i = 0; i < tokens.size(); i++) {
+			String token = tokens.get(i);
+			Operator operator = opSet.findOperator(token);
+			
+			if (operator != null) {
+				operator.setResolver(resolver);
+				
+				List<Argument> args = operator.parseArgs(tokens, i, resolver);
+
+				try {
+					operator.setArguments(args);
+					potentialDelimeters.add(operator);
+				} catch (InvalidArgumentsException e) {
+					/*
+					 * Arguments are invalid for this operator. Move on.
+					 */
 				}
-				parentheticalDepth--;
 			}
 		}
-		if (parentheticalDepth != 0) {
-			return false;
-		}
-		return true;
+		return potentialDelimeters;
+	}
+
+	public Resolver getResolver() {
+		return resolver;
+	}
+
+	public void setOperatorSet(OperatorSet operators) {
+		this.opSet = operators;
+	}
+
+	public void setResolver(Resolver resolver) {
+		this.resolver = resolver;
 	}
 }
