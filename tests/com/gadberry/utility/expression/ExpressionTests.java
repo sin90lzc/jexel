@@ -10,17 +10,7 @@ public class ExpressionTests extends TestCase {
 
 	public void testConstructor() {
 		try {
-			assertEquals(new Expression("max( ( 1 + 2 ), 2 + 3 ) + 1", new MockResolver()).evaluate(), new Argument(
-					new Double(6), null));
-		} catch (InvalidExpressionException e) {
-			e.printStackTrace();
-			fail();
-		}
-
-		try {
-			assertEquals(
-					new Expression("max( ( 1 + 2 ), 2 + 3 ) + 1", OperatorSet.getStandardOperatorSet()).evaluate(),
-					new Argument(new Double(6), null));
+			assertEquals(new Expression("max( ( 1 + 2 ), 2 + 3 ) + 1").evaluate(), new Argument(new Double(6), null));
 		} catch (InvalidExpressionException e) {
 			e.printStackTrace();
 			fail();
