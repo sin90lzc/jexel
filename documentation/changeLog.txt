@@ -8,6 +8,17 @@ Removed testDifferenceInvalidUnit unit test because there is no chance of an inv
 Corrected error in exception text in Argument.toDate() method.
 Made Argument.getObject() public to allow use in argument checking in functions and operators.
 Added CalendarUtils.tieredDifference method that allows the calculation of the difference between two calendars broken down by either all or just selected units.
+Removed resolver argument from Operator.resolve() method.
+Removed several Expression constructors.  Resolvers and OperatorSets can now be used through setResolver() and setOperatorSet().
+Updated Operator to allow the use of OperatorSets for created children.
+Updated Operator and resolver can now only be set through the setResolver() method.
+Fixed bug in Argument constructor that never uses the resolved object.
+Fixed Argument.equals to correctly handle all surrounded objects
+Fixed bug in Argument.toInteger() that will now correctly parse doubles and round them to an integer.
+Added comparison operators <, >, <=, >=, and ==.
+Updated priorities of AdditionSymbol, OrSymbol and SubtractionSymbol to work correctly with the new comparison operators.
+Added and adjusted unit tests to achieve 100% test coverage.
+
 
 ################################################
 ############## JExel-1_0_0-beta_4 ##############
