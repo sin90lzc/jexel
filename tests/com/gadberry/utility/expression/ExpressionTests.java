@@ -1,5 +1,8 @@
 package com.gadberry.utility.expression;
 
+import com.gadberry.utility.expression.symbol.AdditionSymbol;
+import com.gadberry.utility.expression.symbol.SubtractionSymbol;
+
 import junit.framework.TestCase;
 
 /**
@@ -106,5 +109,45 @@ public class ExpressionTests extends TestCase {
 			e.printStackTrace();
 			fail();
 		}
+	}
+	
+	public void testGetResolver() {
+		Resolver resolver = new MockResolver();
+		
+		Expression expression = new Expression("'abc + def'");
+		expression.setResolver(resolver);
+		
+		assertEquals(expression.getResolver(), resolver);
+	}
+	
+	public void testSetResolver() {
+		Resolver resolver = new MockResolver();
+		
+		Expression expression = new Expression("'abc + def'");
+		expression.setResolver(resolver);
+		
+		assertEquals(expression.getResolver(), resolver);
+	}
+	
+	public void testGetOperatorSet() {
+		OperatorSet operatorSet = new OperatorSet();
+		operatorSet.addOperator("+", new AdditionSymbol());
+		operatorSet.addOperator("-", new SubtractionSymbol());
+		
+		Expression expression = new Expression("'abc + def'");
+		expression.setOperatorSet(operatorSet);
+		
+		assertEquals(expression.getOperatorSet(), operatorSet);
+	}
+	
+	public void testSetOperatorSet() {
+		OperatorSet operatorSet = new OperatorSet();
+		operatorSet.addOperator("+", new AdditionSymbol());
+		operatorSet.addOperator("-", new SubtractionSymbol());
+		
+		Expression expression = new Expression("'abc + def'");
+		expression.setOperatorSet(operatorSet);
+		
+		assertEquals(expression.getOperatorSet(), operatorSet);
 	}
 }
