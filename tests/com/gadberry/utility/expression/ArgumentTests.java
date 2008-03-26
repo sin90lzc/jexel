@@ -11,9 +11,17 @@ public class ArgumentTests extends TestCase {
 	/**
 	 * Testing constructor and getObject
 	 */
-	public void testConstructor() {
-		Object o = new Integer(0);
+	public void testConstructor1() {
+		Object o = "abc";
 		arg = new Argument(o, new MockResolver());
+		assertNotNull(arg);
+
+		assertEquals(arg.getObject(), "abc");
+	}
+	
+	public void testConstructor2() {
+		Object o = new Integer(0);
+		arg = new Argument(o, null);
 		assertNotNull(arg);
 
 		assertEquals(arg.getObject(), o);
