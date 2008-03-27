@@ -5,6 +5,10 @@ import java.util.List;
 
 public class Expression {
 
+	private static OperatorSet defaultOperatorSet = OperatorSet.getStandardOperatorSet();
+
+	private static Resolver defaultResolver = null;
+
 	public static final String LITERAL_CHARACTER = "'";
 
 	public static Argument evaluate(String stringExpression)
@@ -15,6 +19,14 @@ public class Expression {
 	public static double evaluateToDouble(String stringExpression)
 			throws InvalidExpressionException {
 		return new Expression(stringExpression).evaluateToDouble();
+	}
+
+	public static OperatorSet getDefaultOperatorSet() {
+		return defaultOperatorSet;
+	}
+
+	public static Resolver getDefaultResolver() {
+		return defaultResolver;
 	}
 
 	private static Operator getLowestPriorityOperator(
@@ -49,6 +61,14 @@ public class Expression {
 		return true;
 	}
 
+	public static void setDefaultOperatorSet(OperatorSet defaultOperatorSet) {
+		Expression.defaultOperatorSet = defaultOperatorSet;
+	}
+
+	public static void setDefaultResolver(Resolver defaultResolver) {
+		Expression.defaultResolver = defaultResolver;
+	}
+
 	private static List<String> tokenize(String expression, List<String> symbols) {
 		expression = trim(expression);
 
@@ -66,16 +86,22 @@ public class Expression {
 			} else if (s.startsWith(LITERAL_CHARACTER)) {
 				insideLiteral = !insideLiteral;
 			} else if (parentheticalDepth == 0 && !insideLiteral) {
+				String maxSymbol = null;
 				for (String symbol : symbols) {
 					if (s.startsWith(symbol)) {
-						if (!currentToken.toString().trim().equals("")) {
-							tokens.add(currentToken.toString().trim());
-							currentToken = new StringBuffer();
+						if ((maxSymbol == null) || (maxSymbol.length() < symbol.length())) {
+							maxSymbol = symbol;
 						}
-						tokens.add(symbol);
-						i += symbol.length() - 1;
-						add = false;
 					}
+				}
+				if (maxSymbol != null) {
+					if (!currentToken.toString().trim().equals("")) {
+						tokens.add(currentToken.toString().trim());
+						currentToken = new StringBuffer();
+					}
+					tokens.add(maxSymbol);
+					i += maxSymbol.length() - 1;
+					add = false;
 				}
 			}
 			if (add) {
@@ -96,9 +122,9 @@ public class Expression {
 		return expression;
 	}
 
-	private OperatorSet opSet = OperatorSet.getStandardOperatorSet();
+	private OperatorSet opSet = Expression.defaultOperatorSet;
 
-	private Resolver resolver = null;
+	private Resolver resolver = Expression.defaultResolver;
 
 	private String stringExpression = null;
 
@@ -116,11 +142,10 @@ public class Expression {
 	 * Use this if you have variables in your expression.
 	 * 
 	 * @param expression
-	 * @param resolver
-	 * @return
+	 * @return Argument result
 	 * @throws InvalidExpressionException
 	 */
-	Argument evaluate() throws InvalidExpressionException {
+	public Argument evaluate() throws InvalidExpressionException {
 		if (!hasValidParenthesees(stringExpression)) {
 			throw new InvalidExpressionException("Invalid parenthesees in: "
 					+ stringExpression);
@@ -163,10 +188,10 @@ public class Expression {
 		for (int i = 0; i < tokens.size(); i++) {
 			String token = tokens.get(i);
 			Operator operator = opSet.findOperator(token);
-			
+
 			if (operator != null) {
 				operator.setResolver(resolver);
-				
+
 				List<Argument> args = operator.parseArgs(tokens, i, resolver);
 
 				try {
