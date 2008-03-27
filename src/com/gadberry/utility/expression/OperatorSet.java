@@ -7,14 +7,17 @@ import java.util.Map;
 
 import com.gadberry.utility.expression.function.AbsFunction;
 import com.gadberry.utility.expression.function.AcosFunction;
+import com.gadberry.utility.expression.function.AtanFunction;
 import com.gadberry.utility.expression.function.CeilFunction;
 import com.gadberry.utility.expression.function.CosFunction;
 import com.gadberry.utility.expression.function.DateDifferenceFunction;
+import com.gadberry.utility.expression.function.DegreesToRadiansFunction;
 import com.gadberry.utility.expression.function.FloorFunction;
 import com.gadberry.utility.expression.function.MaxFunction;
 import com.gadberry.utility.expression.function.MinFunction;
 import com.gadberry.utility.expression.function.NegFunction;
 import com.gadberry.utility.expression.function.NotFunction;
+import com.gadberry.utility.expression.function.RadiansToDegreesFunction;
 import com.gadberry.utility.expression.function.SinFunction;
 import com.gadberry.utility.expression.function.SubstrFunction;
 import com.gadberry.utility.expression.function.TanFunction;
@@ -73,25 +76,25 @@ public class OperatorSet {
 	}
 
 	public static OperatorSet opSet = null;
-	
+
 	public static OperatorSet getStandardOperatorSet() {
-		if(opSet == null){
+		if (opSet == null) {
 			opSet = new OperatorSet();
-			
+
 			// Standard Operators
 			opSet.addOperator("+", new AdditionSymbol());
 			opSet.addOperator("-", new SubtractionSymbol());
 			opSet.addOperator("*", new MultiplicationSymbol());
 			opSet.addOperator("/", new DivisionSymbol());
 			opSet.addOperator("%", new ModuloSymbol());
-			
+
 			// Boolean
 			opSet.addOperator("AND", new AndSymbol());
 			opSet.addOperator("&&", new AndSymbol());
 			opSet.addOperator("OR", new OrSymbol());
 			opSet.addOperator("||", new OrSymbol());
 			opSet.addOperator("not", new NotFunction());
-			
+
 			// Math
 			opSet.addOperator("max", new MaxFunction());
 			opSet.addOperator("min", new MinFunction());
@@ -104,19 +107,20 @@ public class OperatorSet {
 			opSet.addOperator("tan", new TanFunction());
 			opSet.addOperator("acos", new AcosFunction());
 			opSet.addOperator("asin", new AcosFunction());
-			opSet.addOperator("atan", new AcosFunction());
-			
+			opSet.addOperator("atan", new AtanFunction());
+			opSet.addOperator("rad", new DegreesToRadiansFunction());
+			opSet.addOperator("deg", new RadiansToDegreesFunction());
+
 			// Comparison
 			opSet.addOperator("==", new EqualSymbol());
 			opSet.addOperator(">=", new GreaterThanOrEqualSymbol());
 			opSet.addOperator(">", new GreaterThanSymbol());
 			opSet.addOperator("<=", new LessThanOrEqualSymbol());
 			opSet.addOperator("<", new LessThanSymbol());
-			
-			
+
 			// String
 			opSet.addOperator("substr", new SubstrFunction());
-			
+
 			// Date
 			opSet.addOperator("dateDifference", new DateDifferenceFunction());
 		}
