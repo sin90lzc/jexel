@@ -11,13 +11,11 @@ public class Expression {
 
 	public static final String LITERAL_CHARACTER = "'";
 
-	public static Argument evaluate(String stringExpression)
-			throws InvalidExpressionException {
+	public static Argument evaluate(String stringExpression) throws InvalidExpressionException {
 		return new Expression(stringExpression).evaluate();
 	}
 
-	public static double evaluateToDouble(String stringExpression)
-			throws InvalidExpressionException {
+	public static double evaluateToDouble(String stringExpression) throws InvalidExpressionException {
 		return new Expression(stringExpression).evaluateToDouble();
 	}
 
@@ -29,8 +27,7 @@ public class Expression {
 		return defaultResolver;
 	}
 
-	private static Operator getLowestPriorityOperator(
-			List<Operator> potentialOperators) {
+	private static Operator getLowestPriorityOperator(List<Operator> potentialOperators) {
 		Operator lowestPriorityOperator = null;
 		for (Operator op : potentialOperators) {
 			if (lowestPriorityOperator == null) {
@@ -114,8 +111,7 @@ public class Expression {
 
 	public static String trim(String expression) {
 		if (expression.startsWith("(") && expression.endsWith(")")) {
-			if (hasValidParenthesees(expression.substring(1, expression
-					.length() - 1))) {
+			if (hasValidParenthesees(expression.substring(1, expression.length() - 1))) {
 				return trim(expression.substring(1, expression.length() - 1));
 			}
 		}
@@ -147,8 +143,7 @@ public class Expression {
 	 */
 	public Argument evaluate() throws InvalidExpressionException {
 		if (!hasValidParenthesees(stringExpression)) {
-			throw new InvalidExpressionException("Invalid parenthesees in: "
-					+ stringExpression);
+			throw new InvalidExpressionException("Invalid parenthesees in: " + stringExpression);
 		}
 		Operator operator = chooseDelimeter(stringExpression);
 		Argument result = null;
@@ -171,13 +166,12 @@ public class Expression {
 	 * @throws InvalidExpressionException
 	 * @throws ArgumentCastException
 	 */
-	public Double evaluateToDouble() throws InvalidExpressionException,
-			ArgumentCastException {
+	public Double evaluateToDouble() throws InvalidExpressionException, ArgumentCastException {
 		return new Double(evaluate().toDouble());
 	}
 
 	public OperatorSet getOperatorSet() {
-		return this.opSet;
+		return opSet;
 	}
 
 	private List<Operator> getPotentialOperators(String expression) {
@@ -212,7 +206,7 @@ public class Expression {
 	}
 
 	public void setOperatorSet(OperatorSet operators) {
-		this.opSet = operators;
+		opSet = operators;
 	}
 
 	public void setResolver(Resolver resolver) {

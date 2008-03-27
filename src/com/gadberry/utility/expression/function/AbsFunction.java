@@ -7,8 +7,8 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class AbsFunction extends Function {
 
-	protected void checkArgs(List<Argument> args)
-			throws InvalidArgumentsException {
+	@Override
+	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {
 		if (args.size() != 1) {
 			throw new InvalidArgumentsException(
 					"AbsOperator requires a single doubles.  Wrong number of arguments provided.");
@@ -17,12 +17,12 @@ public class AbsFunction extends Function {
 		for (Argument arg : args) {
 			if (!arg.isDouble()) {
 				throw new InvalidArgumentsException(
-						"AbsOperator only accepts doubles.  Wrong type of arguments provided.  Arg: "
-								+ arg.toString());
+						"AbsOperator only accepts doubles.  Wrong type of arguments provided.  Arg: " + arg.toString());
 			}
 		}
 	}
 
+	@Override
 	public Argument resolve() {
 		return new Argument(Math.abs(getArgument(0).toDouble()), resolver);
 	}

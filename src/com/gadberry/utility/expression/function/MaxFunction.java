@@ -8,8 +8,8 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class MaxFunction extends Function {
 
-	protected void checkArgs(List<Argument> args)
-			throws InvalidArgumentsException {
+	@Override
+	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {
 		if (args.size() < 2) {
 			throw new InvalidArgumentsException(
 					"MaxOperator requires a minimum of two doubles.  Wrong number of arguments provided.");
@@ -18,12 +18,12 @@ public class MaxFunction extends Function {
 		for (Argument arg : args) {
 			if (!arg.isDouble()) {
 				throw new InvalidArgumentsException(
-						"MaxOperator only accepts doubles.  Wrong type of arguments provided.  Arg: "
-								+ arg.toString());
+						"MaxOperator only accepts doubles.  Wrong type of arguments provided.  Arg: " + arg.toString());
 			}
 		}
 	}
 
+	@Override
 	public Argument resolve() {
 		double max = 0;
 		Iterator<Argument> iter = getArguments().iterator();

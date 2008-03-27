@@ -8,14 +8,15 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class GreaterThanSymbol extends Symbol {
 
-	protected void checkArgs(List<Argument> args)
-			throws InvalidArgumentsException {
+	@Override
+	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {
 		if (args.size() != 2) {
 			throw new InvalidArgumentsException(
 					"GreaterThanOperator requires two arguments.  Wrong number of arguments provided.");
 		}
 	}
 
+	@Override
 	public Argument resolve() {
 		if (getArgument(0).isDate() && getArgument(1).isDate()) {
 			Date lhs = getArgument(0).toDate();
@@ -32,6 +33,7 @@ public class GreaterThanSymbol extends Symbol {
 		}
 	}
 
+	@Override
 	public int getPriority() {
 		return 2;
 	}

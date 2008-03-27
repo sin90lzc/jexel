@@ -13,12 +13,11 @@ public abstract class Function extends OperatorImpl {
 	public abstract Argument resolve();
 
 	@Override
-	public List<Argument> parseArgs(List<String> tokens, int position,
-			Resolver resolver) {
-		//System.out.println(tokens.toString());
-		//System.out.println("Function: " + tokens.get(0));
-		//System.out.println("Argument: " + tokens.get(1));
-		//System.out.println();
+	public List<Argument> parseArgs(List<String> tokens, int position, Resolver resolver) {
+		// System.out.println(tokens.toString());
+		// System.out.println("Function: " + tokens.get(0));
+		// System.out.println("Argument: " + tokens.get(1));
+		// System.out.println();
 		List<Argument> args = new ArrayList<Argument>();
 		String argumentString = Expression.trim(tokens.get(1));
 		List<String> stringArgs = tokenize(argumentString, ',');

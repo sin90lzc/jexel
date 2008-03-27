@@ -7,16 +7,15 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class SubstrFunction extends Function {
 
-	protected void checkArgs(List<Argument> args)
-			throws InvalidArgumentsException {
+	@Override
+	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {
 		if (args.size() == 2) {
 			if (!args.get(1).isInteger()) {
 				throw new InvalidArgumentsException(
 						"SubstrOperator requires one string and one or two integers.  Wrong type of arguments provided.");
 			}
 			if (args.get(1).toInteger() < 0) {
-				throw new InvalidArgumentsException(
-						"SubstrOperator requires positive integers.");
+				throw new InvalidArgumentsException("SubstrOperator requires positive integers.");
 			}
 		} else if (args.size() == 3) {
 			if (!args.get(1).isInteger() || !args.get(2).isInteger()) {
@@ -24,8 +23,7 @@ public class SubstrFunction extends Function {
 						"SubstrOperator requires one string and one or two integers.  Wrong type of arguments provided.");
 			}
 			if (args.get(2).toInteger() < 0) {
-				throw new InvalidArgumentsException(
-						"SubstrOperator requires positive integers.");
+				throw new InvalidArgumentsException("SubstrOperator requires positive integers.");
 			}
 			if (args.get(1).toInteger() > args.get(2).toInteger()) {
 				throw new InvalidArgumentsException(
@@ -38,6 +36,7 @@ public class SubstrFunction extends Function {
 
 	}
 
+	@Override
 	public Argument resolve() {
 		String s = getArgument(0).toString();
 		int start = getArgument(1).toInteger();

@@ -21,10 +21,11 @@ public class Argument {
 		}
 	}
 
+	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Argument) {
 			Argument a = (Argument) o;
-			if(isDouble() && a.isDouble()){
+			if (isDouble() && a.isDouble()) {
 				return toDouble() == a.toDouble();
 			} else {
 				return getObject().equals(a.getObject());
@@ -74,7 +75,7 @@ public class Argument {
 	}
 
 	public boolean isLiteral() {
-		return !stripLiteral(this.arg.toString()).equals(this.arg.toString());
+		return !stripLiteral(arg.toString()).equals(arg.toString());
 	}
 
 	public boolean isResolved() {
@@ -82,68 +83,69 @@ public class Argument {
 	}
 
 	public boolean toBoolean() throws ArgumentCastException {
-		if (this.arg instanceof Boolean) {
-			return ((Boolean) this.arg).booleanValue();
-		} else if (this.arg instanceof String) {
-			if (((String) this.arg).equalsIgnoreCase("true")) {
+		if (arg instanceof Boolean) {
+			return ((Boolean) arg).booleanValue();
+		} else if (arg instanceof String) {
+			if (((String) arg).equalsIgnoreCase("true")) {
 				return true;
-			} else if (((String) this.arg).equalsIgnoreCase("false")) {
+			} else if (((String) arg).equalsIgnoreCase("false")) {
 				return false;
 			}
 		}
 		throw new ArgumentCastException("Argument can not be interpreted as an boolean.  Arg: "
-				+ this.arg.getClass().toString() + this.arg.toString());
+				+ arg.getClass().toString() + arg.toString());
 	}
 
 	public Date toDate() throws ArgumentCastException {
-		if (this.arg instanceof Date) {
-			return ((Date) this.arg);
-		} else if (this.arg instanceof Calendar) {
-			return ((Calendar) this.arg).getTime();
+		if (arg instanceof Date) {
+			return ((Date) arg);
+		} else if (arg instanceof Calendar) {
+			return ((Calendar) arg).getTime();
 		}
-		throw new ArgumentCastException("Argument can not be interpreted as a date.  Arg: " + this.arg.toString());
+		throw new ArgumentCastException("Argument can not be interpreted as a date.  Arg: " + arg.toString());
 	}
 
 	public double toDouble() throws ArgumentCastException {
-		if (this.arg instanceof Integer) {
-			return ((Integer) this.arg).doubleValue();
-		} else if (this.arg instanceof Long) {
-			return ((Long) this.arg).doubleValue();
-		} else if (this.arg instanceof Double) {
-			return ((Double) this.arg).doubleValue();
-		} else if (this.arg instanceof Float) {
-			return ((Float) this.arg).doubleValue();
-		} else if (this.arg instanceof String) {
+		if (arg instanceof Integer) {
+			return ((Integer) arg).doubleValue();
+		} else if (arg instanceof Long) {
+			return ((Long) arg).doubleValue();
+		} else if (arg instanceof Double) {
+			return ((Double) arg).doubleValue();
+		} else if (arg instanceof Float) {
+			return ((Float) arg).doubleValue();
+		} else if (arg instanceof String) {
 			try {
-				return Double.parseDouble(((String) this.arg));
+				return Double.parseDouble(((String) arg));
 			} catch (NumberFormatException e) {
 				// Allow to pass through to ArgumentCastException
 			}
 		}
-		throw new ArgumentCastException("Argument can not be interpreted as an double.  Arg: " + this.arg.toString());
+		throw new ArgumentCastException("Argument can not be interpreted as an double.  Arg: " + arg.toString());
 	}
 
 	public int toInteger() throws ArgumentCastException {
-		if (this.arg instanceof Integer) {
-			return ((Integer) this.arg).intValue();
-		} else if (this.arg instanceof Long) {
-			return ((Long) this.arg).intValue();
-		} else if (this.arg instanceof Double) {
-			return ((Double) this.arg).intValue();
-		} else if (this.arg instanceof Float) {
-			return ((Float) this.arg).intValue();
-		} else if (this.arg instanceof String) {
+		if (arg instanceof Integer) {
+			return ((Integer) arg).intValue();
+		} else if (arg instanceof Long) {
+			return ((Long) arg).intValue();
+		} else if (arg instanceof Double) {
+			return ((Double) arg).intValue();
+		} else if (arg instanceof Float) {
+			return ((Float) arg).intValue();
+		} else if (arg instanceof String) {
 			try {
-				Double parsed = Double.parseDouble(((String) this.arg));
+				Double parsed = Double.parseDouble(((String) arg));
 				return parsed.intValue();
 			} catch (NumberFormatException e) {
 				// Allow to pass through to ArgumentCastException
 			}
 		}
-		throw new ArgumentCastException("Argument can not be interpreted as an integer.  Arg: " + this.arg.toString());
+		throw new ArgumentCastException("Argument can not be interpreted as an integer.  Arg: " + arg.toString());
 	}
 
+	@Override
 	public String toString() {
-		return stripLiteral(this.arg.toString());
+		return stripLiteral(arg.toString());
 	}
 }

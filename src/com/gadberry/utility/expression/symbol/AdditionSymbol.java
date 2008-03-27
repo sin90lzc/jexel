@@ -7,8 +7,8 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class AdditionSymbol extends Symbol {
 
-	protected void checkArgs(List<Argument> args)
-			throws InvalidArgumentsException {
+	@Override
+	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {
 		if (args.size() != 2) {
 			throw new InvalidArgumentsException(
 					"AdditionOperator requires two arguments.  Wrong number of arguments provided.");
@@ -16,6 +16,7 @@ public class AdditionSymbol extends Symbol {
 
 	}
 
+	@Override
 	public Argument resolve() {
 		if (getArgument(0).isDouble() && getArgument(1).isDouble()) {
 			double lhs = getArgument(0).toDouble();
@@ -28,6 +29,7 @@ public class AdditionSymbol extends Symbol {
 		}
 	}
 
+	@Override
 	public int getPriority() {
 		return 5;
 	}

@@ -7,20 +7,22 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class EqualSymbol extends Symbol {
 
-	protected void checkArgs(List<Argument> args)
-			throws InvalidArgumentsException {
+	@Override
+	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {
 		if (args.size() != 2) {
 			throw new InvalidArgumentsException(
 					"EqualOperator requires two arguments.  Wrong number of arguments provided.");
 		}
 	}
 
+	@Override
 	public Argument resolve() {
 		Argument lhs = getArgument(0);
 		Argument rhs = getArgument(1);
 		return new Argument(new Boolean(lhs.equals(rhs)), resolver);
 	}
 
+	@Override
 	public int getPriority() {
 		return 2;
 	}

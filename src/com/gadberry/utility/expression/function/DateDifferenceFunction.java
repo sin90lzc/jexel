@@ -10,8 +10,8 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class DateDifferenceFunction extends Function {
 
-	protected void checkArgs(List<Argument> args)
-			throws InvalidArgumentsException {
+	@Override
+	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {
 		if (!args.get(0).isDate() || !args.get(1).isDate()) {
 			throw new InvalidArgumentsException(
 					"DateDifferenceOperator requires two dates as the first two arguments.  Wrong type of arguments provided.");
@@ -25,6 +25,7 @@ public class DateDifferenceFunction extends Function {
 		}
 	}
 
+	@Override
 	public Argument resolve() {
 		Date d1 = getArgument(0).toDate();
 		Date d2 = getArgument(1).toDate();

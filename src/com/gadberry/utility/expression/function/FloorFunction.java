@@ -7,8 +7,8 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class FloorFunction extends Function {
 
-	protected void checkArgs(List<Argument> args)
-			throws InvalidArgumentsException {
+	@Override
+	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {
 		if (args.size() != 1) {
 			throw new InvalidArgumentsException(
 					"FloorOperator requires a single double.  Wrong number of arguments provided.");
@@ -17,12 +17,12 @@ public class FloorFunction extends Function {
 		for (Argument arg : args) {
 			if (!arg.isDouble()) {
 				throw new InvalidArgumentsException(
-						"MaxOperator only accepts a double.  Wrong type of arguments provided.  Arg: "
-								+ arg.toString());
+						"MaxOperator only accepts a double.  Wrong type of arguments provided.  Arg: " + arg.toString());
 			}
 		}
 	}
 
+	@Override
 	public Argument resolve() {
 		double n = getArgument(0).toDouble();
 		return new Argument(new Double(Math.floor(n)), resolver);

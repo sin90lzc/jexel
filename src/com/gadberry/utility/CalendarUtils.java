@@ -11,12 +11,11 @@ import java.util.Map;
 public class CalendarUtils {
 
 	public enum Unit {
-		DAY(Calendar.DAY_OF_MONTH, 1000l * 60 * 60 * 24), HOUR(
-				Calendar.HOUR_OF_DAY, 1000l * 60 * 60), MILLISECOND(
-				Calendar.MILLISECOND, 1), MINUTE(Calendar.MINUTE, 1000l * 60), MONTH(
-				Calendar.MONTH, 1000l * 60 * 60 * 24 * 30), SECOND(
-				Calendar.SECOND, 1000l), YEAR(Calendar.YEAR, 1000l * 60 * 60
-				* 24 * 365);
+		DAY(Calendar.DAY_OF_MONTH, 1000l * 60 * 60 * 24), HOUR(Calendar.HOUR_OF_DAY, 1000l * 60 * 60), MILLISECOND(
+				Calendar.MILLISECOND,
+				1), MINUTE(Calendar.MINUTE, 1000l * 60), MONTH(Calendar.MONTH, 1000l * 60 * 60 * 24 * 30), SECOND(
+				Calendar.SECOND,
+				1000l), YEAR(Calendar.YEAR, 1000l * 60 * 60 * 24 * 365);
 
 		private final int calendarUnit;
 		private final long estimate;
@@ -42,8 +41,7 @@ public class CalendarUtils {
 
 		long difference = c2.getTimeInMillis() - c1.getTimeInMillis();
 
-		long increment = (long) Math.floor((double) difference
-				/ (double) unit.estimate);
+		long increment = (long) Math.floor((double) difference / (double) unit.estimate);
 		increment = Math.max(increment, 1);
 
 		long total = 0;
@@ -86,17 +84,17 @@ public class CalendarUtils {
 
 		return unitDifference + remainder;
 	}
-	
+
 	public static Map<Unit, Long> tieredDifference(Calendar c1, Calendar c2) {
-		return tieredDifference(c1, c2,Arrays.asList(Unit.values()));		
+		return tieredDifference(c1, c2, Arrays.asList(Unit.values()));
 	}
 
 	public static Map<Unit, Long> tieredDifference(Calendar c1, Calendar c2, List<Unit> units) {
 		Calendar first = (Calendar) c1.clone();
 		Calendar last = (Calendar) c2.clone();
-		
+
 		Map<Unit, Long> differences = new HashMap<Unit, Long>();
-		
+
 		List<Unit> allUnits = new ArrayList<Unit>();
 		allUnits.add(Unit.YEAR);
 		allUnits.add(Unit.MONTH);
@@ -105,15 +103,15 @@ public class CalendarUtils {
 		allUnits.add(Unit.MINUTE);
 		allUnits.add(Unit.SECOND);
 		allUnits.add(Unit.MILLISECOND);
-		
-		for(Unit unit : allUnits){
-			if(units.contains(unit)){
+
+		for (Unit unit : allUnits) {
+			if (units.contains(unit)) {
 				long difference = difference(first, last, unit);
 				differences.put(unit, difference);
 				CalendarUtils.add(first, unit.calendarUnit, difference);
 			}
 		}
-		
+
 		return differences;
 	}
 

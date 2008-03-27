@@ -7,8 +7,8 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class CeilFunction extends Function {
 
-	protected void checkArgs(List<Argument> args)
-			throws InvalidArgumentsException {
+	@Override
+	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {
 		if (args.size() != 1) {
 			throw new InvalidArgumentsException(
 					"CeilOperator requires a single double.  Wrong number of arguments provided.");
@@ -23,6 +23,7 @@ public class CeilFunction extends Function {
 		}
 	}
 
+	@Override
 	public Argument resolve() {
 		double n = getArgument(0).toDouble();
 		return new Argument(new Double(Math.ceil(n)), resolver);

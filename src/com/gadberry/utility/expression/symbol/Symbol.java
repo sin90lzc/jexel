@@ -14,8 +14,7 @@ public abstract class Symbol extends OperatorImpl {
 	public abstract int getPriority();
 
 	@Override
-	public List<Argument> parseArgs(List<String> tokens, int position,
-			Resolver resolver) {
+	public List<Argument> parseArgs(List<String> tokens, int position, Resolver resolver) {
 		List<Argument> args = new ArrayList<Argument>();
 		if (position > 0) {
 			// There is a left hand argument
