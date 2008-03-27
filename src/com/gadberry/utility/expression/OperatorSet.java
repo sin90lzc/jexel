@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.gadberry.utility.expression.function.AbsFunction;
 import com.gadberry.utility.expression.function.AcosFunction;
+import com.gadberry.utility.expression.function.AsinFunction;
 import com.gadberry.utility.expression.function.AtanFunction;
 import com.gadberry.utility.expression.function.CeilFunction;
 import com.gadberry.utility.expression.function.CosFunction;
@@ -106,7 +107,7 @@ public class OperatorSet {
 			opSet.addOperator("sin", new SinFunction());
 			opSet.addOperator("tan", new TanFunction());
 			opSet.addOperator("acos", new AcosFunction());
-			opSet.addOperator("asin", new AcosFunction());
+			opSet.addOperator("asin", new AsinFunction());
 			opSet.addOperator("atan", new AtanFunction());
 			opSet.addOperator("rad", new DegreesToRadiansFunction());
 			opSet.addOperator("deg", new RadiansToDegreesFunction());
