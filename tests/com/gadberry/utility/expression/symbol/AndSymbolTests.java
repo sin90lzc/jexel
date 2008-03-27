@@ -1,26 +1,31 @@
 package com.gadberry.utility.expression.symbol;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
-import junit.framework.TestCase;
-
-public class AndSymbolTests extends TestCase {
+public class AndSymbolTests {
 
 	private AndSymbol op = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		op = new AndSymbol();
 	}
 
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		op = null;
-		super.tearDown();
 	}
 
 	/**
@@ -28,6 +33,7 @@ public class AndSymbolTests extends TestCase {
 	 * 
 	 * Test: true && true
 	 */
+	@Test
 	public void testResolve1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Boolean(true), null));
@@ -49,6 +55,7 @@ public class AndSymbolTests extends TestCase {
 	 * 
 	 * Test: true && false
 	 */
+	@Test
 	public void testResolve2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Boolean(true), null));
@@ -70,6 +77,7 @@ public class AndSymbolTests extends TestCase {
 	 * 
 	 * Test: false && true
 	 */
+	@Test
 	public void testResolve3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Boolean(false), null));
@@ -91,6 +99,7 @@ public class AndSymbolTests extends TestCase {
 	 * 
 	 * Test: true && true
 	 */
+	@Test
 	public void testResolve4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Boolean(false), null));
@@ -114,6 +123,7 @@ public class AndSymbolTests extends TestCase {
 	 * 
 	 * Argument 2: boolean
 	 */
+	@Test
 	public void testCheckArgs1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Boolean(true), null));
@@ -132,6 +142,7 @@ public class AndSymbolTests extends TestCase {
 	 * 
 	 * Argument 1: boolean
 	 */
+	@Test
 	public void testCheckArgs2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Boolean(false), null));
@@ -152,6 +163,7 @@ public class AndSymbolTests extends TestCase {
 	 * 
 	 * Argument 3: boolean
 	 */
+	@Test
 	public void testCheckArgs3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Boolean(false), null));
@@ -172,6 +184,7 @@ public class AndSymbolTests extends TestCase {
 	 * 
 	 * Argument 2: abc
 	 */
+	@Test
 	public void testCheckArgs4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Boolean(false), null));
@@ -193,6 +206,7 @@ public class AndSymbolTests extends TestCase {
 	 * 
 	 * Argument 2: 1
 	 */
+	@Test
 	public void testCheckArgs5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Boolean(false), null));
@@ -207,6 +221,7 @@ public class AndSymbolTests extends TestCase {
 	/**
 	 * Verify the priority
 	 */
+	@Test
 	public void testGetPriority() {
 		assertEquals(op.getPriority(), 10);
 	}

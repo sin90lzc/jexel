@@ -1,27 +1,32 @@
 package com.gadberry.utility.expression.symbol;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.gadberry.utility.FuzzyEquals;
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
-import junit.framework.TestCase;
-
-public class SubtractionSymbolTests extends TestCase {
+public class SubtractionSymbolTests {
 
 	private SubtractionSymbol op = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		op = new SubtractionSymbol();
 	}
 
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		op = null;
-		super.tearDown();
 	}
 
 	/**
@@ -29,6 +34,7 @@ public class SubtractionSymbolTests extends TestCase {
 	 * 
 	 * Test: 2 - 1
 	 */
+	@Test
 	public void testResolve1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Integer(2), null));
@@ -50,6 +56,7 @@ public class SubtractionSymbolTests extends TestCase {
 	 * 
 	 * Test: 3.33 - 2.22
 	 */
+	@Test
 	public void testResolve2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Float(3.33), null));
@@ -71,6 +78,7 @@ public class SubtractionSymbolTests extends TestCase {
 	 * 
 	 * Test: 1001 - 2.22
 	 */
+	@Test
 	public void testResolve3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1001), null));
@@ -92,6 +100,7 @@ public class SubtractionSymbolTests extends TestCase {
 	 * 
 	 * Test: 1111 - 0.11
 	 */
+	@Test
 	public void testResolve4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1111), null));
@@ -113,6 +122,7 @@ public class SubtractionSymbolTests extends TestCase {
 	 * 
 	 * Test: 0.15 - -0.11
 	 */
+	@Test
 	public void testResolve5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(0.15), null));
@@ -136,6 +146,7 @@ public class SubtractionSymbolTests extends TestCase {
 	 * 
 	 * Argument 2: 1
 	 */
+	@Test
 	public void testCheckArgs1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -154,6 +165,7 @@ public class SubtractionSymbolTests extends TestCase {
 	 * 
 	 * Argument 1: 1
 	 */
+	@Test
 	public void testCheckArgs2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -174,6 +186,7 @@ public class SubtractionSymbolTests extends TestCase {
 	 * 
 	 * Argument 3: 1
 	 */
+	@Test
 	public void testCheckArgs3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -194,6 +207,7 @@ public class SubtractionSymbolTests extends TestCase {
 	 * 
 	 * Argument 2: abc
 	 */
+	@Test
 	public void testCheckArgs4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -215,6 +229,7 @@ public class SubtractionSymbolTests extends TestCase {
 	 * 
 	 * Argument 2: 1
 	 */
+	@Test
 	public void testCheckArgs5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abc", null));
@@ -229,6 +244,7 @@ public class SubtractionSymbolTests extends TestCase {
 	/**
 	 * Verify the priority
 	 */
+	@Test
 	public void testGetPriority() {
 		assertEquals(op.getPriority(), 6);
 	}

@@ -1,28 +1,32 @@
 package com.gadberry.utility.expression.function;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.gadberry.utility.FuzzyEquals;
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.function.MaxFunction;
 
-import junit.framework.TestCase;
-
-public class MaxFunctionTests extends TestCase {
+public class MaxFunctionTests {
 
 	private MaxFunction op = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		op = new MaxFunction();
 	}
 
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		op = null;
-		super.tearDown();
 	}
 
 	/**
@@ -30,6 +34,7 @@ public class MaxFunctionTests extends TestCase {
 	 * 
 	 * Test: 8, 3, 7
 	 */
+	@Test
 	public void testResolve1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Integer(8), null));
@@ -52,6 +57,7 @@ public class MaxFunctionTests extends TestCase {
 	 * 
 	 * Test: -8, 2, 7
 	 */
+	@Test
 	public void testResolve2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(-8), null));
@@ -74,6 +80,7 @@ public class MaxFunctionTests extends TestCase {
 	 * 
 	 * Test: 5, 2.5, 7
 	 */
+	@Test
 	public void testResolve3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(5), null));
@@ -90,12 +97,13 @@ public class MaxFunctionTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This checks a large number and a number < 1
 	 * 
 	 * Test: 1111, 0.27
 	 */
+	@Test
 	public void testResolve5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1111), null));
@@ -117,6 +125,7 @@ public class MaxFunctionTests extends TestCase {
 	 * 
 	 * Test: 0.15, -0.11
 	 */
+	@Test
 	public void testResolve6() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(0.15), null));
@@ -139,6 +148,7 @@ public class MaxFunctionTests extends TestCase {
 	 * 
 	 * Argument 1: 1
 	 */
+	@Test
 	public void testCheckArgs1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -156,6 +166,7 @@ public class MaxFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: 1
 	 */
+	@Test
 	public void testCheckArgs2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -167,7 +178,7 @@ public class MaxFunctionTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This checks three arguments. Should not throw an exception.
 	 * 
@@ -177,6 +188,7 @@ public class MaxFunctionTests extends TestCase {
 	 * 
 	 * Argument 3: 1
 	 */
+	@Test
 	public void testCheckArgs3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -189,6 +201,7 @@ public class MaxFunctionTests extends TestCase {
 			fail();
 		}
 	}
+
 	/**
 	 * This checks non-double arguments. Should throw an exception for a
 	 * non-double argument.
@@ -197,6 +210,7 @@ public class MaxFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: abc
 	 */
+	@Test
 	public void testCheckArgs4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -218,6 +232,7 @@ public class MaxFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: 1
 	 */
+	@Test
 	public void testCheckArgs5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abc", null));

@@ -6,13 +6,12 @@ import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class MockSymbol extends Symbol {
-	
+
 	@Override
-	protected void checkArgs(List<Argument> args)
-			throws InvalidArgumentsException {
-		//Take no action
+	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {
+		// Take no action
 	}
-	
+
 	@Override
 	public Argument resolve() {
 		return new Argument(1, resolver);
@@ -22,7 +21,5 @@ public class MockSymbol extends Symbol {
 	public int getPriority() {
 		return 10;
 	}
-
-	
 
 }

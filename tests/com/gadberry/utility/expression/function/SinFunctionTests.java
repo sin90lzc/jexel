@@ -1,28 +1,32 @@
 package com.gadberry.utility.expression.function;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.gadberry.utility.FuzzyEquals;
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.function.SinFunction;
 
-import junit.framework.TestCase;
-
-public class SinFunctionTests extends TestCase {
+public class SinFunctionTests {
 
 	private SinFunction op = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		op = new SinFunction();
 	}
 
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		op = null;
-		super.tearDown();
 	}
 
 	/**
@@ -30,6 +34,7 @@ public class SinFunctionTests extends TestCase {
 	 * 
 	 * Test: sin( 90 )
 	 */
+	@Test
 	public void testResolve1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(Math.toRadians(90)), null));
@@ -50,6 +55,7 @@ public class SinFunctionTests extends TestCase {
 	 * 
 	 * Test: sin( 270 )
 	 */
+	@Test
 	public void testResolve2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(Math.toRadians(270)), null));
@@ -70,6 +76,7 @@ public class SinFunctionTests extends TestCase {
 	 * 
 	 * Test: sin( -90 )
 	 */
+	@Test
 	public void testResolve3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(Math.toRadians(-90)), null));
@@ -90,6 +97,7 @@ public class SinFunctionTests extends TestCase {
 	 * 
 	 * Argument 1: 1
 	 */
+	@Test
 	public void testCheckArgs1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -108,6 +116,7 @@ public class SinFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: 1
 	 */
+	@Test
 	public void testCheckArgs2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -118,7 +127,7 @@ public class SinFunctionTests extends TestCase {
 		} catch (InvalidArgumentsException e) {
 		}
 	}
-	
+
 	/**
 	 * This checks three arguments. Should throw an exception.
 	 * 
@@ -128,6 +137,7 @@ public class SinFunctionTests extends TestCase {
 	 * 
 	 * Argument 3: 1
 	 */
+	@Test
 	public void testCheckArgs3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -139,12 +149,14 @@ public class SinFunctionTests extends TestCase {
 		} catch (InvalidArgumentsException e) {
 		}
 	}
+
 	/**
 	 * This checks non-double arguments. Should throw an exception for a
 	 * non-double argument.
 	 * 
 	 * Argument 2: abc
 	 */
+	@Test
 	public void testCheckArgs4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abc", null));

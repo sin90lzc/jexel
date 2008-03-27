@@ -1,27 +1,31 @@
 package com.gadberry.utility.expression.function;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.function.NotFunction;
 
-import junit.framework.TestCase;
-
-public class NotFunctionTests extends TestCase {
+public class NotFunctionTests {
 
 	private NotFunction op = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		op = new NotFunction();
 	}
 
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		op = null;
-		super.tearDown();
 	}
 
 	/**
@@ -29,6 +33,7 @@ public class NotFunctionTests extends TestCase {
 	 * 
 	 * Test: true
 	 */
+	@Test
 	public void testResolve1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Boolean(true), null));
@@ -49,6 +54,7 @@ public class NotFunctionTests extends TestCase {
 	 * 
 	 * Test: false
 	 */
+	@Test
 	public void testResolve2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Boolean(false), null));
@@ -68,8 +74,9 @@ public class NotFunctionTests extends TestCase {
 	 * This check standard arguments. Should not throw an exception.
 	 * 
 	 * Argument 1: boolean
-
+	 * 
 	 */
+	@Test
 	public void testCheckArgs1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Boolean(true), null));
@@ -89,6 +96,7 @@ public class NotFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: boolean
 	 */
+	@Test
 	public void testCheckArgs2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Boolean(false), null));
@@ -110,6 +118,7 @@ public class NotFunctionTests extends TestCase {
 	 * 
 	 * Argument 3: boolean
 	 */
+	@Test
 	public void testCheckArgs3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Boolean(false), null));
@@ -128,6 +137,7 @@ public class NotFunctionTests extends TestCase {
 	 * 
 	 * Argument 1: abc
 	 */
+	@Test
 	public void testCheckArgs4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abc", null));
@@ -144,6 +154,7 @@ public class NotFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: 1
 	 */
+	@Test
 	public void testCheckArgs5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));

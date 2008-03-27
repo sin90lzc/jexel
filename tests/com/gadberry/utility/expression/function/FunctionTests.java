@@ -1,31 +1,35 @@
 package com.gadberry.utility.expression.function;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.Resolver;
-import com.gadberry.utility.expression.function.Function;
 
-import junit.framework.TestCase;
-
-public class FunctionTests extends TestCase {
+public class FunctionTests {
 
 	private Function op = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		op = new MockFunction();
 	}
 
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		op = null;
-		super.tearDown();
 	}
 
 	/**
 	 * This checks basic argument resolution
 	 */
+	@Test
 	public void testParseArgs() {
 		List<String> tokens = new ArrayList<String>();
 		tokens.add("functionName");
@@ -41,6 +45,7 @@ public class FunctionTests extends TestCase {
 	/**
 	 * Verify the priority
 	 */
+	@Test
 	public void testGetPriority() {
 		assertEquals(op.getPriority(), 20);
 	}

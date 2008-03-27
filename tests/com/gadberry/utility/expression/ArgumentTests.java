@@ -1,16 +1,23 @@
 package com.gadberry.utility.expression;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import org.junit.Test;
+
 import com.gadberry.utility.FuzzyEquals;
 
-import junit.framework.TestCase;
-
-public class ArgumentTests extends TestCase {
+public class ArgumentTests {
 
 	private Argument arg = null;
 
 	/**
 	 * Testing constructor and getObject
 	 */
+	@Test
 	public void testConstructor1() {
 		Object o = "abc";
 		arg = new Argument(o, new MockResolver());
@@ -18,7 +25,8 @@ public class ArgumentTests extends TestCase {
 
 		assertEquals(arg.getObject(), "abc");
 	}
-	
+
+	@Test
 	public void testConstructor2() {
 		Object o = new Integer(0);
 		arg = new Argument(o, null);
@@ -27,6 +35,7 @@ public class ArgumentTests extends TestCase {
 		assertEquals(arg.getObject(), o);
 	}
 
+	@Test
 	public void testIsDouble() {
 		arg = new Argument(new Integer(0), new MockResolver());
 		assertTrue(arg.isDouble());
@@ -41,6 +50,7 @@ public class ArgumentTests extends TestCase {
 		assertFalse(arg.isDouble());
 	}
 
+	@Test
 	public void testToDouble() {
 		arg = new Argument(new Integer(0), new MockResolver());
 		try {
@@ -90,6 +100,7 @@ public class ArgumentTests extends TestCase {
 		}
 	}
 
+	@Test
 	public void testToInteger() {
 		arg = new Argument(new Integer(0), null);
 		try {
@@ -139,6 +150,7 @@ public class ArgumentTests extends TestCase {
 		}
 	}
 
+	@Test
 	public void testToBoolean() {
 		arg = new Argument(new Boolean(true), new MockResolver());
 		assertTrue(arg.toBoolean());
@@ -147,13 +159,14 @@ public class ArgumentTests extends TestCase {
 		assertFalse(arg.toBoolean());
 
 		arg = new Argument(new String("abc"), new MockResolver());
-		try{
+		try {
 			arg.toBoolean();
 			fail();
-		}catch(ArgumentCastException e){
+		} catch (ArgumentCastException e) {
 		}
 	}
 
+	@Test
 	public void testToString() {
 		arg = new Argument(new Integer(0), new MockResolver());
 		assertEquals(arg.toString(), "0");
@@ -165,6 +178,7 @@ public class ArgumentTests extends TestCase {
 		assertEquals(arg.toString(), "abc");
 	}
 
+	@Test
 	public void testEquals() {
 		Argument arg2;
 

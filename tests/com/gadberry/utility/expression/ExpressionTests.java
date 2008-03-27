@@ -1,5 +1,7 @@
 package com.gadberry.utility.expression;
 
+import org.junit.Test;
+
 import com.gadberry.utility.expression.symbol.AdditionSymbol;
 import com.gadberry.utility.expression.symbol.SubtractionSymbol;
 
@@ -11,6 +13,7 @@ import junit.framework.TestCase;
  */
 public class ExpressionTests extends TestCase {
 
+	@Test
 	public void testConstructor() {
 		try {
 			assertEquals(new Expression("max( ( 1 + 2 ), 2 + 3 ) + 1").evaluate(), new Argument(new Double(6), null));
@@ -20,6 +23,7 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	@Test
 	public void testEvaluate() {
 		try {
 			assertEquals(new Expression("max( ( 1 + 2 ), 2 + 3 ) + 1").evaluate(), new Argument(new Double(6), null));
@@ -29,6 +33,7 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	@Test
 	public void testStaticEvaluate() {
 		try {
 			assertEquals(Expression.evaluate("max( ( 1 + 2 ), 2 + 3 ) + 1"), new Argument(new Double(6), null));
@@ -38,6 +43,7 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	@Test
 	public void testEvaluateInvalidExpression() {
 		try {
 			assertEquals(Expression.evaluate("max( ( 1 + 2 , 2 + 3 )"), new Argument(new Double(5), null));
@@ -46,6 +52,7 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	@Test
 	public void testEvaluateExpressionWithInvalidArguments() {
 		try {
 			assertEquals(Expression.evaluate("max( 1, a, 2 )"), new Argument("max( 1, a, 2 )", null));
@@ -55,6 +62,7 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	@Test
 	public void testEvaluateNonExpression() {
 		try {
 			assertEquals(Expression.evaluate("1"), new Argument(new Double(1), null));
@@ -65,6 +73,7 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	@Test
 	public void testEvaluateToDouble() {
 		try {
 			assertEquals(Expression.evaluateToDouble("max( ( 1 + 2 ), 2 + 3 )"), 5d);
@@ -77,6 +86,7 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	@Test
 	public void testParenthesees() {
 		try {
 			assertEquals(Expression.evaluateToDouble("max( ( 1 + 2 ), 2 + 3 )"), new Double(5));
@@ -95,6 +105,7 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	@Test
 	public void testLiterals() {
 		try {
 			assertEquals(Expression.evaluate("'abc + def'").toString(), "abc + def");
@@ -110,44 +121,48 @@ public class ExpressionTests extends TestCase {
 			fail();
 		}
 	}
-	
+
+	@Test
 	public void testGetResolver() {
 		Resolver resolver = new MockResolver();
-		
+
 		Expression expression = new Expression("'abc + def'");
 		expression.setResolver(resolver);
-		
+
 		assertEquals(expression.getResolver(), resolver);
 	}
-	
+
+	@Test
 	public void testSetResolver() {
 		Resolver resolver = new MockResolver();
-		
+
 		Expression expression = new Expression("'abc + def'");
 		expression.setResolver(resolver);
-		
+
 		assertEquals(expression.getResolver(), resolver);
 	}
-	
+
+	@Test
 	public void testGetOperatorSet() {
 		OperatorSet operatorSet = new OperatorSet();
 		operatorSet.addOperator("+", new AdditionSymbol());
 		operatorSet.addOperator("-", new SubtractionSymbol());
-		
+
 		Expression expression = new Expression("'abc + def'");
 		expression.setOperatorSet(operatorSet);
-		
+
 		assertEquals(expression.getOperatorSet(), operatorSet);
 	}
-	
+
+	@Test
 	public void testSetOperatorSet() {
 		OperatorSet operatorSet = new OperatorSet();
 		operatorSet.addOperator("+", new AdditionSymbol());
 		operatorSet.addOperator("-", new SubtractionSymbol());
-		
+
 		Expression expression = new Expression("'abc + def'");
 		expression.setOperatorSet(operatorSet);
-		
+
 		assertEquals(expression.getOperatorSet(), operatorSet);
 	}
 }

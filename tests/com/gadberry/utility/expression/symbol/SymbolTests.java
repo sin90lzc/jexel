@@ -1,30 +1,35 @@
 package com.gadberry.utility.expression.symbol;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.Resolver;
 
-import junit.framework.TestCase;
-
-public class SymbolTests extends TestCase {
+public class SymbolTests {
 
 	private Symbol op = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		op = new MockSymbol();
 	}
 
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		op = null;
-		super.tearDown();
 	}
 
 	/**
 	 * This checks basic argument resolution
 	 */
+	@Test
 	public void testParseArgs() {
 		List<String> tokens = new ArrayList<String>();
 		tokens.add("1 - 2");

@@ -1,28 +1,32 @@
 package com.gadberry.utility.expression.function;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.gadberry.utility.FuzzyEquals;
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.function.AtanFunction;
 
-import junit.framework.TestCase;
-
-public class AtanFunctionTests extends TestCase {
+public class AtanFunctionTests {
 
 	private AtanFunction op = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		op = new AtanFunction();
 	}
 
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		op = null;
-		super.tearDown();
 	}
 
 	/**
@@ -30,6 +34,7 @@ public class AtanFunctionTests extends TestCase {
 	 * 
 	 * Test: atan( 0 )
 	 */
+	@Test
 	public void testResolve1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Integer(0), null));
@@ -50,12 +55,13 @@ public class AtanFunctionTests extends TestCase {
 	 * 
 	 * Test: atan( 1 )
 	 */
+	@Test
 	public void testResolve2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), Math.PI/4, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), Math.PI / 4, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -70,12 +76,13 @@ public class AtanFunctionTests extends TestCase {
 	 * 
 	 * Test: atan( -1 )
 	 */
+	@Test
 	public void testResolve3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(-1), null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), -Math.PI/4, FuzzyEquals.TOLERANCE);
+			assertEquals(op.resolve().toDouble(), -Math.PI / 4, FuzzyEquals.TOLERANCE);
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -84,13 +91,13 @@ public class AtanFunctionTests extends TestCase {
 			fail();
 		}
 	}
-	
 
 	/**
 	 * This check one argument. Should not throw an exception.
 	 * 
 	 * Argument 1: 1
 	 */
+	@Test
 	public void testCheckArgs1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -109,6 +116,7 @@ public class AtanFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: 1
 	 */
+	@Test
 	public void testCheckArgs2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -119,7 +127,7 @@ public class AtanFunctionTests extends TestCase {
 		} catch (InvalidArgumentsException e) {
 		}
 	}
-	
+
 	/**
 	 * This checks three arguments. Should throw an exception.
 	 * 
@@ -129,6 +137,7 @@ public class AtanFunctionTests extends TestCase {
 	 * 
 	 * Argument 3: 1
 	 */
+	@Test
 	public void testCheckArgs3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -140,12 +149,14 @@ public class AtanFunctionTests extends TestCase {
 		} catch (InvalidArgumentsException e) {
 		}
 	}
+
 	/**
 	 * This checks non-double arguments. Should throw an exception for a
 	 * non-double argument.
 	 * 
 	 * Argument 2: abc
 	 */
+	@Test
 	public void testCheckArgs4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abc", null));

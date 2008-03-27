@@ -1,11 +1,16 @@
 package com.gadberry.utility.expression.function;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.gadberry.utility.CalendarUtils;
 import com.gadberry.utility.CalendarUtils.Unit;
@@ -13,25 +18,26 @@ import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
-public class DateDifferenceFunctionTests extends TestCase {
+public class DateDifferenceFunctionTests {
 
 	private DateDifferenceFunction op = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		op = new DateDifferenceFunction();
 	}
 
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		op = null;
-		super.tearDown();
 	}
-	
+
 	/**
 	 * This checks basic date difference
 	 * 
 	 * Test: dateDifference( c1, c2, month )
 	 */
+	@Test
 	public void testResolve1() {
 		Calendar c1 = Calendar.getInstance();
 		c1.set(Calendar.YEAR, 2000);
@@ -57,8 +63,7 @@ public class DateDifferenceFunctionTests extends TestCase {
 		args.add(new Argument(Unit.MONTH, null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), (double) CalendarUtils
-					.difference(c1, c2, Unit.MONTH));
+			assertEquals(op.resolve().toDouble(), (double) CalendarUtils.difference(c1, c2, Unit.MONTH));
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -73,6 +78,7 @@ public class DateDifferenceFunctionTests extends TestCase {
 	 * 
 	 * Test: dateDifference( c1, c2, millisecond )
 	 */
+	@Test
 	public void testResolve2() {
 		Calendar c1 = Calendar.getInstance();
 		c1.set(Calendar.YEAR, 2000);
@@ -98,8 +104,7 @@ public class DateDifferenceFunctionTests extends TestCase {
 		args.add(new Argument(Unit.MILLISECOND, null));
 		try {
 			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), (double) CalendarUtils
-					.difference(c1, c2, Unit.MILLISECOND));
+			assertEquals(op.resolve().toDouble(), (double) CalendarUtils.difference(c1, c2, Unit.MILLISECOND));
 		} catch (InvalidArgumentsException e) {
 			e.printStackTrace();
 			fail();
@@ -118,6 +123,7 @@ public class DateDifferenceFunctionTests extends TestCase {
 	 * 
 	 * Argument 3: Unit.YEAR
 	 */
+	@Test
 	public void testCheckArgs1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(Calendar.getInstance(), null));
@@ -140,6 +146,7 @@ public class DateDifferenceFunctionTests extends TestCase {
 	 * 
 	 * Argument 3: Unit.YEAR
 	 */
+	@Test
 	public void testCheckArgs2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Date(), null));
@@ -163,6 +170,7 @@ public class DateDifferenceFunctionTests extends TestCase {
 	 * 
 	 * Argument 3: Unit.YEAR
 	 */
+	@Test
 	public void testCheckArgs3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(Calendar.getInstance(), null));
@@ -185,6 +193,7 @@ public class DateDifferenceFunctionTests extends TestCase {
 	 * 
 	 * Argument 3: "DAYS"
 	 */
+	@Test
 	public void testCheckArgs4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(Calendar.getInstance(), null));
@@ -206,6 +215,7 @@ public class DateDifferenceFunctionTests extends TestCase {
 	 * 
 	 * Argument 3: Unit.YEAR
 	 */
+	@Test
 	public void testCheckArgs5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));
@@ -225,6 +235,7 @@ public class DateDifferenceFunctionTests extends TestCase {
 	 * Argument 1: abcd
 	 */
 
+	@Test
 	public void testCheckArgs6() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));

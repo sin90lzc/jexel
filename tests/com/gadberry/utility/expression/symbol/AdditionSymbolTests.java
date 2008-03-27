@@ -1,27 +1,32 @@
 package com.gadberry.utility.expression.symbol;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.gadberry.utility.FuzzyEquals;
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
-import junit.framework.TestCase;
-
-public class AdditionSymbolTests extends TestCase {
+public class AdditionSymbolTests {
 
 	private AdditionSymbol op = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		op = new AdditionSymbol();
 	}
 
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		op = null;
-		super.tearDown();
 	}
 
 	/**
@@ -29,6 +34,7 @@ public class AdditionSymbolTests extends TestCase {
 	 * 
 	 * Test: 1 + 2
 	 */
+	@Test
 	public void testResolveDouble1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Integer(1), null));
@@ -50,6 +56,7 @@ public class AdditionSymbolTests extends TestCase {
 	 * 
 	 * Test: 1.11 + 2.22
 	 */
+	@Test
 	public void testResolveDouble2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1.11), null));
@@ -71,6 +78,7 @@ public class AdditionSymbolTests extends TestCase {
 	 * 
 	 * Test: 1001 + 2.22
 	 */
+	@Test
 	public void testResolveDouble3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1001), null));
@@ -92,6 +100,7 @@ public class AdditionSymbolTests extends TestCase {
 	 * 
 	 * Test: 1111 + 0.11
 	 */
+	@Test
 	public void testResolveDouble4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1111), null));
@@ -113,6 +122,7 @@ public class AdditionSymbolTests extends TestCase {
 	 * 
 	 * Test: 0.15 + -0.11
 	 */
+	@Test
 	public void testResolveDouble5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(0.15), null));
@@ -128,12 +138,13 @@ public class AdditionSymbolTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This checks basic string addition
 	 * 
 	 * Test: abc + def
 	 */
+	@Test
 	public void testResolveString1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abc", null));
@@ -146,12 +157,13 @@ public class AdditionSymbolTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This checks basic string addition
 	 * 
 	 * Test: abc + 1.0
 	 */
+	@Test
 	public void testResolveString2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abc", null));
@@ -172,6 +184,7 @@ public class AdditionSymbolTests extends TestCase {
 	 * 
 	 * Argument 2: 1
 	 */
+	@Test
 	public void testCheckArgs1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -190,6 +203,7 @@ public class AdditionSymbolTests extends TestCase {
 	 * 
 	 * Argument 1: 1
 	 */
+	@Test
 	public void testCheckArgs2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -210,6 +224,7 @@ public class AdditionSymbolTests extends TestCase {
 	 * 
 	 * Argument 3: 1
 	 */
+	@Test
 	public void testCheckArgs3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -225,6 +240,7 @@ public class AdditionSymbolTests extends TestCase {
 	/**
 	 * Verify the priority
 	 */
+	@Test
 	public void testGetPriority() {
 		assertEquals(op.getPriority(), 5);
 	}

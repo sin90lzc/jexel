@@ -1,28 +1,33 @@
 package com.gadberry.utility.expression.symbol;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
-public class GreaterThanOrEqualSymbolTests extends TestCase {
+public class GreaterThanOrEqualSymbolTests {
 
 	private GreaterThanOrEqualSymbol op = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		op = new GreaterThanOrEqualSymbol();
 	}
 
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		op = null;
-		super.tearDown();
 	}
 
 	/**
@@ -30,6 +35,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 	 * 
 	 * Test: 1 >= 0
 	 */
+	@Test
 	public void testResolveDouble1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Integer(1), null));
@@ -51,6 +57,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 	 * 
 	 * Test: 0 >= 1
 	 */
+	@Test
 	public void testResolveDouble2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Float(0), null));
@@ -72,6 +79,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 	 * 
 	 * Test: 1 >= 1
 	 */
+	@Test
 	public void testResolveDouble3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -87,12 +95,13 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This checks true string comparison
 	 * 
 	 * Test: "b" >= "a"
 	 */
+	@Test
 	public void testResolveString1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("b", null));
@@ -108,12 +117,13 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This checks false string comparison
 	 * 
 	 * Test: "a" >= "b"
 	 */
+	@Test
 	public void testResolveString2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("a", null));
@@ -129,12 +139,13 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This checks true string comparison
 	 * 
 	 * Test: "a" >= "a"
 	 */
+	@Test
 	public void testResolveString3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("a", null));
@@ -150,15 +161,16 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This checks true date comparison
 	 * 
 	 * Test: 1/1/2007 >= 1/1/2006
 	 */
+	@Test
 	public void testResolveDate1() {
 		List<Argument> args = new ArrayList<Argument>();
-		
+
 		Calendar c1 = Calendar.getInstance();
 		c1.set(Calendar.YEAR, 2007);
 		c1.set(Calendar.MONTH, 0);
@@ -176,8 +188,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 		c2.set(Calendar.MINUTE, 0);
 		c2.set(Calendar.SECOND, 0);
 		c2.set(Calendar.MILLISECOND, 0);
-		
-		
+
 		args.add(new Argument(c1, null));
 		args.add(new Argument(c2, null));
 		try {
@@ -197,9 +208,10 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 	 * 
 	 * Test: 1/1/2006 >= 1/1/2007
 	 */
+	@Test
 	public void testResolveDate2() {
 		List<Argument> args = new ArrayList<Argument>();
-		
+
 		Calendar c1 = Calendar.getInstance();
 		c1.set(Calendar.YEAR, 2006);
 		c1.set(Calendar.MONTH, 0);
@@ -217,8 +229,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 		c2.set(Calendar.MINUTE, 0);
 		c2.set(Calendar.SECOND, 0);
 		c2.set(Calendar.MILLISECOND, 0);
-		
-		
+
 		args.add(new Argument(c1, null));
 		args.add(new Argument(c2, null));
 		try {
@@ -232,15 +243,16 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This checks true date comparison
 	 * 
 	 * Test: 1/1/2006 >= 1/1/2006
 	 */
+	@Test
 	public void testResolveDate3() {
 		List<Argument> args = new ArrayList<Argument>();
-		
+
 		Calendar c1 = Calendar.getInstance();
 		c1.set(Calendar.YEAR, 2006);
 		c1.set(Calendar.MONTH, 0);
@@ -258,8 +270,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 		c2.set(Calendar.MINUTE, 0);
 		c2.set(Calendar.SECOND, 0);
 		c2.set(Calendar.MILLISECOND, 0);
-		
-		
+
 		args.add(new Argument(c1, null));
 		args.add(new Argument(c2, null));
 		try {
@@ -273,7 +284,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This check standard double arguments. Should not throw an exception.
 	 * 
@@ -281,6 +292,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 	 * 
 	 * Argument 2: 1
 	 */
+	@Test
 	public void testCheckArgs1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -292,7 +304,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This check standard date arguments. Should not throw an exception.
 	 * 
@@ -300,6 +312,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 	 * 
 	 * Argument 2: now
 	 */
+	@Test
 	public void testCheckArgs2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Date(), null));
@@ -311,7 +324,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This check standard string arguments. Should not throw an exception.
 	 * 
@@ -319,6 +332,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 	 * 
 	 * Argument 2: "bbbb"
 	 */
+	@Test
 	public void testCheckArgs3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("aaaa", null));
@@ -337,6 +351,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 	 * 
 	 * Argument 1: 1
 	 */
+	@Test
 	public void testCheckArgs4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -357,6 +372,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 	 * 
 	 * Argument 3: 1
 	 */
+	@Test
 	public void testCheckArgs5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -372,6 +388,7 @@ public class GreaterThanOrEqualSymbolTests extends TestCase {
 	/**
 	 * Verify the priority
 	 */
+	@Test
 	public void testGetPriority() {
 		assertEquals(op.getPriority(), 2);
 	}

@@ -1,27 +1,32 @@
 package com.gadberry.utility.expression.symbol;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.gadberry.utility.FuzzyEquals;
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
-import junit.framework.TestCase;
-
-public class ModuloSymbolTests extends TestCase {
+public class ModuloSymbolTests {
 
 	private ModuloSymbol op = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		op = new ModuloSymbol();
 	}
 
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		op = null;
-		super.tearDown();
 	}
 
 	/**
@@ -29,6 +34,7 @@ public class ModuloSymbolTests extends TestCase {
 	 * 
 	 * Test: 8 % 3
 	 */
+	@Test
 	public void testResolve1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Integer(8), null));
@@ -50,6 +56,7 @@ public class ModuloSymbolTests extends TestCase {
 	 * 
 	 * Test: 4 / 2
 	 */
+	@Test
 	public void testResolve2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(4), null));
@@ -71,6 +78,7 @@ public class ModuloSymbolTests extends TestCase {
 	 * 
 	 * Test: 5 % 2.5
 	 */
+	@Test
 	public void testResolve3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(5), null));
@@ -86,12 +94,13 @@ public class ModuloSymbolTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This checks a large number and a number < 1
 	 * 
 	 * Test: 1111 / 0.27
 	 */
+	@Test
 	public void testResolve5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1111), null));
@@ -113,6 +122,7 @@ public class ModuloSymbolTests extends TestCase {
 	 * 
 	 * Test: 0.15 % -0.11
 	 */
+	@Test
 	public void testResolve6() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(0.15), null));
@@ -136,6 +146,7 @@ public class ModuloSymbolTests extends TestCase {
 	 * 
 	 * Argument 2: 1
 	 */
+	@Test
 	public void testCheckArgs1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -154,6 +165,7 @@ public class ModuloSymbolTests extends TestCase {
 	 * 
 	 * Argument 1: 1
 	 */
+	@Test
 	public void testCheckArgs2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -174,6 +186,7 @@ public class ModuloSymbolTests extends TestCase {
 	 * 
 	 * Argument 3: 1
 	 */
+	@Test
 	public void testCheckArgs3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -185,6 +198,7 @@ public class ModuloSymbolTests extends TestCase {
 		} catch (InvalidArgumentsException e) {
 		}
 	}
+
 	/**
 	 * This checks non-double arguments. Should throw an exception for a
 	 * non-double argument.
@@ -193,6 +207,7 @@ public class ModuloSymbolTests extends TestCase {
 	 * 
 	 * Argument 2: abc
 	 */
+	@Test
 	public void testCheckArgs4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Double(1), null));
@@ -214,6 +229,7 @@ public class ModuloSymbolTests extends TestCase {
 	 * 
 	 * Argument 2: 1
 	 */
+	@Test
 	public void testCheckArgs5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abc", null));
@@ -228,6 +244,7 @@ public class ModuloSymbolTests extends TestCase {
 	/**
 	 * Verify the priority
 	 */
+	@Test
 	public void testGetPriority() {
 		assertEquals(op.getPriority(), 10);
 	}

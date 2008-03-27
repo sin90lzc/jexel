@@ -1,35 +1,39 @@
 package com.gadberry.utility.expression;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gadberry.utility.expression.Argument;
-import com.gadberry.utility.expression.InvalidArgumentsException;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.gadberry.utility.expression.symbol.AdditionSymbol;
 import com.gadberry.utility.expression.symbol.SubtractionSymbol;
 
-import junit.framework.TestCase;
-
-public class OperatorImplTests extends TestCase {
+public class OperatorImplTests {
 
 	public static double TOLERANCE = .0001;
 
 	private Operator op = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		op = new MockOperator();
 	}
 
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		op = null;
-		super.tearDown();
 	}
-	
+
 	/**
 	 * Testing set / get arguments
-	 *
+	 * 
 	 */
+	@Test
 	public void testSetArguments() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument(new Integer(1), null));
@@ -42,11 +46,12 @@ public class OperatorImplTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * Testing getArgument(int) and argument resolution
-	 *
+	 * 
 	 */
+	@Test
 	public void testGetArgument() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("1 + 1", null));
@@ -60,11 +65,12 @@ public class OperatorImplTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * Testing getArguments()
-	 *
+	 * 
 	 */
+	@Test
 	public void testGetArguments() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("4", null));
@@ -77,40 +83,44 @@ public class OperatorImplTests extends TestCase {
 			fail();
 		}
 	}
-	
-	public void testGetResolver(){
+
+	@Test
+	public void testGetResolver() {
 		Resolver resolver = new MockResolver();
-		
+
 		op.setResolver(resolver);
-		
+
 		assertEquals(op.getResolver(), resolver);
 	}
-	
-	public void testSetResolver(){
+
+	@Test
+	public void testSetResolver() {
 		Resolver resolver = new MockResolver();
-		
+
 		op.setResolver(resolver);
-		
+
 		assertEquals(op.getResolver(), resolver);
 	}
-	
-	public void testGetOperatorSet(){
+
+	@Test
+	public void testGetOperatorSet() {
 		OperatorSet operatorSet = new OperatorSet();
 		operatorSet.addOperator("+", new AdditionSymbol());
 		operatorSet.addOperator("-", new SubtractionSymbol());
-		
+
 		op.setOperatorSet(operatorSet);
-		
+
 		assertEquals(op.getOperatorSet(), operatorSet);
 	}
-	
-	public void testSetOperatorSet(){
+
+	@Test
+	public void testSetOperatorSet() {
 		OperatorSet operatorSet = new OperatorSet();
 		operatorSet.addOperator("+", new AdditionSymbol());
 		operatorSet.addOperator("-", new SubtractionSymbol());
-		
+
 		op.setOperatorSet(operatorSet);
-		
+
 		assertEquals(op.getOperatorSet(), operatorSet);
 	}
 }

@@ -1,27 +1,31 @@
 package com.gadberry.utility.expression.function;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
-import com.gadberry.utility.expression.function.SubstrFunction;
 
-import junit.framework.TestCase;
-
-public class SubstrFunctionTests extends TestCase {
+public class SubstrFunctionTests {
 
 	private SubstrFunction op = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		op = new SubstrFunction();
 	}
 
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		op = null;
-		super.tearDown();
 	}
 
 	/**
@@ -29,6 +33,7 @@ public class SubstrFunctionTests extends TestCase {
 	 * 
 	 * Test: substr( abcd, 2 )
 	 */
+	@Test
 	public void testResolve1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));
@@ -50,6 +55,7 @@ public class SubstrFunctionTests extends TestCase {
 	 * 
 	 * Test: substr( abcd, 0 )
 	 */
+	@Test
 	public void testResolve2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));
@@ -71,6 +77,7 @@ public class SubstrFunctionTests extends TestCase {
 	 * 
 	 * Test: substr( abcd, 0, 0 )
 	 */
+	@Test
 	public void testResolve3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));
@@ -95,6 +102,7 @@ public class SubstrFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: 1
 	 */
+	@Test
 	public void testCheckArgs1() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));
@@ -106,7 +114,7 @@ public class SubstrFunctionTests extends TestCase {
 			fail();
 		}
 	}
-	
+
 	/**
 	 * This check a non-integer second argument. Should throw an exception.
 	 * 
@@ -114,6 +122,7 @@ public class SubstrFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: a
 	 */
+	@Test
 	public void testCheckArgs2() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));
@@ -124,7 +133,7 @@ public class SubstrFunctionTests extends TestCase {
 		} catch (InvalidArgumentsException e) {
 		}
 	}
-	
+
 	/**
 	 * This check a negative second argument. Should throw an exception.
 	 * 
@@ -132,6 +141,7 @@ public class SubstrFunctionTests extends TestCase {
 	 * 
 	 * Argument 2: -1
 	 */
+	@Test
 	public void testCheckArgs3() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));
@@ -153,6 +163,7 @@ public class SubstrFunctionTests extends TestCase {
 	 * 
 	 * Argument 3: 1
 	 */
+	@Test
 	public void testCheckArgs4() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));
@@ -176,6 +187,7 @@ public class SubstrFunctionTests extends TestCase {
 	 * 
 	 * Argument 3: 1
 	 */
+	@Test
 	public void testCheckArgs5() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));
@@ -187,7 +199,7 @@ public class SubstrFunctionTests extends TestCase {
 		} catch (InvalidArgumentsException e) {
 		}
 	}
-	
+
 	/**
 	 * Should throw an exception for a non-integer third argument.
 	 * 
@@ -197,6 +209,7 @@ public class SubstrFunctionTests extends TestCase {
 	 * 
 	 * Argument 3: abcd
 	 */
+	@Test
 	public void testCheckArgs6() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));
@@ -208,7 +221,7 @@ public class SubstrFunctionTests extends TestCase {
 		} catch (InvalidArgumentsException e) {
 		}
 	}
-	
+
 	/**
 	 * Should throw an exception for a negetive integer third argument.
 	 * 
@@ -218,6 +231,7 @@ public class SubstrFunctionTests extends TestCase {
 	 * 
 	 * Argument 3: -1
 	 */
+	@Test
 	public void testCheckArgs7() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));
@@ -229,9 +243,10 @@ public class SubstrFunctionTests extends TestCase {
 		} catch (InvalidArgumentsException e) {
 		}
 	}
-	
+
 	/**
-	 * Should throw an exception for a second argument larger than a third argument.
+	 * Should throw an exception for a second argument larger than a third
+	 * argument.
 	 * 
 	 * Argument 1: abcd
 	 * 
@@ -239,6 +254,7 @@ public class SubstrFunctionTests extends TestCase {
 	 * 
 	 * Argument 3: 1
 	 */
+	@Test
 	public void testCheckArgs8() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));
@@ -257,6 +273,7 @@ public class SubstrFunctionTests extends TestCase {
 	 * 
 	 * Argument 1: abcd
 	 */
+	@Test
 	public void testCheckArgs9() {
 		List<Argument> args = new ArrayList<Argument>();
 		args.add(new Argument("abcd", null));
