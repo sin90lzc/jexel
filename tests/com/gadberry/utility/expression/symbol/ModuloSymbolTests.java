@@ -30,116 +30,6 @@ public class ModuloSymbolTests {
 	}
 
 	/**
-	 * This checks basic modulo
-	 * 
-	 * Test: 8 % 3
-	 */
-	@Test
-	public void testResolve1() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Integer(8), null));
-		args.add(new Argument(new Integer(3), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), 2d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks even result
-	 * 
-	 * Test: 4 / 2
-	 */
-	@Test
-	public void testResolve2() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(4), null));
-		args.add(new Argument(new Float(2), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), 0d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks floating point modulo with one floating point
-	 * 
-	 * Test: 5 % 2.5
-	 */
-	@Test
-	public void testResolve3() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(5), null));
-		args.add(new Argument(new Float(2.5), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), 0d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks a large number and a number < 1
-	 * 
-	 * Test: 1111 / 0.27
-	 */
-	@Test
-	public void testResolve5() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(1111), null));
-		args.add(new Argument(new Float(0.27), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), 0.22d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks a positive small number and a negetive small number
-	 * 
-	 * Test: 0.15 % -0.11
-	 */
-	@Test
-	public void testResolve6() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(0.15), null));
-		args.add(new Argument(new Float(-0.11), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), 0.04d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
 	 * This check standard arguments. Should not throw an exception.
 	 * 
 	 * Argument 1: 1
@@ -247,5 +137,115 @@ public class ModuloSymbolTests {
 	@Test
 	public void testGetPriority() {
 		assertEquals(op.getPriority(), 10);
+	}
+
+	/**
+	 * This checks basic modulo
+	 * 
+	 * Test: 8 % 3
+	 */
+	@Test
+	public void testResolve1() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Integer(8), null));
+		args.add(new Argument(new Integer(3), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), 2d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks even result
+	 * 
+	 * Test: 4 / 2
+	 */
+	@Test
+	public void testResolve2() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(4), null));
+		args.add(new Argument(new Float(2), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), 0d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks floating point modulo with one floating point
+	 * 
+	 * Test: 5 % 2.5
+	 */
+	@Test
+	public void testResolve3() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(5), null));
+		args.add(new Argument(new Float(2.5), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), 0d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks a large number and a number < 1
+	 * 
+	 * Test: 1111 / 0.27
+	 */
+	@Test
+	public void testResolve5() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(1111), null));
+		args.add(new Argument(new Float(0.27), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), 0.22d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks a positive small number and a negetive small number
+	 * 
+	 * Test: 0.15 % -0.11
+	 */
+	@Test
+	public void testResolve6() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(0.15), null));
+		args.add(new Argument(new Float(-0.11), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), 0.04d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
 	}
 }

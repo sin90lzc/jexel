@@ -36,6 +36,35 @@ public class ArgumentTests {
 	}
 
 	@Test
+	public void testEquals() {
+		Argument arg2;
+
+		arg = new Argument(new Integer(0), new MockResolver());
+		arg2 = new Argument(new Integer(0), new MockResolver());
+		assertTrue(arg.equals(arg2));
+
+		arg = new Argument(new Double(1.2), new MockResolver());
+		arg2 = new Argument(new Double(1.2), new MockResolver());
+		assertTrue(arg.equals(arg2));
+
+		arg = new Argument(new Double(1.3), new MockResolver());
+		arg2 = new Argument(new Double(1.2), new MockResolver());
+		assertFalse(arg.equals(arg2));
+
+		arg = new Argument("abc", new MockResolver());
+		arg2 = new Argument("abc", new MockResolver());
+		assertTrue(arg.equals(arg2));
+
+		arg = new Argument("abc", new MockResolver());
+		arg2 = new Argument("def", new MockResolver());
+		assertFalse(arg.equals(arg2));
+
+		arg = new Argument("abc", new MockResolver());
+		String s = "abc";
+		assertFalse(arg.equals(s));
+	}
+
+	@Test
 	public void testIsDouble() {
 		arg = new Argument(new Integer(0), new MockResolver());
 		assertTrue(arg.isDouble());
@@ -48,6 +77,22 @@ public class ArgumentTests {
 
 		arg = new Argument("abc", new MockResolver());
 		assertFalse(arg.isDouble());
+	}
+
+	@Test
+	public void testToBoolean() {
+		arg = new Argument(new Boolean(true), new MockResolver());
+		assertTrue(arg.toBoolean());
+
+		arg = new Argument(new Boolean(false), new MockResolver());
+		assertFalse(arg.toBoolean());
+
+		arg = new Argument(new String("abc"), new MockResolver());
+		try {
+			arg.toBoolean();
+			fail();
+		} catch (ArgumentCastException e) {
+		}
 	}
 
 	@Test
@@ -151,22 +196,6 @@ public class ArgumentTests {
 	}
 
 	@Test
-	public void testToBoolean() {
-		arg = new Argument(new Boolean(true), new MockResolver());
-		assertTrue(arg.toBoolean());
-
-		arg = new Argument(new Boolean(false), new MockResolver());
-		assertFalse(arg.toBoolean());
-
-		arg = new Argument(new String("abc"), new MockResolver());
-		try {
-			arg.toBoolean();
-			fail();
-		} catch (ArgumentCastException e) {
-		}
-	}
-
-	@Test
 	public void testToString() {
 		arg = new Argument(new Integer(0), new MockResolver());
 		assertEquals(arg.toString(), "0");
@@ -176,34 +205,5 @@ public class ArgumentTests {
 
 		arg = new Argument("abc", new MockResolver());
 		assertEquals(arg.toString(), "abc");
-	}
-
-	@Test
-	public void testEquals() {
-		Argument arg2;
-
-		arg = new Argument(new Integer(0), new MockResolver());
-		arg2 = new Argument(new Integer(0), new MockResolver());
-		assertTrue(arg.equals(arg2));
-
-		arg = new Argument(new Double(1.2), new MockResolver());
-		arg2 = new Argument(new Double(1.2), new MockResolver());
-		assertTrue(arg.equals(arg2));
-
-		arg = new Argument(new Double(1.3), new MockResolver());
-		arg2 = new Argument(new Double(1.2), new MockResolver());
-		assertFalse(arg.equals(arg2));
-
-		arg = new Argument("abc", new MockResolver());
-		arg2 = new Argument("abc", new MockResolver());
-		assertTrue(arg.equals(arg2));
-
-		arg = new Argument("abc", new MockResolver());
-		arg2 = new Argument("def", new MockResolver());
-		assertFalse(arg.equals(arg2));
-
-		arg = new Argument("abc", new MockResolver());
-		String s = "abc";
-		assertFalse(arg.equals(s));
 	}
 }

@@ -29,94 +29,6 @@ public class AndSymbolTests {
 	}
 
 	/**
-	 * This checks one iteration of basic AND
-	 * 
-	 * Test: true && true
-	 */
-	@Test
-	public void testResolve1() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Boolean(true), null));
-		args.add(new Argument(new Boolean(true), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toBoolean(), true);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks one iteration of basic AND
-	 * 
-	 * Test: true && false
-	 */
-	@Test
-	public void testResolve2() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Boolean(true), null));
-		args.add(new Argument(new Boolean(false), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toBoolean(), false);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks one iteration of basic AND
-	 * 
-	 * Test: false && true
-	 */
-	@Test
-	public void testResolve3() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Boolean(false), null));
-		args.add(new Argument(new Boolean(true), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toBoolean(), false);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks one iteration of basic AND
-	 * 
-	 * Test: true && true
-	 */
-	@Test
-	public void testResolve4() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Boolean(false), null));
-		args.add(new Argument(new Boolean(false), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toBoolean(), false);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
 	 * This check standard arguments. Should not throw an exception.
 	 * 
 	 * Argument 1: boolean
@@ -224,5 +136,93 @@ public class AndSymbolTests {
 	@Test
 	public void testGetPriority() {
 		assertEquals(op.getPriority(), 10);
+	}
+
+	/**
+	 * This checks one iteration of basic AND
+	 * 
+	 * Test: true && true
+	 */
+	@Test
+	public void testResolve1() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Boolean(true), null));
+		args.add(new Argument(new Boolean(true), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toBoolean(), true);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks one iteration of basic AND
+	 * 
+	 * Test: true && false
+	 */
+	@Test
+	public void testResolve2() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Boolean(true), null));
+		args.add(new Argument(new Boolean(false), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toBoolean(), false);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks one iteration of basic AND
+	 * 
+	 * Test: false && true
+	 */
+	@Test
+	public void testResolve3() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Boolean(false), null));
+		args.add(new Argument(new Boolean(true), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toBoolean(), false);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks one iteration of basic AND
+	 * 
+	 * Test: true && true
+	 */
+	@Test
+	public void testResolve4() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Boolean(false), null));
+		args.add(new Argument(new Boolean(false), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toBoolean(), false);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
 	}
 }

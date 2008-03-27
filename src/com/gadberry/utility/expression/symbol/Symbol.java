@@ -9,8 +9,6 @@ import com.gadberry.utility.expression.Resolver;
 
 public abstract class Symbol extends OperatorImpl {
 
-	public abstract Argument resolve();
-
 	public abstract int getPriority();
 
 	@Override
@@ -36,5 +34,7 @@ public abstract class Symbol extends OperatorImpl {
 		}
 		return args;
 	}
+
+	public abstract Argument resolve();
 
 }

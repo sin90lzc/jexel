@@ -20,15 +20,15 @@ public class AndSymbol extends Symbol {
 	}
 
 	@Override
+	public int getPriority() {
+		return 10;
+	}
+
+	@Override
 	public Argument resolve() {
 		boolean lhs = getArgument(0).toBoolean();
 		boolean rhs = getArgument(1).toBoolean();
 		return new Argument(new Boolean(lhs && rhs), resolver);
-	}
-
-	@Override
-	public int getPriority() {
-		return 10;
 	}
 
 }

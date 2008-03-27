@@ -16,15 +16,15 @@ public class EqualSymbol extends Symbol {
 	}
 
 	@Override
+	public int getPriority() {
+		return 2;
+	}
+
+	@Override
 	public Argument resolve() {
 		Argument lhs = getArgument(0);
 		Argument rhs = getArgument(1);
 		return new Argument(new Boolean(lhs.equals(rhs)), resolver);
-	}
-
-	@Override
-	public int getPriority() {
-		return 2;
 	}
 
 }

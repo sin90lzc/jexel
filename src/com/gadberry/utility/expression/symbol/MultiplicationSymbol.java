@@ -21,15 +21,15 @@ public class MultiplicationSymbol extends Symbol {
 	}
 
 	@Override
+	public int getPriority() {
+		return 10;
+	}
+
+	@Override
 	public Argument resolve() {
 		double lhs = getArgument(0).toDouble();
 		double rhs = getArgument(1).toDouble();
 		return new Argument(new Double(lhs * rhs), resolver);
-	}
-
-	@Override
-	public int getPriority() {
-		return 10;
 	}
 
 }

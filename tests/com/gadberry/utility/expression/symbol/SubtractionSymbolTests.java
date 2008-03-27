@@ -30,116 +30,6 @@ public class SubtractionSymbolTests {
 	}
 
 	/**
-	 * This checks basic subtraction
-	 * 
-	 * Test: 2 - 1
-	 */
-	@Test
-	public void testResolve1() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Integer(2), null));
-		args.add(new Argument(new Integer(1), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), 1d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks floating point subtraction
-	 * 
-	 * Test: 3.33 - 2.22
-	 */
-	@Test
-	public void testResolve2() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Float(3.33), null));
-		args.add(new Argument(new Double(2.22), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), 1.11d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks floating point subtraction with one floating point
-	 * 
-	 * Test: 1001 - 2.22
-	 */
-	@Test
-	public void testResolve3() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(1001), null));
-		args.add(new Argument(new Float(2.22), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), 998.78d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks a large number and a number < 1
-	 * 
-	 * Test: 1111 - 0.11
-	 */
-	@Test
-	public void testResolve4() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(1111), null));
-		args.add(new Argument(new Float(0.11), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), 1110.89, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks a positive small number and a negetive small number
-	 * 
-	 * Test: 0.15 - -0.11
-	 */
-	@Test
-	public void testResolve5() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(0.15), null));
-		args.add(new Argument(new Float(-0.11), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), 0.26, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
 	 * This check standard arguments. Should not throw an exception.
 	 * 
 	 * Argument 1: 1
@@ -247,5 +137,115 @@ public class SubtractionSymbolTests {
 	@Test
 	public void testGetPriority() {
 		assertEquals(op.getPriority(), 6);
+	}
+
+	/**
+	 * This checks basic subtraction
+	 * 
+	 * Test: 2 - 1
+	 */
+	@Test
+	public void testResolve1() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Integer(2), null));
+		args.add(new Argument(new Integer(1), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), 1d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks floating point subtraction
+	 * 
+	 * Test: 3.33 - 2.22
+	 */
+	@Test
+	public void testResolve2() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Float(3.33), null));
+		args.add(new Argument(new Double(2.22), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), 1.11d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks floating point subtraction with one floating point
+	 * 
+	 * Test: 1001 - 2.22
+	 */
+	@Test
+	public void testResolve3() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(1001), null));
+		args.add(new Argument(new Float(2.22), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), 998.78d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks a large number and a number < 1
+	 * 
+	 * Test: 1111 - 0.11
+	 */
+	@Test
+	public void testResolve4() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(1111), null));
+		args.add(new Argument(new Float(0.11), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), 1110.89, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks a positive small number and a negetive small number
+	 * 
+	 * Test: 0.15 - -0.11
+	 */
+	@Test
+	public void testResolve5() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(0.15), null));
+		args.add(new Argument(new Float(-0.11), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), 0.26, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
 	}
 }

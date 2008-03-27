@@ -30,69 +30,6 @@ public class NegFunctionTests {
 	}
 
 	/**
-	 * This checks basic neg
-	 * 
-	 * Test: neg( 1 )
-	 */
-	@Test
-	public void testResolve1() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Integer(1), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), -1d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks a larger result
-	 * 
-	 * Test: neg( 180 )
-	 */
-	@Test
-	public void testResolve2() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(180), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), -180d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks a negetive argument
-	 * 
-	 * Test: cos( -180 )
-	 */
-	@Test
-	public void testResolve3() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(-180), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), 180d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
 	 * This check one argument. Should not throw an exception.
 	 * 
 	 * Argument 1: 1
@@ -164,6 +101,69 @@ public class NegFunctionTests {
 			op.setArguments(args);
 			fail();
 		} catch (InvalidArgumentsException e) {
+		}
+	}
+
+	/**
+	 * This checks basic neg
+	 * 
+	 * Test: neg( 1 )
+	 */
+	@Test
+	public void testResolve1() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Integer(1), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), -1d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks a larger result
+	 * 
+	 * Test: neg( 180 )
+	 */
+	@Test
+	public void testResolve2() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(180), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), -180d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks a negetive argument
+	 * 
+	 * Test: cos( -180 )
+	 */
+	@Test
+	public void testResolve3() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(-180), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), 180d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
 		}
 	}
 }

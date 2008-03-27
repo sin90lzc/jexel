@@ -26,26 +26,6 @@ public class OperatorSetTests {
 	}
 
 	@Test
-	public void testFindOperator() {
-		Operator op = null;
-
-		op = opSet.findOperator("+");
-		if (!(op instanceof AdditionSymbol)) {
-			fail();
-		}
-
-		op = opSet.findOperator("+a");
-		if (!(op instanceof AdditionSymbol)) {
-			fail();
-		}
-
-		op = opSet.findOperator("aaaaaaaa");
-		if (!(op == null)) {
-			fail();
-		}
-	}
-
-	@Test
 	public void testAddOperator() {
 		Operator op = null;
 
@@ -64,6 +44,26 @@ public class OperatorSetTests {
 		opSet.addOperator("+", new AdditionSymbol());
 		op = opSet.findOperator("+");
 		if (!(op instanceof AdditionSymbol)) {
+			fail();
+		}
+	}
+
+	@Test
+	public void testFindOperator() {
+		Operator op = null;
+
+		op = opSet.findOperator("+");
+		if (!(op instanceof AdditionSymbol)) {
+			fail();
+		}
+
+		op = opSet.findOperator("+a");
+		if (!(op instanceof AdditionSymbol)) {
+			fail();
+		}
+
+		op = opSet.findOperator("aaaaaaaa");
+		if (!(op == null)) {
 			fail();
 		}
 	}

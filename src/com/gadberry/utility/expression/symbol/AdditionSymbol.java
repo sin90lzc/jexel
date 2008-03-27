@@ -17,6 +17,11 @@ public class AdditionSymbol extends Symbol {
 	}
 
 	@Override
+	public int getPriority() {
+		return 5;
+	}
+
+	@Override
 	public Argument resolve() {
 		if (getArgument(0).isDouble() && getArgument(1).isDouble()) {
 			double lhs = getArgument(0).toDouble();
@@ -27,11 +32,6 @@ public class AdditionSymbol extends Symbol {
 			String rhs = getArgument(1).toString();
 			return new Argument(lhs + rhs, resolver);
 		}
-	}
-
-	@Override
-	public int getPriority() {
-		return 5;
 	}
 
 }

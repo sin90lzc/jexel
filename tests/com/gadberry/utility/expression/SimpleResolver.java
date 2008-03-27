@@ -20,27 +20,10 @@ public class SimpleResolver implements Resolver {
 		return false;
 	}
 
-	private boolean isDateUnit(String path) {
-		return getDateUnit(path) != null;
-	}
-
 	private Date getDate(String path) {
 		try {
 			return sdf.parse(path);
 		} catch (ParseException e) {
-		}
-		return null;
-	}
-
-	private boolean isDate(String path) {
-		return getDate(path) != null;
-	}
-
-	public Object resolve(String path) {
-		if (isDate(path)) {
-			return getDate(path);
-		} else if (isDateUnit(path)) {
-			return getDateUnit(path);
 		}
 		return null;
 	}
@@ -60,6 +43,23 @@ public class SimpleResolver implements Resolver {
 			return CalendarUtils.Unit.SECOND;
 		} else if (path.equals("|MILLISECOND|")) {
 			return CalendarUtils.Unit.MILLISECOND;
+		}
+		return null;
+	}
+
+	private boolean isDate(String path) {
+		return getDate(path) != null;
+	}
+
+	private boolean isDateUnit(String path) {
+		return getDateUnit(path) != null;
+	}
+
+	public Object resolve(String path) {
+		if (isDate(path)) {
+			return getDate(path);
+		} else if (isDateUnit(path)) {
+			return getDateUnit(path);
 		}
 		return null;
 	}

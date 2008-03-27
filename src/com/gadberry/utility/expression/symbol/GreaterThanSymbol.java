@@ -17,6 +17,11 @@ public class GreaterThanSymbol extends Symbol {
 	}
 
 	@Override
+	public int getPriority() {
+		return 2;
+	}
+
+	@Override
 	public Argument resolve() {
 		if (getArgument(0).isDate() && getArgument(1).isDate()) {
 			Date lhs = getArgument(0).toDate();
@@ -31,11 +36,6 @@ public class GreaterThanSymbol extends Symbol {
 			String rhs = getArgument(1).toString();
 			return new Argument(new Boolean(lhs.compareTo(rhs) > 0), resolver);
 		}
-	}
-
-	@Override
-	public int getPriority() {
-		return 2;
 	}
 
 }

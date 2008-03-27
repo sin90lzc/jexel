@@ -17,6 +17,11 @@ public class GreaterThanOrEqualSymbol extends Symbol {
 	}
 
 	@Override
+	public int getPriority() {
+		return 2;
+	}
+
+	@Override
 	public Argument resolve() {
 		Argument lhs = getArgument(0);
 		Argument rhs = getArgument(1);
@@ -40,11 +45,6 @@ public class GreaterThanOrEqualSymbol extends Symbol {
 		}
 		boolean equal = es.resolve().toBoolean();
 		return new Argument(new Boolean(greaterThan || equal), resolver);
-	}
-
-	@Override
-	public int getPriority() {
-		return 2;
 	}
 
 }

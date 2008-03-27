@@ -30,69 +30,6 @@ public class SinFunctionTests {
 	}
 
 	/**
-	 * This checks basic sin
-	 * 
-	 * Test: sin( 90 )
-	 */
-	@Test
-	public void testResolve1() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(Math.toRadians(90)), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), 1d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks a negative number
-	 * 
-	 * Test: sin( 270 )
-	 */
-	@Test
-	public void testResolve2() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(Math.toRadians(270)), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), -1d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks a negetive sin
-	 * 
-	 * Test: sin( -90 )
-	 */
-	@Test
-	public void testResolve3() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(Math.toRadians(-90)), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), -1d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
 	 * This check one argument. Should not throw an exception.
 	 * 
 	 * Argument 1: 1
@@ -164,6 +101,69 @@ public class SinFunctionTests {
 			op.setArguments(args);
 			fail();
 		} catch (InvalidArgumentsException e) {
+		}
+	}
+
+	/**
+	 * This checks basic sin
+	 * 
+	 * Test: sin( 90 )
+	 */
+	@Test
+	public void testResolve1() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(Math.toRadians(90)), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), 1d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks a negative number
+	 * 
+	 * Test: sin( 270 )
+	 */
+	@Test
+	public void testResolve2() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(Math.toRadians(270)), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), -1d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks a negetive sin
+	 * 
+	 * Test: sin( -90 )
+	 */
+	@Test
+	public void testResolve3() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(Math.toRadians(-90)), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), -1d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
 		}
 	}
 }

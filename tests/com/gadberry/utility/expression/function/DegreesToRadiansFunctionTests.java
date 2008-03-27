@@ -30,48 +30,6 @@ public class DegreesToRadiansFunctionTests {
 	}
 
 	/**
-	 * This checks basic degrees to radians
-	 * 
-	 * Test: rad( 0 )
-	 */
-	@Test
-	public void testResolve1() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Integer(0), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), Math.toRadians(0), FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks a negetive rad
-	 * 
-	 * Test: rad( -180 )
-	 */
-	@Test
-	public void testResolve2() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(-180), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), Math.toRadians(-180), FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
 	 * This check one argument. Should not throw an exception.
 	 * 
 	 * Argument 1: 1
@@ -143,6 +101,48 @@ public class DegreesToRadiansFunctionTests {
 			op.setArguments(args);
 			fail();
 		} catch (InvalidArgumentsException e) {
+		}
+	}
+
+	/**
+	 * This checks basic degrees to radians
+	 * 
+	 * Test: rad( 0 )
+	 */
+	@Test
+	public void testResolve1() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Integer(0), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), Math.toRadians(0), FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks a negetive rad
+	 * 
+	 * Test: rad( -180 )
+	 */
+	@Test
+	public void testResolve2() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(-180), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), Math.toRadians(-180), FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
 		}
 	}
 }

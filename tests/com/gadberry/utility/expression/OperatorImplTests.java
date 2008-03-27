@@ -30,24 +30,6 @@ public class OperatorImplTests {
 	}
 
 	/**
-	 * Testing set / get arguments
-	 * 
-	 */
-	@Test
-	public void testSetArguments() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Integer(1), null));
-		args.add(new Argument(new Integer(2), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.getArguments(), args);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
 	 * Testing getArgument(int) and argument resolution
 	 * 
 	 */
@@ -85,24 +67,6 @@ public class OperatorImplTests {
 	}
 
 	@Test
-	public void testGetResolver() {
-		Resolver resolver = new MockResolver();
-
-		op.setResolver(resolver);
-
-		assertEquals(op.getResolver(), resolver);
-	}
-
-	@Test
-	public void testSetResolver() {
-		Resolver resolver = new MockResolver();
-
-		op.setResolver(resolver);
-
-		assertEquals(op.getResolver(), resolver);
-	}
-
-	@Test
 	public void testGetOperatorSet() {
 		OperatorSet operatorSet = new OperatorSet();
 		operatorSet.addOperator("+", new AdditionSymbol());
@@ -114,6 +78,33 @@ public class OperatorImplTests {
 	}
 
 	@Test
+	public void testGetResolver() {
+		Resolver resolver = new MockResolver();
+
+		op.setResolver(resolver);
+
+		assertEquals(op.getResolver(), resolver);
+	}
+
+	/**
+	 * Testing set / get arguments
+	 * 
+	 */
+	@Test
+	public void testSetArguments() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Integer(1), null));
+		args.add(new Argument(new Integer(2), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.getArguments(), args);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	@Test
 	public void testSetOperatorSet() {
 		OperatorSet operatorSet = new OperatorSet();
 		operatorSet.addOperator("+", new AdditionSymbol());
@@ -122,5 +113,14 @@ public class OperatorImplTests {
 		op.setOperatorSet(operatorSet);
 
 		assertEquals(op.getOperatorSet(), operatorSet);
+	}
+
+	@Test
+	public void testSetResolver() {
+		Resolver resolver = new MockResolver();
+
+		op.setResolver(resolver);
+
+		assertEquals(op.getResolver(), resolver);
 	}
 }

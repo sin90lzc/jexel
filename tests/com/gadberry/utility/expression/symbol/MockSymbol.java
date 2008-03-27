@@ -13,13 +13,13 @@ public class MockSymbol extends Symbol {
 	}
 
 	@Override
-	public Argument resolve() {
-		return new Argument(1, resolver);
+	public int getPriority() {
+		return 10;
 	}
 
 	@Override
-	public int getPriority() {
-		return 10;
+	public Argument resolve() {
+		return new Argument(1, resolver);
 	}
 
 }

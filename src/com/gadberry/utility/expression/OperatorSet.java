@@ -37,45 +37,6 @@ import com.gadberry.utility.expression.symbol.SubtractionSymbol;
 
 public class OperatorSet {
 
-	private Map<String, Operator> operators = new HashMap<String, Operator>();
-
-	public Operator findOperator(String symbol) {
-		// If we have a direct match
-		if (operators.get(symbol) != null) {
-			return createOperator(operators.get(symbol).getClass());
-		}
-
-		// If we have a starts with match (functions)
-		for (String s : operators.keySet()) {
-			if (symbol.startsWith(s)) {
-				return createOperator(operators.get(s).getClass());
-			}
-		}
-
-		return null;
-	}
-
-	private Operator createOperator(Class<? extends Operator> c) {
-		try {
-			Operator o = c.newInstance();
-			o.setOperatorSet(this);
-			return o;
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public void addOperator(String delimeter, Operator o) {
-		operators.put(delimeter, o);
-	}
-
-	public List<String> getDelimeters() {
-		return new ArrayList<String>(operators.keySet());
-	}
-
 	public static OperatorSet opSet = null;
 
 	public static OperatorSet getStandardOperatorSet() {
@@ -127,6 +88,45 @@ public class OperatorSet {
 		}
 
 		return opSet;
+	}
+
+	private Map<String, Operator> operators = new HashMap<String, Operator>();
+
+	public void addOperator(String delimeter, Operator o) {
+		operators.put(delimeter, o);
+	}
+
+	private Operator createOperator(Class<? extends Operator> c) {
+		try {
+			Operator o = c.newInstance();
+			o.setOperatorSet(this);
+			return o;
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public Operator findOperator(String symbol) {
+		// If we have a direct match
+		if (operators.get(symbol) != null) {
+			return createOperator(operators.get(symbol).getClass());
+		}
+
+		// If we have a starts with match (functions)
+		for (String s : operators.keySet()) {
+			if (symbol.startsWith(s)) {
+				return createOperator(operators.get(s).getClass());
+			}
+		}
+
+		return null;
+	}
+
+	public List<String> getDelimeters() {
+		return new ArrayList<String>(operators.keySet());
 	}
 
 }

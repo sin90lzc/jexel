@@ -30,69 +30,6 @@ public class AsinFunctionTests {
 	}
 
 	/**
-	 * This checks basic asin
-	 * 
-	 * Test: asin( 0 )
-	 */
-	@Test
-	public void testResolve1() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Integer(0), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), 0d, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks a negative number
-	 * 
-	 * Test: asin( 1 )
-	 */
-	@Test
-	public void testResolve2() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(1), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), Math.PI / 2, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks a negetive cos
-	 * 
-	 * Test: asin( -1 )
-	 */
-	@Test
-	public void testResolve3() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(-1), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), -Math.PI / 2, FuzzyEquals.TOLERANCE);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
 	 * This check one argument. Should not throw an exception.
 	 * 
 	 * Argument 1: 1
@@ -164,6 +101,69 @@ public class AsinFunctionTests {
 			op.setArguments(args);
 			fail();
 		} catch (InvalidArgumentsException e) {
+		}
+	}
+
+	/**
+	 * This checks basic asin
+	 * 
+	 * Test: asin( 0 )
+	 */
+	@Test
+	public void testResolve1() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Integer(0), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), 0d, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks a negative number
+	 * 
+	 * Test: asin( 1 )
+	 */
+	@Test
+	public void testResolve2() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(1), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), Math.PI / 2, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks a negetive cos
+	 * 
+	 * Test: asin( -1 )
+	 */
+	@Test
+	public void testResolve3() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(-1), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), -Math.PI / 2, FuzzyEquals.TOLERANCE);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
 		}
 	}
 }

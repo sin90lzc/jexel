@@ -30,6 +30,81 @@ public class AbsFunctionTests {
 	}
 
 	/**
+	 * This check one argument. Should not throw an exception.
+	 * 
+	 * Argument 1: 1
+	 */
+	@Test
+	public void testCheckArgs1() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(1), null));
+		try {
+			op.setArguments(args);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This check standard arguments. Should throw an exception.
+	 * 
+	 * Argument 1: 1
+	 * 
+	 * Argument 2: 1
+	 */
+	@Test
+	public void testCheckArgs2() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(1), null));
+		args.add(new Argument(new Float(1), null));
+		try {
+			op.setArguments(args);
+			fail();
+		} catch (InvalidArgumentsException e) {
+		}
+	}
+
+	/**
+	 * This checks three arguments. Should throw an exception.
+	 * 
+	 * Argument 1: 1
+	 * 
+	 * Argument 2: 1
+	 * 
+	 * Argument 3: 1
+	 */
+	@Test
+	public void testCheckArgs3() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Double(1), null));
+		args.add(new Argument(new Float(1), null));
+		args.add(new Argument(new Integer(1), null));
+		try {
+			op.setArguments(args);
+			fail();
+		} catch (InvalidArgumentsException e) {
+		}
+	}
+
+	/**
+	 * This checks non-double arguments. Should throw an exception for a
+	 * non-double argument.
+	 * 
+	 * Argument 2: abc
+	 */
+	@Test
+	public void testCheckArgs4() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument("abc", null));
+		try {
+			op.setArguments(args);
+			fail();
+		} catch (InvalidArgumentsException e) {
+		}
+	}
+
+	/**
 	 * This checks basic abs
 	 * 
 	 * Test: abs( 1 )
@@ -110,81 +185,6 @@ public class AbsFunctionTests {
 		} catch (ArgumentCastException e) {
 			e.printStackTrace();
 			fail();
-		}
-	}
-
-	/**
-	 * This check one argument. Should not throw an exception.
-	 * 
-	 * Argument 1: 1
-	 */
-	@Test
-	public void testCheckArgs1() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(1), null));
-		try {
-			op.setArguments(args);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This check standard arguments. Should throw an exception.
-	 * 
-	 * Argument 1: 1
-	 * 
-	 * Argument 2: 1
-	 */
-	@Test
-	public void testCheckArgs2() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(1), null));
-		args.add(new Argument(new Float(1), null));
-		try {
-			op.setArguments(args);
-			fail();
-		} catch (InvalidArgumentsException e) {
-		}
-	}
-
-	/**
-	 * This checks three arguments. Should throw an exception.
-	 * 
-	 * Argument 1: 1
-	 * 
-	 * Argument 2: 1
-	 * 
-	 * Argument 3: 1
-	 */
-	@Test
-	public void testCheckArgs3() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Double(1), null));
-		args.add(new Argument(new Float(1), null));
-		args.add(new Argument(new Integer(1), null));
-		try {
-			op.setArguments(args);
-			fail();
-		} catch (InvalidArgumentsException e) {
-		}
-	}
-
-	/**
-	 * This checks non-double arguments. Should throw an exception for a
-	 * non-double argument.
-	 * 
-	 * Argument 2: abc
-	 */
-	@Test
-	public void testCheckArgs4() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument("abc", null));
-		try {
-			op.setArguments(args);
-			fail();
-		} catch (InvalidArgumentsException e) {
 		}
 	}
 }

@@ -29,94 +29,6 @@ public class OrSymbolTests {
 	}
 
 	/**
-	 * This checks one iteration of basic OR
-	 * 
-	 * Test: true || true
-	 */
-	@Test
-	public void testResolve1() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Boolean(true), null));
-		args.add(new Argument(new Boolean(true), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toBoolean(), true);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks one iteration of basic OR
-	 * 
-	 * Test: true || false
-	 */
-	@Test
-	public void testResolve2() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Boolean(true), null));
-		args.add(new Argument(new Boolean(false), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toBoolean(), true);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks one iteration of basic OR
-	 * 
-	 * Test: false || true
-	 */
-	@Test
-	public void testResolve3() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Boolean(false), null));
-		args.add(new Argument(new Boolean(true), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toBoolean(), true);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks one iteration of basic OR
-	 * 
-	 * Test: false || false
-	 */
-	@Test
-	public void testResolve4() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(new Boolean(false), null));
-		args.add(new Argument(new Boolean(false), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toBoolean(), false);
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
 	 * This check standard arguments. Should not throw an exception.
 	 * 
 	 * Argument 1: boolean
@@ -224,5 +136,93 @@ public class OrSymbolTests {
 	@Test
 	public void testGetPriority() {
 		assertEquals(op.getPriority(), 5);
+	}
+
+	/**
+	 * This checks one iteration of basic OR
+	 * 
+	 * Test: true || true
+	 */
+	@Test
+	public void testResolve1() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Boolean(true), null));
+		args.add(new Argument(new Boolean(true), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toBoolean(), true);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks one iteration of basic OR
+	 * 
+	 * Test: true || false
+	 */
+	@Test
+	public void testResolve2() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Boolean(true), null));
+		args.add(new Argument(new Boolean(false), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toBoolean(), true);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks one iteration of basic OR
+	 * 
+	 * Test: false || true
+	 */
+	@Test
+	public void testResolve3() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Boolean(false), null));
+		args.add(new Argument(new Boolean(true), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toBoolean(), true);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks one iteration of basic OR
+	 * 
+	 * Test: false || false
+	 */
+	@Test
+	public void testResolve4() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(new Boolean(false), null));
+		args.add(new Argument(new Boolean(false), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toBoolean(), false);
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
 	}
 }

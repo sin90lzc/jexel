@@ -27,6 +27,14 @@ public class FunctionTests {
 	}
 
 	/**
+	 * Verify the priority
+	 */
+	@Test
+	public void testGetPriority() {
+		assertEquals(op.getPriority(), 20);
+	}
+
+	/**
 	 * This checks basic argument resolution
 	 */
 	@Test
@@ -40,13 +48,5 @@ public class FunctionTests {
 		assertEquals(args.get(0), new Argument(1, null));
 		assertEquals(args.get(1), new Argument("(1 + 2)", null));
 		assertEquals(args.get(2), new Argument("today", null));
-	}
-
-	/**
-	 * Verify the priority
-	 */
-	@Test
-	public void testGetPriority() {
-		assertEquals(op.getPriority(), 20);
 	}
 }

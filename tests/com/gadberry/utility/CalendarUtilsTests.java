@@ -15,164 +15,46 @@ import com.gadberry.utility.CalendarUtils.Unit;
 
 public class CalendarUtilsTests {
 
+	@Test
+	public void testAdd() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 0);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2000);
+		c2.set(Calendar.MONTH, 0);
+		c2.set(Calendar.DAY_OF_MONTH, 1);
+		c2.set(Calendar.HOUR_OF_DAY, 0);
+		c2.set(Calendar.MINUTE, 0);
+		c2.set(Calendar.SECOND, 0);
+		c2.set(Calendar.MILLISECOND, 0);
+
+		long increment = Integer.MAX_VALUE * 5l + 123456;
+
+		c1.add(Calendar.MILLISECOND, Integer.MAX_VALUE);
+		c1.add(Calendar.MILLISECOND, Integer.MAX_VALUE);
+		c1.add(Calendar.MILLISECOND, Integer.MAX_VALUE);
+		c1.add(Calendar.MILLISECOND, Integer.MAX_VALUE);
+		c1.add(Calendar.MILLISECOND, Integer.MAX_VALUE);
+		c1.add(Calendar.MILLISECOND, 123456);
+
+		CalendarUtils.add(c2, Calendar.MILLISECOND, increment);
+
+		assertEquals(c1, c2);
+	}
+
 	/**
 	 * Test the constructor. This is just for coverage
 	 */
 	@Test
 	public void testConstructor() {
 		new CalendarUtils();
-	}
-
-	/**
-	 * Test for exactly one unit difference between two calendars
-	 */
-	@Test
-	public void testDifferenceYear1() {
-		Calendar c1 = Calendar.getInstance();
-		c1.set(Calendar.YEAR, 2000);
-		c1.set(Calendar.MONTH, 0);
-		c1.set(Calendar.DAY_OF_MONTH, 1);
-		c1.set(Calendar.HOUR_OF_DAY, 0);
-		c1.set(Calendar.MINUTE, 0);
-		c1.set(Calendar.SECOND, 0);
-		c1.set(Calendar.MILLISECOND, 0);
-
-		Calendar c2 = Calendar.getInstance();
-		c2.set(Calendar.YEAR, 2001);
-		c2.set(Calendar.MONTH, 0);
-		c2.set(Calendar.DAY_OF_MONTH, 1);
-		c2.set(Calendar.HOUR_OF_DAY, 0);
-		c2.set(Calendar.MINUTE, 0);
-		c2.set(Calendar.SECOND, 0);
-		c2.set(Calendar.MILLISECOND, 0);
-
-		assertEquals(CalendarUtils.difference(c1, c2, Unit.YEAR), 1);
-		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.YEAR), 1);
-	}
-
-	/**
-	 * Test for one millisecond short of exactly one unit difference between two
-	 * calendars
-	 */
-	@Test
-	public void testDifferenceYear2() {
-		Calendar c1 = Calendar.getInstance();
-		c1.set(Calendar.YEAR, 2000);
-		c1.set(Calendar.MONTH, 0);
-		c1.set(Calendar.DAY_OF_MONTH, 1);
-		c1.set(Calendar.HOUR_OF_DAY, 0);
-		c1.set(Calendar.MINUTE, 0);
-		c1.set(Calendar.SECOND, 0);
-		c1.set(Calendar.MILLISECOND, 0);
-
-		Calendar c2 = Calendar.getInstance();
-		c2.set(Calendar.YEAR, 2000);
-		c2.set(Calendar.MONTH, 11);
-		c2.set(Calendar.DAY_OF_MONTH, 31);
-		c2.set(Calendar.HOUR_OF_DAY, 23);
-		c2.set(Calendar.MINUTE, 59);
-		c2.set(Calendar.SECOND, 59);
-		c2.set(Calendar.MILLISECOND, 999);
-
-		assertEquals(CalendarUtils.difference(c1, c2, Unit.YEAR), 0);
-		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.YEAR), 0);
-
-		c2.add(Calendar.MILLISECOND, 1);
-
-		assertEquals(CalendarUtils.difference(c1, c2, Unit.YEAR), 1);
-		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.YEAR), 1);
-	}
-
-	/**
-	 * Test for exactly one unit difference between two calendars
-	 */
-	@Test
-	public void testDifferenceMonth1() {
-		Calendar c1 = Calendar.getInstance();
-		c1.set(Calendar.YEAR, 2000);
-		c1.set(Calendar.MONTH, 0);
-		c1.set(Calendar.DAY_OF_MONTH, 1);
-		c1.set(Calendar.HOUR_OF_DAY, 0);
-		c1.set(Calendar.MINUTE, 0);
-		c1.set(Calendar.SECOND, 0);
-		c1.set(Calendar.MILLISECOND, 0);
-
-		Calendar c2 = Calendar.getInstance();
-		c2.set(Calendar.YEAR, 2000);
-		c2.set(Calendar.MONTH, 1);
-		c2.set(Calendar.DAY_OF_MONTH, 1);
-		c2.set(Calendar.HOUR_OF_DAY, 0);
-		c2.set(Calendar.MINUTE, 0);
-		c2.set(Calendar.SECOND, 0);
-		c2.set(Calendar.MILLISECOND, 0);
-
-		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 1);
-		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MONTH), 1);
-	}
-
-	/**
-	 * Test for one millisecond short of exactly one unit difference between two
-	 * calendars
-	 */
-	@Test
-	public void testDifferenceMonth2() {
-		Calendar c1 = Calendar.getInstance();
-		c1.set(Calendar.YEAR, 2000);
-		c1.set(Calendar.MONTH, 0);
-		c1.set(Calendar.DAY_OF_MONTH, 1);
-		c1.set(Calendar.HOUR_OF_DAY, 0);
-		c1.set(Calendar.MINUTE, 0);
-		c1.set(Calendar.SECOND, 0);
-		c1.set(Calendar.MILLISECOND, 0);
-
-		Calendar c2 = Calendar.getInstance();
-		c2.set(Calendar.YEAR, 2000);
-		c2.set(Calendar.MONTH, 0);
-		c2.set(Calendar.DAY_OF_MONTH, 31);
-		c2.set(Calendar.HOUR_OF_DAY, 23);
-		c2.set(Calendar.MINUTE, 59);
-		c2.set(Calendar.SECOND, 59);
-		c2.set(Calendar.MILLISECOND, 999);
-
-		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 0);
-		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MONTH), 0);
-
-		c2.add(Calendar.MILLISECOND, 1);
-
-		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 1);
-		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MONTH), 1);
-	}
-
-	/**
-	 * Test for the month of February
-	 */
-	@Test
-	public void testDifferenceMonth3() {
-		Calendar c1 = Calendar.getInstance();
-		c1.set(Calendar.YEAR, 2000);
-		c1.set(Calendar.MONTH, 1);
-		c1.set(Calendar.DAY_OF_MONTH, 1);
-		c1.set(Calendar.HOUR_OF_DAY, 0);
-		c1.set(Calendar.MINUTE, 0);
-		c1.set(Calendar.SECOND, 0);
-		c1.set(Calendar.MILLISECOND, 0);
-
-		Calendar c2 = Calendar.getInstance();
-		c2.set(Calendar.YEAR, 2000);
-		c2.set(Calendar.MONTH, 1);
-		c2.set(Calendar.DAY_OF_MONTH, 29);
-		c2.set(Calendar.HOUR_OF_DAY, 23);
-		c2.set(Calendar.MINUTE, 59);
-		c2.set(Calendar.SECOND, 59);
-		c2.set(Calendar.MILLISECOND, 999);
-
-		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 0);
-		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MONTH), 0);
-
-		c2.add(Calendar.MILLISECOND, 1);
-
-		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 1);
-		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MONTH), 1);
 	}
 
 	/**
@@ -299,6 +181,66 @@ public class CalendarUtilsTests {
 	 * Test for exactly one unit difference between two calendars
 	 */
 	@Test
+	public void testDifferenceMillisecond1() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 0);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2000);
+		c2.set(Calendar.MONTH, 0);
+		c2.set(Calendar.DAY_OF_MONTH, 1);
+		c2.set(Calendar.HOUR_OF_DAY, 0);
+		c2.set(Calendar.MINUTE, 0);
+		c2.set(Calendar.SECOND, 0);
+		c2.set(Calendar.MILLISECOND, 1);
+
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MILLISECOND), 1);
+		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MILLISECOND), 1);
+	}
+
+	/**
+	 * Test for one millisecond short of exactly one unit difference between two
+	 * calendars
+	 */
+	@Test
+	public void testDifferenceMillisecond2() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 0);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2000);
+		c2.set(Calendar.MONTH, 0);
+		c2.set(Calendar.DAY_OF_MONTH, 1);
+		c2.set(Calendar.HOUR_OF_DAY, 0);
+		c2.set(Calendar.MINUTE, 0);
+		c2.set(Calendar.SECOND, 0);
+		c2.set(Calendar.MILLISECOND, 0);
+
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MILLISECOND), 0);
+		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MILLISECOND), 0);
+
+		c2.add(Calendar.MILLISECOND, 1);
+
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MILLISECOND), 1);
+		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MILLISECOND), 1);
+	}
+
+	/**
+	 * Test for exactly one unit difference between two calendars
+	 */
+	@Test
 	public void testDifferenceMinute1() {
 		Calendar c1 = Calendar.getInstance();
 		c1.set(Calendar.YEAR, 2000);
@@ -353,6 +295,98 @@ public class CalendarUtilsTests {
 
 		assertEquals(CalendarUtils.difference(c1, c2, Unit.MINUTE), 1);
 		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MINUTE), 1);
+	}
+
+	/**
+	 * Test for exactly one unit difference between two calendars
+	 */
+	@Test
+	public void testDifferenceMonth1() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 0);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2000);
+		c2.set(Calendar.MONTH, 1);
+		c2.set(Calendar.DAY_OF_MONTH, 1);
+		c2.set(Calendar.HOUR_OF_DAY, 0);
+		c2.set(Calendar.MINUTE, 0);
+		c2.set(Calendar.SECOND, 0);
+		c2.set(Calendar.MILLISECOND, 0);
+
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 1);
+		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MONTH), 1);
+	}
+
+	/**
+	 * Test for one millisecond short of exactly one unit difference between two
+	 * calendars
+	 */
+	@Test
+	public void testDifferenceMonth2() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 0);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2000);
+		c2.set(Calendar.MONTH, 0);
+		c2.set(Calendar.DAY_OF_MONTH, 31);
+		c2.set(Calendar.HOUR_OF_DAY, 23);
+		c2.set(Calendar.MINUTE, 59);
+		c2.set(Calendar.SECOND, 59);
+		c2.set(Calendar.MILLISECOND, 999);
+
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 0);
+		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MONTH), 0);
+
+		c2.add(Calendar.MILLISECOND, 1);
+
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 1);
+		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MONTH), 1);
+	}
+
+	/**
+	 * Test for the month of February
+	 */
+	@Test
+	public void testDifferenceMonth3() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 1);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2000);
+		c2.set(Calendar.MONTH, 1);
+		c2.set(Calendar.DAY_OF_MONTH, 29);
+		c2.set(Calendar.HOUR_OF_DAY, 23);
+		c2.set(Calendar.MINUTE, 59);
+		c2.set(Calendar.SECOND, 59);
+		c2.set(Calendar.MILLISECOND, 999);
+
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 0);
+		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MONTH), 0);
+
+		c2.add(Calendar.MILLISECOND, 1);
+
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.MONTH), 1);
+		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MONTH), 1);
 	}
 
 	/**
@@ -419,7 +453,7 @@ public class CalendarUtilsTests {
 	 * Test for exactly one unit difference between two calendars
 	 */
 	@Test
-	public void testDifferenceMillisecond1() {
+	public void testDifferenceYear1() {
 		Calendar c1 = Calendar.getInstance();
 		c1.set(Calendar.YEAR, 2000);
 		c1.set(Calendar.MONTH, 0);
@@ -430,16 +464,16 @@ public class CalendarUtilsTests {
 		c1.set(Calendar.MILLISECOND, 0);
 
 		Calendar c2 = Calendar.getInstance();
-		c2.set(Calendar.YEAR, 2000);
+		c2.set(Calendar.YEAR, 2001);
 		c2.set(Calendar.MONTH, 0);
 		c2.set(Calendar.DAY_OF_MONTH, 1);
 		c2.set(Calendar.HOUR_OF_DAY, 0);
 		c2.set(Calendar.MINUTE, 0);
 		c2.set(Calendar.SECOND, 0);
-		c2.set(Calendar.MILLISECOND, 1);
+		c2.set(Calendar.MILLISECOND, 0);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Unit.MILLISECOND), 1);
-		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MILLISECOND), 1);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.YEAR), 1);
+		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.YEAR), 1);
 	}
 
 	/**
@@ -447,7 +481,7 @@ public class CalendarUtilsTests {
 	 * calendars
 	 */
 	@Test
-	public void testDifferenceMillisecond2() {
+	public void testDifferenceYear2() {
 		Calendar c1 = Calendar.getInstance();
 		c1.set(Calendar.YEAR, 2000);
 		c1.set(Calendar.MONTH, 0);
@@ -459,54 +493,20 @@ public class CalendarUtilsTests {
 
 		Calendar c2 = Calendar.getInstance();
 		c2.set(Calendar.YEAR, 2000);
-		c2.set(Calendar.MONTH, 0);
-		c2.set(Calendar.DAY_OF_MONTH, 1);
-		c2.set(Calendar.HOUR_OF_DAY, 0);
-		c2.set(Calendar.MINUTE, 0);
-		c2.set(Calendar.SECOND, 0);
-		c2.set(Calendar.MILLISECOND, 0);
+		c2.set(Calendar.MONTH, 11);
+		c2.set(Calendar.DAY_OF_MONTH, 31);
+		c2.set(Calendar.HOUR_OF_DAY, 23);
+		c2.set(Calendar.MINUTE, 59);
+		c2.set(Calendar.SECOND, 59);
+		c2.set(Calendar.MILLISECOND, 999);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Unit.MILLISECOND), 0);
-		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MILLISECOND), 0);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.YEAR), 0);
+		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.YEAR), 0);
 
 		c2.add(Calendar.MILLISECOND, 1);
 
-		assertEquals(CalendarUtils.difference(c1, c2, Unit.MILLISECOND), 1);
-		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.MILLISECOND), 1);
-	}
-
-	@Test
-	public void testAdd() {
-		Calendar c1 = Calendar.getInstance();
-		c1.set(Calendar.YEAR, 2000);
-		c1.set(Calendar.MONTH, 0);
-		c1.set(Calendar.DAY_OF_MONTH, 1);
-		c1.set(Calendar.HOUR_OF_DAY, 0);
-		c1.set(Calendar.MINUTE, 0);
-		c1.set(Calendar.SECOND, 0);
-		c1.set(Calendar.MILLISECOND, 0);
-
-		Calendar c2 = Calendar.getInstance();
-		c2.set(Calendar.YEAR, 2000);
-		c2.set(Calendar.MONTH, 0);
-		c2.set(Calendar.DAY_OF_MONTH, 1);
-		c2.set(Calendar.HOUR_OF_DAY, 0);
-		c2.set(Calendar.MINUTE, 0);
-		c2.set(Calendar.SECOND, 0);
-		c2.set(Calendar.MILLISECOND, 0);
-
-		long increment = Integer.MAX_VALUE * 5l + 123456;
-
-		c1.add(Calendar.MILLISECOND, Integer.MAX_VALUE);
-		c1.add(Calendar.MILLISECOND, Integer.MAX_VALUE);
-		c1.add(Calendar.MILLISECOND, Integer.MAX_VALUE);
-		c1.add(Calendar.MILLISECOND, Integer.MAX_VALUE);
-		c1.add(Calendar.MILLISECOND, Integer.MAX_VALUE);
-		c1.add(Calendar.MILLISECOND, 123456);
-
-		CalendarUtils.add(c2, Calendar.MILLISECOND, increment);
-
-		assertEquals(c1, c2);
+		assertEquals(CalendarUtils.difference(c1, c2, Unit.YEAR), 1);
+		assertEquals(CalendarUtils.difference(c1.getTime(), c2.getTime(), Unit.YEAR), 1);
 	}
 
 	/**

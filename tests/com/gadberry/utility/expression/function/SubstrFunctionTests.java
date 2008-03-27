@@ -29,73 +29,6 @@ public class SubstrFunctionTests {
 	}
 
 	/**
-	 * This checks basic substr
-	 * 
-	 * Test: substr( abcd, 2 )
-	 */
-	@Test
-	public void testResolve1() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument("abcd", null));
-		args.add(new Argument(new Integer(2), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toString(), "cd");
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks substr with argument of 0
-	 * 
-	 * Test: substr( abcd, 0 )
-	 */
-	@Test
-	public void testResolve2() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument("abcd", null));
-		args.add(new Argument(new Integer(0), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toString(), "abcd");
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks substr with two arguments of 0
-	 * 
-	 * Test: substr( abcd, 0, 0 )
-	 */
-	@Test
-	public void testResolve3() {
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument("abcd", null));
-		args.add(new Argument(new Integer(0), null));
-		args.add(new Argument(new Integer(0), null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toString(), "");
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
 	 * This check standard arguments. Should not throw an exception.
 	 * 
 	 * Argument 1: abcd
@@ -281,6 +214,73 @@ public class SubstrFunctionTests {
 			op.setArguments(args);
 			fail();
 		} catch (InvalidArgumentsException e) {
+		}
+	}
+
+	/**
+	 * This checks basic substr
+	 * 
+	 * Test: substr( abcd, 2 )
+	 */
+	@Test
+	public void testResolve1() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument("abcd", null));
+		args.add(new Argument(new Integer(2), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toString(), "cd");
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks substr with argument of 0
+	 * 
+	 * Test: substr( abcd, 0 )
+	 */
+	@Test
+	public void testResolve2() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument("abcd", null));
+		args.add(new Argument(new Integer(0), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toString(), "abcd");
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks substr with two arguments of 0
+	 * 
+	 * Test: substr( abcd, 0, 0 )
+	 */
+	@Test
+	public void testResolve3() {
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument("abcd", null));
+		args.add(new Argument(new Integer(0), null));
+		args.add(new Argument(new Integer(0), null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toString(), "");
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
 		}
 	}
 }

@@ -33,88 +33,6 @@ public class DateDifferenceFunctionTests {
 	}
 
 	/**
-	 * This checks basic date difference
-	 * 
-	 * Test: dateDifference( c1, c2, month )
-	 */
-	@Test
-	public void testResolve1() {
-		Calendar c1 = Calendar.getInstance();
-		c1.set(Calendar.YEAR, 2000);
-		c1.set(Calendar.MONTH, 0);
-		c1.set(Calendar.DAY_OF_MONTH, 1);
-		c1.set(Calendar.HOUR_OF_DAY, 0);
-		c1.set(Calendar.MINUTE, 0);
-		c1.set(Calendar.SECOND, 0);
-		c1.set(Calendar.MILLISECOND, 0);
-
-		Calendar c2 = Calendar.getInstance();
-		c2.set(Calendar.YEAR, 2001);
-		c2.set(Calendar.MONTH, 0);
-		c2.set(Calendar.DAY_OF_MONTH, 31);
-		c2.set(Calendar.HOUR_OF_DAY, 0);
-		c2.set(Calendar.MINUTE, 0);
-		c2.set(Calendar.SECOND, 0);
-		c2.set(Calendar.MILLISECOND, 0);
-
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(c1, null));
-		args.add(new Argument(c2, null));
-		args.add(new Argument(Unit.MONTH, null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), (double) CalendarUtils.difference(c1, c2, Unit.MONTH));
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
-	 * This checks large date difference
-	 * 
-	 * Test: dateDifference( c1, c2, millisecond )
-	 */
-	@Test
-	public void testResolve2() {
-		Calendar c1 = Calendar.getInstance();
-		c1.set(Calendar.YEAR, 2000);
-		c1.set(Calendar.MONTH, 0);
-		c1.set(Calendar.DAY_OF_MONTH, 1);
-		c1.set(Calendar.HOUR_OF_DAY, 0);
-		c1.set(Calendar.MINUTE, 0);
-		c1.set(Calendar.SECOND, 0);
-		c1.set(Calendar.MILLISECOND, 0);
-
-		Calendar c2 = Calendar.getInstance();
-		c2.set(Calendar.YEAR, 2001);
-		c2.set(Calendar.MONTH, 0);
-		c2.set(Calendar.DAY_OF_MONTH, 1);
-		c2.set(Calendar.HOUR_OF_DAY, 0);
-		c2.set(Calendar.MINUTE, 0);
-		c2.set(Calendar.SECOND, 0);
-		c2.set(Calendar.MILLISECOND, 0);
-
-		List<Argument> args = new ArrayList<Argument>();
-		args.add(new Argument(c1, null));
-		args.add(new Argument(c2, null));
-		args.add(new Argument(Unit.MILLISECOND, null));
-		try {
-			op.setArguments(args);
-			assertEquals(op.resolve().toDouble(), (double) CalendarUtils.difference(c1, c2, Unit.MILLISECOND));
-		} catch (InvalidArgumentsException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	/**
 	 * This checks standard calendar arguments. Should not throw an exception.
 	 * 
 	 * Argument 1: Calendar
@@ -243,6 +161,88 @@ public class DateDifferenceFunctionTests {
 			op.setArguments(args);
 			fail();
 		} catch (InvalidArgumentsException e) {
+		}
+	}
+
+	/**
+	 * This checks basic date difference
+	 * 
+	 * Test: dateDifference( c1, c2, month )
+	 */
+	@Test
+	public void testResolve1() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 0);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2001);
+		c2.set(Calendar.MONTH, 0);
+		c2.set(Calendar.DAY_OF_MONTH, 31);
+		c2.set(Calendar.HOUR_OF_DAY, 0);
+		c2.set(Calendar.MINUTE, 0);
+		c2.set(Calendar.SECOND, 0);
+		c2.set(Calendar.MILLISECOND, 0);
+
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(c1, null));
+		args.add(new Argument(c2, null));
+		args.add(new Argument(Unit.MONTH, null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), (double) CalendarUtils.difference(c1, c2, Unit.MONTH));
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	/**
+	 * This checks large date difference
+	 * 
+	 * Test: dateDifference( c1, c2, millisecond )
+	 */
+	@Test
+	public void testResolve2() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.YEAR, 2000);
+		c1.set(Calendar.MONTH, 0);
+		c1.set(Calendar.DAY_OF_MONTH, 1);
+		c1.set(Calendar.HOUR_OF_DAY, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+
+		Calendar c2 = Calendar.getInstance();
+		c2.set(Calendar.YEAR, 2001);
+		c2.set(Calendar.MONTH, 0);
+		c2.set(Calendar.DAY_OF_MONTH, 1);
+		c2.set(Calendar.HOUR_OF_DAY, 0);
+		c2.set(Calendar.MINUTE, 0);
+		c2.set(Calendar.SECOND, 0);
+		c2.set(Calendar.MILLISECOND, 0);
+
+		List<Argument> args = new ArrayList<Argument>();
+		args.add(new Argument(c1, null));
+		args.add(new Argument(c2, null));
+		args.add(new Argument(Unit.MILLISECOND, null));
+		try {
+			op.setArguments(args);
+			assertEquals(op.resolve().toDouble(), (double) CalendarUtils.difference(c1, c2, Unit.MILLISECOND));
+		} catch (InvalidArgumentsException e) {
+			e.printStackTrace();
+			fail();
+		} catch (ArgumentCastException e) {
+			e.printStackTrace();
+			fail();
 		}
 	}
 }

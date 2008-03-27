@@ -13,13 +13,13 @@ public class MockOperator extends OperatorImpl {
 		return 0;
 	}
 
-	public Argument resolve() {
-		return null;
-	}
-
 	@Override
 	public List<Argument> parseArgs(List<String> tokens, int position, Resolver resolver) {
 		return new ArrayList<Argument>();
+	}
+
+	public Argument resolve() {
+		return null;
 	}
 
 }
