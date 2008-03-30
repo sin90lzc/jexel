@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.Resolver;
+import com.gadberry.utility.expression.Symbol;
 
 public class SymbolTests {
 
@@ -36,8 +37,7 @@ public class SymbolTests {
 		tokens.add("+");
 		tokens.add("max(3, 4)");
 		int position = 1;
-		Resolver resolver = null;
-		List<Argument> args = op.parseArgs(tokens, position, resolver);
+		List<Argument> args = op.parseArgs(tokens, position);
 		assertEquals(args.get(0), new Argument("1 - 2", null));
 		assertEquals(args.get(1), new Argument("max(3, 4)", null));
 	}
