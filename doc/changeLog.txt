@@ -2,14 +2,20 @@
 ############## JExel-1_0_0-beta_6 ##############
 ################################################
 
-Fixed bug in OperatorSet where atan was associated with AcosFunction instead of AtanFunction
+Fixed bug in OperatorSet where atan was associated with AcosFunction instead of AtanFunction.
 Fixed bug in Expression where two found symbols at the same position would conflict.  Exposed in usage of <= and >=.
 Added high level unit tests to test parsing of the symbols as they are added.
 Added SimpleResolver as an example resolver and for use in high level unit tests.
 Added Expression.setDefaultResolver() and Expression.setDefaultOperatorSet() to allow access to static methods while still using resolvers and operator sets.
-Upgrade unit tests to JUnit 4
-Cleaned up code
+Upgrade unit tests to JUnit 4.
+Cleaned up code.
 Sorted all methods for easier comparisons in the future.
+Added JavaDoc to code and generated JavaDoc to svn.
+Moved Function and Symbol to the com.gadberry.utility.expression package (one up from their previous locations)
+Updated Operator, OperatorImpl, Function and Symbol abstract method structure to not have multiple unnecessary overrides.
+Updated OperatorSet to store class definitions instead of instances of member operators.
+Removed OperatorSet and Resolver from Operator and instead store the parent Expression from which these variables are retrieved.
+Removed evaluateToDouble methods from Expression because they are unnecessary and duplicated.
 
 ################################################
 ############## JExel-1_0_0-beta_5 ##############
