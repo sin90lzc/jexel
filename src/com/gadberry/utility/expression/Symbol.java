@@ -1,18 +1,15 @@
-package com.gadberry.utility.expression.symbol;
+package com.gadberry.utility.expression;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gadberry.utility.expression.Argument;
-import com.gadberry.utility.expression.OperatorImpl;
-import com.gadberry.utility.expression.Resolver;
+/**
+ * @author Aaron Gadberry
+ */
 
 public abstract class Symbol extends OperatorImpl {
 
-	public abstract int getPriority();
-
-	@Override
-	public List<Argument> parseArgs(List<String> tokens, int position, Resolver resolver) {
+	public List<Argument> parseArgs(List<String> tokens, int position) {
 		List<Argument> args = new ArrayList<Argument>();
 		if (position > 0) {
 			// There is a left hand argument
@@ -20,7 +17,7 @@ public abstract class Symbol extends OperatorImpl {
 			for (int j = 0; j < position; j++) {
 				lhs.append(tokens.get(j));
 			}
-			args.add(new Argument(lhs.toString().trim(), resolver));
+			args.add(new Argument(lhs.toString().trim(), parentExpression.getResolver()));
 			// System.out.println("LHS:" + lhs.toString());
 		}
 		if (position < tokens.size()) {
@@ -29,12 +26,9 @@ public abstract class Symbol extends OperatorImpl {
 			for (int j = position + 1; j < tokens.size(); j++) {
 				rhs.append(tokens.get(j));
 			}
-			args.add(new Argument(rhs.toString().trim(), resolver));
+			args.add(new Argument(rhs.toString().trim(), parentExpression.getResolver()));
 			// System.out.println("RHS:" + rhs.toString());
 		}
 		return args;
 	}
-
-	public abstract Argument resolve();
-
 }

@@ -1,15 +1,14 @@
-package com.gadberry.utility.expression.function;
+package com.gadberry.utility.expression;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gadberry.utility.expression.Argument;
-import com.gadberry.utility.expression.Expression;
-import com.gadberry.utility.expression.OperatorImpl;
-import com.gadberry.utility.expression.Resolver;
+/**
+ * @author Aaron Gadberry
+ */
 
 public abstract class Function extends OperatorImpl {
-
+	
 	private static List<String> tokenize(String expression, char splitChar) {
 		expression = Expression.trim(expression);
 		int parentheticalDepth = 0;
@@ -38,21 +37,13 @@ public abstract class Function extends OperatorImpl {
 		return 20;
 	}
 
-	@Override
-	public List<Argument> parseArgs(List<String> tokens, int position, Resolver resolver) {
-		// System.out.println(tokens.toString());
-		// System.out.println("Function: " + tokens.get(0));
-		// System.out.println("Argument: " + tokens.get(1));
-		// System.out.println();
+	public List<Argument> parseArgs(List<String> tokens, int position) {
 		List<Argument> args = new ArrayList<Argument>();
 		String argumentString = Expression.trim(tokens.get(1));
 		List<String> stringArgs = tokenize(argumentString, ',');
 		for (String stringArg : stringArgs) {
-			args.add(new Argument(stringArg.trim(), resolver));
+			args.add(new Argument(stringArg.trim(), parentExpression.getResolver()));
 		}
 		return args;
 	}
-
-	public abstract Argument resolve();
-
 }
