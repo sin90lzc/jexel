@@ -66,7 +66,7 @@ public class ExpressionTests extends TestCase {
 	@Test
 	public void testEvaluateToDouble() {
 		try {
-			assertEquals(Expression.evaluateToDouble("max( ( 1 + 2 ), 2 + 3 )"), 5d);
+			assertEquals(Expression.evaluate("max( ( 1 + 2 ), 2 + 3 )").toDouble(), 5d);
 		} catch (InvalidExpressionException e) {
 			e.printStackTrace();
 			fail();
@@ -79,8 +79,8 @@ public class ExpressionTests extends TestCase {
 	@Test
 	public void testGetOperatorSet() {
 		OperatorSet operatorSet = new OperatorSet();
-		operatorSet.addOperator("+", new AdditionSymbol());
-		operatorSet.addOperator("-", new SubtractionSymbol());
+		operatorSet.addOperator("+", AdditionSymbol.class);
+		operatorSet.addOperator("-", SubtractionSymbol.class);
 
 		Expression expression = new Expression("'abc + def'");
 		expression.setOperatorSet(operatorSet);
@@ -118,13 +118,13 @@ public class ExpressionTests extends TestCase {
 	@Test
 	public void testParenthesees() {
 		try {
-			assertEquals(Expression.evaluateToDouble("max( ( 1 + 2 ), 2 + 3 )"), new Double(5));
-			assertEquals(Expression.evaluateToDouble("min(max(1,2),2 + 3)"), new Double(2));
-			assertEquals(Expression.evaluateToDouble("2 * ( 2 + 3 )"), new Double(10));
-			assertEquals(Expression.evaluateToDouble("( 1 + 1 ) * ( 2 + 3 )"), new Double(10));
-			assertEquals(Expression.evaluateToDouble("( 1 * 5 ) + ( 6 / 3 )"), new Double(7));
-			assertEquals(Expression.evaluateToDouble("1 + 2 * 6 / 3"), new Double(5));
-			assertEquals(Expression.evaluateToDouble("( 1 + 2) * 6 / 3"), new Double(6));
+			assertEquals(Expression.evaluate("max( ( 1 + 2 ), 2 + 3 )").toDouble(), new Double(5));
+			assertEquals(Expression.evaluate("min(max(1,2),2 + 3)").toDouble(), new Double(2));
+			assertEquals(Expression.evaluate("2 * ( 2 + 3 )").toDouble(), new Double(10));
+			assertEquals(Expression.evaluate("( 1 + 1 ) * ( 2 + 3 )").toDouble(), new Double(10));
+			assertEquals(Expression.evaluate("( 1 * 5 ) + ( 6 / 3 )").toDouble(), new Double(7));
+			assertEquals(Expression.evaluate("1 + 2 * 6 / 3").toDouble(), new Double(5));
+			assertEquals(Expression.evaluate("( 1 + 2) * 6 / 3").toDouble(), new Double(6));
 		} catch (InvalidExpressionException e) {
 			e.printStackTrace();
 			fail();
@@ -137,8 +137,8 @@ public class ExpressionTests extends TestCase {
 	@Test
 	public void testSetOperatorSet() {
 		OperatorSet operatorSet = new OperatorSet();
-		operatorSet.addOperator("+", new AdditionSymbol());
-		operatorSet.addOperator("-", new SubtractionSymbol());
+		operatorSet.addOperator("+", AdditionSymbol.class);
+		operatorSet.addOperator("-", SubtractionSymbol.class);
 
 		Expression expression = new Expression("'abc + def'");
 		expression.setOperatorSet(operatorSet);
