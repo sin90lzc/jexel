@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
+import com.gadberry.utility.expression.Symbol;
 
 public class AdditionSymbol extends Symbol {
 
@@ -16,21 +17,19 @@ public class AdditionSymbol extends Symbol {
 
 	}
 
-	@Override
 	public int getPriority() {
 		return 5;
 	}
 
-	@Override
 	public Argument resolve() {
 		if (getArgument(0).isDouble() && getArgument(1).isDouble()) {
 			double lhs = getArgument(0).toDouble();
 			double rhs = getArgument(1).toDouble();
-			return new Argument(new Double(lhs + rhs), resolver);
+			return new Argument(new Double(lhs + rhs), getResolver());
 		} else {
 			String lhs = getArgument(0).toString();
 			String rhs = getArgument(1).toString();
-			return new Argument(lhs + rhs, resolver);
+			return new Argument(lhs + rhs, getResolver());
 		}
 	}
 

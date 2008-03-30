@@ -3,6 +3,7 @@ package com.gadberry.utility.expression.function;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Function;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class NotFunction extends Function {
@@ -19,9 +20,8 @@ public class NotFunction extends Function {
 		}
 	}
 
-	@Override
 	public Argument resolve() {
 		boolean arg = getArgument(0).toBoolean();
-		return new Argument(new Boolean(!arg), resolver);
+		return new Argument(new Boolean(!arg), getResolver());
 	}
 }

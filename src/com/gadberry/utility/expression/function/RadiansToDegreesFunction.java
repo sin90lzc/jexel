@@ -3,6 +3,7 @@ package com.gadberry.utility.expression.function;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Function;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class RadiansToDegreesFunction extends Function {
@@ -23,8 +24,7 @@ public class RadiansToDegreesFunction extends Function {
 		}
 	}
 
-	@Override
 	public Argument resolve() {
-		return new Argument(Math.toDegrees(getArgument(0).toDouble()), resolver);
+		return new Argument(Math.toDegrees(getArgument(0).toDouble()), getResolver());
 	}
 }

@@ -3,6 +3,7 @@ package com.gadberry.utility.expression.function;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Function;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class SubstrFunction extends Function {
@@ -36,16 +37,15 @@ public class SubstrFunction extends Function {
 
 	}
 
-	@Override
 	public Argument resolve() {
 		String s = getArgument(0).toString();
 		int start = getArgument(1).toInteger();
 		Argument result = null;
 		if (getArguments().size() == 2) {
-			result = new Argument(s.substring(start), resolver);
+			result = new Argument(s.substring(start), getResolver());
 		} else if (getArguments().size() == 3) {
 			int end = getArgument(2).toInteger();
-			result = new Argument(s.substring(start, end), resolver);
+			result = new Argument(s.substring(start, end), getResolver());
 		}
 		return result;
 	}

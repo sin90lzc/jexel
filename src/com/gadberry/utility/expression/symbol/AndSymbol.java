@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
+import com.gadberry.utility.expression.Symbol;
 
 public class AndSymbol extends Symbol {
 
@@ -19,16 +20,14 @@ public class AndSymbol extends Symbol {
 		}
 	}
 
-	@Override
 	public int getPriority() {
 		return 10;
 	}
 
-	@Override
 	public Argument resolve() {
 		boolean lhs = getArgument(0).toBoolean();
 		boolean rhs = getArgument(1).toBoolean();
-		return new Argument(new Boolean(lhs && rhs), resolver);
+		return new Argument(new Boolean(lhs && rhs), getResolver());
 	}
 
 }

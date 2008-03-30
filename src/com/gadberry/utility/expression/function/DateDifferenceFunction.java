@@ -6,6 +6,7 @@ import java.util.List;
 import com.gadberry.utility.CalendarUtils;
 import com.gadberry.utility.CalendarUtils.Unit;
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Function;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class DateDifferenceFunction extends Function {
@@ -25,13 +26,12 @@ public class DateDifferenceFunction extends Function {
 		}
 	}
 
-	@Override
 	public Argument resolve() {
 		Date d1 = getArgument(0).toDate();
 		Date d2 = getArgument(1).toDate();
 		Unit unit = Unit.valueOf(getArgument(2).toString());
 
-		return new Argument(CalendarUtils.difference(d1, d2, unit), resolver);
+		return new Argument(CalendarUtils.difference(d1, d2, unit), getResolver());
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
+import com.gadberry.utility.expression.Symbol;
 
 public class LessThanOrEqualSymbol extends Symbol {
 
@@ -16,12 +17,10 @@ public class LessThanOrEqualSymbol extends Symbol {
 		}
 	}
 
-	@Override
 	public int getPriority() {
 		return 2;
 	}
 
-	@Override
 	public Argument resolve() {
 		Argument lhs = getArgument(0);
 		Argument rhs = getArgument(1);
@@ -31,7 +30,7 @@ public class LessThanOrEqualSymbol extends Symbol {
 
 		LessThanSymbol lts = new LessThanSymbol();
 		try {
-			lts.setResolver(resolver);
+			lts.setExpression(parentExpression);
 			lts.setArguments(args);
 		} catch (InvalidArgumentsException e) {
 		}
@@ -39,12 +38,12 @@ public class LessThanOrEqualSymbol extends Symbol {
 
 		EqualSymbol es = new EqualSymbol();
 		try {
-			es.setResolver(resolver);
+			es.setExpression(parentExpression);
 			es.setArguments(args);
 		} catch (InvalidArgumentsException e) {
 		}
 		boolean equal = es.resolve().toBoolean();
-		return new Argument(new Boolean(lessThan || equal), resolver);
+		return new Argument(new Boolean(lessThan || equal), getResolver());
 	}
 
 }

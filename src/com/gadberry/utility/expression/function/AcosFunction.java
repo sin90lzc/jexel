@@ -3,6 +3,7 @@ package com.gadberry.utility.expression.function;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Function;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class AcosFunction extends Function {
@@ -22,8 +23,7 @@ public class AcosFunction extends Function {
 		}
 	}
 
-	@Override
 	public Argument resolve() {
-		return new Argument(Math.acos((getArgument(0).toDouble())), resolver);
+		return new Argument(Math.acos((getArgument(0).toDouble())), getResolver());
 	}
 }

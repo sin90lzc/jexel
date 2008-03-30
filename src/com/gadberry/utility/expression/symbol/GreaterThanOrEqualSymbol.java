@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
+import com.gadberry.utility.expression.Symbol;
 
 public class GreaterThanOrEqualSymbol extends Symbol {
 
@@ -16,12 +17,10 @@ public class GreaterThanOrEqualSymbol extends Symbol {
 		}
 	}
 
-	@Override
 	public int getPriority() {
 		return 2;
 	}
 
-	@Override
 	public Argument resolve() {
 		Argument lhs = getArgument(0);
 		Argument rhs = getArgument(1);
@@ -31,7 +30,7 @@ public class GreaterThanOrEqualSymbol extends Symbol {
 
 		GreaterThanSymbol gts = new GreaterThanSymbol();
 		try {
-			gts.setResolver(resolver);
+			gts.setExpression(parentExpression);
 			gts.setArguments(args);
 		} catch (InvalidArgumentsException e) {
 		}
@@ -39,12 +38,12 @@ public class GreaterThanOrEqualSymbol extends Symbol {
 
 		EqualSymbol es = new EqualSymbol();
 		try {
-			es.setResolver(resolver);
+			es.setExpression(parentExpression);
 			es.setArguments(args);
 		} catch (InvalidArgumentsException e) {
 		}
 		boolean equal = es.resolve().toBoolean();
-		return new Argument(new Boolean(greaterThan || equal), resolver);
+		return new Argument(new Boolean(greaterThan || equal), getResolver());
 	}
 
 }

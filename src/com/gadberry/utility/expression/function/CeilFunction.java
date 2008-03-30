@@ -3,6 +3,7 @@ package com.gadberry.utility.expression.function;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Function;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class CeilFunction extends Function {
@@ -23,9 +24,8 @@ public class CeilFunction extends Function {
 		}
 	}
 
-	@Override
 	public Argument resolve() {
 		double n = getArgument(0).toDouble();
-		return new Argument(new Double(Math.ceil(n)), resolver);
+		return new Argument(new Double(Math.ceil(n)), getResolver());
 	}
 }

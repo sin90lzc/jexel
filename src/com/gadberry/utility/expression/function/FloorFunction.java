@@ -3,6 +3,7 @@ package com.gadberry.utility.expression.function;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Function;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class FloorFunction extends Function {
@@ -22,9 +23,8 @@ public class FloorFunction extends Function {
 		}
 	}
 
-	@Override
 	public Argument resolve() {
 		double n = getArgument(0).toDouble();
-		return new Argument(new Double(Math.floor(n)), resolver);
+		return new Argument(new Double(Math.floor(n)), getResolver());
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
+import com.gadberry.utility.expression.Symbol;
 
 public class SubtractionSymbol extends Symbol {
 
@@ -20,16 +21,14 @@ public class SubtractionSymbol extends Symbol {
 		}
 	}
 
-	@Override
 	public int getPriority() {
 		return 6;
 	}
 
-	@Override
 	public Argument resolve() {
 		double lhs = getArgument(0).toDouble();
 		double rhs = getArgument(1).toDouble();
-		return new Argument(new Double(lhs - rhs), resolver);
+		return new Argument(new Double(lhs - rhs), getResolver());
 	}
 
 }
