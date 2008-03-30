@@ -37,95 +37,103 @@ import com.gadberry.utility.expression.symbol.SubtractionSymbol;
 
 public class OperatorSet {
 
-	public static OperatorSet opSet = null;
+	private static OperatorSet standardOperatorSet = null;
 
+	/**
+	 * Get the standard set of operators included
+	 * 
+	 * @return the standard set of operators
+	 */
 	public static OperatorSet getStandardOperatorSet() {
-		if (opSet == null) {
-			opSet = new OperatorSet();
+		if (standardOperatorSet == null) {
+			standardOperatorSet = new OperatorSet();
 
 			// Standard Operators
-			opSet.addOperator("+", new AdditionSymbol());
-			opSet.addOperator("-", new SubtractionSymbol());
-			opSet.addOperator("*", new MultiplicationSymbol());
-			opSet.addOperator("/", new DivisionSymbol());
-			opSet.addOperator("%", new ModuloSymbol());
+			standardOperatorSet.addOperator("+", AdditionSymbol.class);
+			standardOperatorSet.addOperator("-", SubtractionSymbol.class);
+			standardOperatorSet.addOperator("*", MultiplicationSymbol.class);
+			standardOperatorSet.addOperator("/", DivisionSymbol.class);
+			standardOperatorSet.addOperator("%", ModuloSymbol.class);
 
 			// Boolean
-			opSet.addOperator("AND", new AndSymbol());
-			opSet.addOperator("&&", new AndSymbol());
-			opSet.addOperator("OR", new OrSymbol());
-			opSet.addOperator("||", new OrSymbol());
-			opSet.addOperator("not", new NotFunction());
+			standardOperatorSet.addOperator("AND", AndSymbol.class);
+			standardOperatorSet.addOperator("&&", AndSymbol.class);
+			standardOperatorSet.addOperator("OR", OrSymbol.class);
+			standardOperatorSet.addOperator("||", OrSymbol.class);
+			standardOperatorSet.addOperator("not", NotFunction.class);
 
 			// Math
-			opSet.addOperator("max", new MaxFunction());
-			opSet.addOperator("min", new MinFunction());
-			opSet.addOperator("floor", new FloorFunction());
-			opSet.addOperator("ceil", new CeilFunction());
-			opSet.addOperator("neg", new NegFunction());
-			opSet.addOperator("abs", new AbsFunction());
-			opSet.addOperator("cos", new CosFunction());
-			opSet.addOperator("sin", new SinFunction());
-			opSet.addOperator("tan", new TanFunction());
-			opSet.addOperator("acos", new AcosFunction());
-			opSet.addOperator("asin", new AsinFunction());
-			opSet.addOperator("atan", new AtanFunction());
-			opSet.addOperator("rad", new DegreesToRadiansFunction());
-			opSet.addOperator("deg", new RadiansToDegreesFunction());
+			standardOperatorSet.addOperator("max", MaxFunction.class);
+			standardOperatorSet.addOperator("min", MinFunction.class);
+			standardOperatorSet.addOperator("floor", FloorFunction.class);
+			standardOperatorSet.addOperator("ceil", CeilFunction.class);
+			standardOperatorSet.addOperator("neg", NegFunction.class);
+			standardOperatorSet.addOperator("abs", AbsFunction.class);
+			standardOperatorSet.addOperator("cos", CosFunction.class);
+			standardOperatorSet.addOperator("sin", SinFunction.class);
+			standardOperatorSet.addOperator("tan", TanFunction.class);
+			standardOperatorSet.addOperator("acos", AcosFunction.class);
+			standardOperatorSet.addOperator("asin", AsinFunction.class);
+			standardOperatorSet.addOperator("atan", AtanFunction.class);
+			standardOperatorSet.addOperator("rad", DegreesToRadiansFunction.class);
+			standardOperatorSet.addOperator("deg", RadiansToDegreesFunction.class);
 
 			// Comparison
-			opSet.addOperator("==", new EqualSymbol());
-			opSet.addOperator(">=", new GreaterThanOrEqualSymbol());
-			opSet.addOperator(">", new GreaterThanSymbol());
-			opSet.addOperator("<=", new LessThanOrEqualSymbol());
-			opSet.addOperator("<", new LessThanSymbol());
+			standardOperatorSet.addOperator("==", EqualSymbol.class);
+			standardOperatorSet.addOperator(">=", GreaterThanOrEqualSymbol.class);
+			standardOperatorSet.addOperator(">", GreaterThanSymbol.class);
+			standardOperatorSet.addOperator("<=", LessThanOrEqualSymbol.class);
+			standardOperatorSet.addOperator("<", LessThanSymbol.class);
 
 			// String
-			opSet.addOperator("substr", new SubstrFunction());
+			standardOperatorSet.addOperator("substr", SubstrFunction.class);
 
 			// Date
-			opSet.addOperator("dateDifference", new DateDifferenceFunction());
+			standardOperatorSet.addOperator("dateDifference", DateDifferenceFunction.class);
 		}
 
-		return opSet;
+		return standardOperatorSet;
 	}
 
-	private Map<String, Operator> operators = new HashMap<String, Operator>();
+	private Map<String, Class<? extends Operator>> operators = new HashMap<String, Class<? extends Operator>>();
 
-	public void addOperator(String delimeter, Operator o) {
-		operators.put(delimeter, o);
+	public void addOperator(String delimiter, Class<? extends Operator> c) {
+		operators.put(delimiter, c);
 	}
 
-	private Operator createOperator(Class<? extends Operator> c) {
+	private Operator createOperator(Class<? extends Operator> c, Expression expression) {
 		try {
 			Operator o = c.newInstance();
-			o.setOperatorSet(this);
-			return o;
+			o.setExpression(expression);
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	public Operator findOperator(String symbol) {
+	Operator findOperator(String symbol, Expression expression) {
 		// If we have a direct match
 		if (operators.get(symbol) != null) {
-			return createOperator(operators.get(symbol).getClass());
+			return createOperator(operators.get(symbol), expression);
 		}
 
 		// If we have a starts with match (functions)
 		for (String s : operators.keySet()) {
 			if (symbol.startsWith(s)) {
-				return createOperator(operators.get(s).getClass());
+				return createOperator(operators.get(s), expression);
 			}
 		}
 
 		return null;
 	}
 
-	public List<String> getDelimeters() {
+	List<String> getDelimeters() {
 		return new ArrayList<String>(operators.keySet());
 	}
 
