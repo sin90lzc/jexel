@@ -12,12 +12,7 @@ public class SimpleResolver implements Resolver {
 	private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
 	public boolean canResolve(String path) {
-		if (isDate(path)) {
-			return true;
-		} else if (isDateUnit(path)) {
-			return true;
-		}
-		return false;
+		return resolve(path) != null;
 	}
 
 	private Date getDate(String path) {
