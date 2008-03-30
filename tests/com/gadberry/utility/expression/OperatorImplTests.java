@@ -66,26 +66,6 @@ public class OperatorImplTests {
 		}
 	}
 
-	@Test
-	public void testGetOperatorSet() {
-		OperatorSet operatorSet = new OperatorSet();
-		operatorSet.addOperator("+", new AdditionSymbol());
-		operatorSet.addOperator("-", new SubtractionSymbol());
-
-		op.setOperatorSet(operatorSet);
-
-		assertEquals(op.getOperatorSet(), operatorSet);
-	}
-
-	@Test
-	public void testGetResolver() {
-		Resolver resolver = new MockResolver();
-
-		op.setResolver(resolver);
-
-		assertEquals(op.getResolver(), resolver);
-	}
-
 	/**
 	 * Testing set / get arguments
 	 * 
@@ -102,25 +82,5 @@ public class OperatorImplTests {
 			e.printStackTrace();
 			fail();
 		}
-	}
-
-	@Test
-	public void testSetOperatorSet() {
-		OperatorSet operatorSet = new OperatorSet();
-		operatorSet.addOperator("+", new AdditionSymbol());
-		operatorSet.addOperator("-", new SubtractionSymbol());
-
-		op.setOperatorSet(operatorSet);
-
-		assertEquals(op.getOperatorSet(), operatorSet);
-	}
-
-	@Test
-	public void testSetResolver() {
-		Resolver resolver = new MockResolver();
-
-		op.setResolver(resolver);
-
-		assertEquals(op.getResolver(), resolver);
 	}
 }
