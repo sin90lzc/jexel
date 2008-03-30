@@ -8,9 +8,7 @@ public abstract class OperatorImpl implements Operator {
 
 	private List<Argument> arguments = null;
 
-	protected OperatorSet operatorSet = OperatorSet.getStandardOperatorSet();
-
-	protected Resolver resolver = null;
+	protected Expression parentExpression = null;
 
 	protected abstract void checkArgs(List<Argument> args) throws InvalidArgumentsException;
 
@@ -22,16 +20,6 @@ public abstract class OperatorImpl implements Operator {
 		return arguments;
 	}
 
-	public OperatorSet getOperatorSet() {
-		return operatorSet;
-	}
-
-	public Resolver getResolver() {
-		return resolver;
-	}
-
-	public abstract List<Argument> parseArgs(List<String> tokens, int position, Resolver resolver);
-
 	private List<Argument> resolveArguments(List<Argument> args) {
 		List<Argument> resolvedArgs = new ArrayList<Argument>(args.size());
 		Iterator<Argument> iter = args.iterator();
@@ -40,8 +28,8 @@ public abstract class OperatorImpl implements Operator {
 			if (!arg.isResolved()) {
 				try {
 					Expression expression = new Expression(arg.toString());
-					expression.setOperatorSet(operatorSet);
-					expression.setResolver(resolver);
+					expression.setOperatorSet(parentExpression.getOperatorSet());
+					expression.setResolver(parentExpression.getResolver());
 
 					arg = expression.evaluate();
 				} catch (InvalidExpressionException e) {
@@ -58,11 +46,11 @@ public abstract class OperatorImpl implements Operator {
 		arguments = resolvedArgs;
 	}
 
-	public void setOperatorSet(OperatorSet operatorSet) {
-		this.operatorSet = operatorSet;
+	public void setExpression(Expression expression) {
+		parentExpression = expression;
 	}
-
-	public void setResolver(Resolver resolver) {
-		this.resolver = resolver;
+	
+	protected Resolver getResolver(){
+		return parentExpression.getResolver();
 	}
 }
