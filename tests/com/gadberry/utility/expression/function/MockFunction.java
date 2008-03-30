@@ -3,6 +3,7 @@ package com.gadberry.utility.expression.function;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Function;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
 public class MockFunction extends Function {
@@ -12,8 +13,7 @@ public class MockFunction extends Function {
 		// Take no action
 	}
 
-	@Override
 	public Argument resolve() {
-		return new Argument(1, resolver);
+		return new Argument(1, getResolver());
 	}
 }
