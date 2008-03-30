@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Function;
 import com.gadberry.utility.expression.Resolver;
 
 public class FunctionTests {
@@ -43,8 +44,7 @@ public class FunctionTests {
 		tokens.add("functionName");
 		tokens.add("(1, (1 + 2), today)");
 		int position = 0;
-		Resolver resolver = null;
-		List<Argument> args = op.parseArgs(tokens, position, resolver);
+		List<Argument> args = op.parseArgs(tokens, position);
 		assertEquals(args.get(0), new Argument(1, null));
 		assertEquals(args.get(1), new Argument("(1 + 2)", null));
 		assertEquals(args.get(2), new Argument("today", null));
