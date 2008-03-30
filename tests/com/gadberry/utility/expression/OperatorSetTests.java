@@ -29,20 +29,20 @@ public class OperatorSetTests {
 	public void testAddOperator() {
 		Operator op = null;
 
-		op = opSet.findOperator("+");
+		op = opSet.findOperator("+", null);
 		if (!(op instanceof AdditionSymbol)) {
 			fail();
 		}
 
 		opSet = new OperatorSet();
 
-		op = opSet.findOperator("+");
+		op = opSet.findOperator("+", null);
 		if (!(op == null)) {
 			fail();
 		}
 
-		opSet.addOperator("+", new AdditionSymbol());
-		op = opSet.findOperator("+");
+		opSet.addOperator("+", AdditionSymbol.class);
+		op = opSet.findOperator("+", null);
 		if (!(op instanceof AdditionSymbol)) {
 			fail();
 		}
@@ -52,17 +52,17 @@ public class OperatorSetTests {
 	public void testFindOperator() {
 		Operator op = null;
 
-		op = opSet.findOperator("+");
+		op = opSet.findOperator("+", null);
 		if (!(op instanceof AdditionSymbol)) {
 			fail();
 		}
 
-		op = opSet.findOperator("+a");
+		op = opSet.findOperator("+a", null);
 		if (!(op instanceof AdditionSymbol)) {
 			fail();
 		}
 
-		op = opSet.findOperator("aaaaaaaa");
+		op = opSet.findOperator("aaaaaaaa", null);
 		if (!(op == null)) {
 			fail();
 		}
@@ -71,8 +71,8 @@ public class OperatorSetTests {
 	@Test
 	public void testGetSymbols() {
 		opSet = new OperatorSet();
-		opSet.addOperator("+", new AdditionSymbol());
-		opSet.addOperator("-", new SubtractionSymbol());
+		opSet.addOperator("+", AdditionSymbol.class);
+		opSet.addOperator("-", SubtractionSymbol.class);
 
 		List<String> symbols = opSet.getDelimeters();
 		if (!symbols.contains("+")) {
