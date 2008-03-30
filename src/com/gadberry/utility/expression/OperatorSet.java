@@ -120,6 +120,7 @@ public class OperatorSet {
 		try {
 			Operator o = c.newInstance();
 			o.setExpression(expression);
+			return o;
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
