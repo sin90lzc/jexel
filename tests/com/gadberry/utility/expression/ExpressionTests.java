@@ -64,19 +64,6 @@ public class ExpressionTests extends TestCase {
 	}
 
 	@Test
-	public void testEvaluateToDouble() {
-		try {
-			assertEquals(Expression.evaluate("max( ( 1 + 2 ), 2 + 3 )").toDouble(), 5d);
-		} catch (InvalidExpressionException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ArgumentCastException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	@Test
 	public void testGetOperatorSet() {
 		OperatorSet operatorSet = new OperatorSet();
 		operatorSet.addOperator("+", AdditionSymbol.class);
