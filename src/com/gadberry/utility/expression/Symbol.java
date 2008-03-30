@@ -17,7 +17,7 @@ public abstract class Symbol extends OperatorImpl {
 			for (int j = 0; j < position; j++) {
 				lhs.append(tokens.get(j));
 			}
-			args.add(new Argument(lhs.toString().trim(), parentExpression.getResolver()));
+			args.add(new Argument(lhs.toString().trim(), getResolver()));
 			// System.out.println("LHS:" + lhs.toString());
 		}
 		if (position < tokens.size()) {
@@ -26,7 +26,7 @@ public abstract class Symbol extends OperatorImpl {
 			for (int j = position + 1; j < tokens.size(); j++) {
 				rhs.append(tokens.get(j));
 			}
-			args.add(new Argument(rhs.toString().trim(), parentExpression.getResolver()));
+			args.add(new Argument(rhs.toString().trim(), getResolver()));
 			// System.out.println("RHS:" + rhs.toString());
 		}
 		return args;

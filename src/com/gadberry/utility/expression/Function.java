@@ -42,7 +42,7 @@ public abstract class Function extends OperatorImpl {
 		String argumentString = Expression.trim(tokens.get(1));
 		List<String> stringArgs = tokenize(argumentString, ',');
 		for (String stringArg : stringArgs) {
-			args.add(new Argument(stringArg.trim(), parentExpression.getResolver()));
+			args.add(new Argument(stringArg.trim(), getResolver()));
 		}
 		return args;
 	}
