@@ -32,8 +32,8 @@ public abstract class OperatorImpl implements Operator {
 			if (!arg.isResolved()) {
 				try {
 					Expression expression = new Expression(arg.toString());
-					expression.setOperatorSet(parentExpression.getOperatorSet());
-					expression.setResolver(parentExpression.getResolver());
+					expression.setOperatorSet(getOperatorSet());
+					expression.setResolver(getResolver());
 
 					arg = expression.evaluate();
 				} catch (InvalidExpressionException e) {
@@ -42,6 +42,13 @@ public abstract class OperatorImpl implements Operator {
 			resolvedArgs.add(arg);
 		}
 		return resolvedArgs;
+	}
+
+	private OperatorSet getOperatorSet() {
+		if(parentExpression != null){
+			return parentExpression.getOperatorSet();
+		}
+		return Expression.getDefaultOperatorSet();
 	}
 
 	public void setArguments(List<Argument> args) throws InvalidArgumentsException {
@@ -55,6 +62,9 @@ public abstract class OperatorImpl implements Operator {
 	}
 	
 	protected Resolver getResolver(){
-		return parentExpression.getResolver();
+		if(parentExpression != null){
+			return parentExpression.getResolver();
+		}
+		return null;
 	}
 }
