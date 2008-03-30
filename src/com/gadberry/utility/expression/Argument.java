@@ -3,6 +3,9 @@ package com.gadberry.utility.expression;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * @author Aaron Gadberry
+ */
 public class Argument {
 	private static String stripLiteral(String string) {
 		if (string.startsWith(Expression.LITERAL_CHARACTER) && string.endsWith(Expression.LITERAL_CHARACTER)) {
@@ -13,6 +16,16 @@ public class Argument {
 
 	private Object arg = null;
 
+	/**
+	 * Create an Argument for use in an Operator or to return from an Operator.
+	 * 
+	 * @param object
+	 *            The subject of the Argument.
+	 * 
+	 * @param resolver
+	 *            The {@link Resolver} to utilize on this argument. Null
+	 *            indicates no resolver should be used.
+	 */
 	public Argument(Object object, Resolver resolver) {
 		if (resolver != null && resolver.canResolve(object.toString())) {
 			arg = resolver.resolve(object.toString());
@@ -34,10 +47,22 @@ public class Argument {
 		return false;
 	}
 
+	/**
+	 * Get the base object of this Argument.
+	 * 
+	 * @return the unedited base object
+	 */
 	public Object getObject() {
 		return arg;
 	}
 
+	/**
+	 * Determine if the base object can be interpreted as a {@link Boolean}
+	 * value.
+	 * 
+	 * @return whether or not the argument can be interpreted as a boolean
+	 *         value.
+	 */
 	public boolean isBoolean() {
 		try {
 			toBoolean();
@@ -47,6 +72,11 @@ public class Argument {
 		}
 	}
 
+	/**
+	 * Determine if the base object can be interpreted as a {@link Date} value.
+	 * 
+	 * @return whether or not the argument can be interpreted as a date value.
+	 */
 	public boolean isDate() {
 		try {
 			toDate();
@@ -56,6 +86,12 @@ public class Argument {
 		}
 	}
 
+	/**
+	 * Determine if the base object can be interpreted as a {@link Double}
+	 * value.
+	 * 
+	 * @return whether or not the argument can be interpreted as a double value.
+	 */
 	public boolean isDouble() {
 		try {
 			toDouble();
@@ -65,6 +101,13 @@ public class Argument {
 		}
 	}
 
+	/**
+	 * Determine if the base object can be interpreted as a {@link Integer}
+	 * value. This will return true in the case of a decimal number.
+	 * 
+	 * @return whether or not the argument can be interpreted as a integer
+	 *         value.
+	 */
 	public boolean isInteger() {
 		try {
 			toInteger();
@@ -74,14 +117,31 @@ public class Argument {
 		}
 	}
 
+	/**
+	 * Determine if the base object is a literal string.
+	 * 
+	 * @return whether or not the argument is surrounded by the
+	 *         Expression.LITERAL_STRING constant
+	 */
 	public boolean isLiteral() {
 		return !stripLiteral(arg.toString()).equals(arg.toString());
 	}
 
-	public boolean isResolved() {
+	boolean isResolved() {
 		return isDate() || isDouble() || isInteger() || isBoolean() || isLiteral();
 	}
 
+	/**
+	 * Return a {@link Boolean} interpretation of the base object if a direct
+	 * conversion can take place.
+	 * 
+	 * @return Boolean interpretation of the base object.
+	 * 
+	 * @throws ArgumentCastException
+	 *             is thrown if the base object is not a {@link Boolean} and the
+	 *             base object is not a String with a value of "true" or
+	 *             "false".
+	 */
 	public boolean toBoolean() throws ArgumentCastException {
 		if (arg instanceof Boolean) {
 			return ((Boolean) arg).booleanValue();
@@ -96,6 +156,16 @@ public class Argument {
 				+ arg.getClass().toString() + arg.toString());
 	}
 
+	/**
+	 * Return a {@link Date} interpretation of the base object if a direct
+	 * conversion can take place.
+	 * 
+	 * @return Date interpretation of the base object.
+	 * 
+	 * @throws ArgumentCastException
+	 *             is thrown if the base object is not a {@link Date} and the
+	 *             base object is not a {@link Calendar}.
+	 */
 	public Date toDate() throws ArgumentCastException {
 		if (arg instanceof Date) {
 			return ((Date) arg);
@@ -105,6 +175,17 @@ public class Argument {
 		throw new ArgumentCastException("Argument can not be interpreted as a date.  Arg: " + arg.toString());
 	}
 
+	/**
+	 * Return a {@link Double} interpretation of the base object if a direct
+	 * conversion can take place.
+	 * 
+	 * @return Double interpretation of the base object.
+	 * 
+	 * @throws ArgumentCastException
+	 *             is thrown if the base object is not a {@link Double} and the
+	 *             base object is not a {@link Integer} and the base object is
+	 *             not a {@link Float} and the base object is not a {@link Long}.
+	 */
 	public double toDouble() throws ArgumentCastException {
 		if (arg instanceof Integer) {
 			return ((Integer) arg).doubleValue();
@@ -124,6 +205,17 @@ public class Argument {
 		throw new ArgumentCastException("Argument can not be interpreted as an double.  Arg: " + arg.toString());
 	}
 
+	/**
+	 * Return a {@link Integer} interpretation of the base object if a direct
+	 * conversion can take place.
+	 * 
+	 * @return Integer interpretation of the base object.
+	 * 
+	 * @throws ArgumentCastException
+	 *             is thrown if the base object is not a {@link Double} and the
+	 *             base object is not a {@link Integer} and the base object is
+	 *             not a {@link Float} and the base object is not a {@link Long}.
+	 */
 	public int toInteger() throws ArgumentCastException {
 		if (arg instanceof Integer) {
 			return ((Integer) arg).intValue();

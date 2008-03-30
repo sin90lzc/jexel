@@ -9,6 +9,10 @@ import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.Function;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
+/**
+ * @author Aaron Gadberry
+ */
+
 public class DateDifferenceFunction extends Function {
 
 	@Override

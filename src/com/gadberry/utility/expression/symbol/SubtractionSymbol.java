@@ -6,6 +6,10 @@ import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 import com.gadberry.utility.expression.Symbol;
 
+/**
+ * @author Aaron Gadberry
+ */
+
 public class SubtractionSymbol extends Symbol {
 
 	@Override

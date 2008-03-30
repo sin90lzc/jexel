@@ -8,14 +8,45 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Aaron Gadberry
+ */
+
 public class CalendarUtils {
 
+	/**
+	 * Unit is utilized to distinguish the valid types of units that can be
+	 * utilized by a series of difference methods within this class.
+	 */
 	public enum Unit {
-		DAY(Calendar.DAY_OF_MONTH, 1000l * 60 * 60 * 24), HOUR(Calendar.HOUR_OF_DAY, 1000l * 60 * 60), MILLISECOND(
-				Calendar.MILLISECOND,
-				1), MINUTE(Calendar.MINUTE, 1000l * 60), MONTH(Calendar.MONTH, 1000l * 60 * 60 * 24 * 30), SECOND(
-				Calendar.SECOND,
-				1000l), YEAR(Calendar.YEAR, 1000l * 60 * 60 * 24 * 365);
+		/**
+		 * Represents a unit of time defined by Calendar.DAY_OF_MONTH
+		 */
+		DAY(Calendar.DAY_OF_MONTH, 1000l * 60 * 60 * 24),
+		/**
+		 * Represents a unit of time defined by Calendar.HOUR_OF_DAY
+		 */
+		HOUR(Calendar.HOUR_OF_DAY, 1000l * 60 * 60),
+		/**
+		 * Represents a unit of time defined by Calendar.MILLISECOND
+		 */
+		MILLISECOND(Calendar.MILLISECOND, 1),
+		/**
+		 * Represents a unit of time defined by Calendar.MINUTE
+		 */
+		MINUTE(Calendar.MINUTE, 1000l * 60),
+		/**
+		 * Represents a unit of time defined by Calendar.MONTH
+		 */
+		MONTH(Calendar.MONTH, 1000l * 60 * 60 * 24 * 30),
+		/**
+		 * Represents a unit of time defined by Calendar.SECOND
+		 */
+		SECOND(Calendar.SECOND, 1000l),
+		/**
+		 * Represents a unit of time defined by Calendar.YEAR
+		 */
+		YEAR(Calendar.YEAR, 1000l * 60 * 60 * 24 * 365);
 
 		private final int calendarUnit;
 		private final long estimate;
@@ -26,6 +57,19 @@ public class CalendarUtils {
 		}
 	}
 
+	/**
+	 * Add a long amount to a calendar. Similar to calendar.add() but accepts a
+	 * long argument instead of limiting it to an int.
+	 * 
+	 * @param c
+	 *            the calendar
+	 * 
+	 * @param unit
+	 *            the unit to increment
+	 * 
+	 * @param increment
+	 *            the amount to increment
+	 */
 	public static void add(Calendar c, int unit, long increment) {
 		while (increment > Integer.MAX_VALUE) {
 			c.add(unit, Integer.MAX_VALUE);
@@ -34,6 +78,20 @@ public class CalendarUtils {
 		c.add(unit, (int) increment);
 	}
 
+	/**
+	 * Find the number of units passed between two {@link Calendar} objects.
+	 * 
+	 * @param c1
+	 *            The first occurring {@link Calendar}
+	 * 
+	 * @param c2
+	 *            The later occurring {@link Calendar}
+	 * 
+	 * @param unit
+	 *            The unit to calculate the difference in
+	 * 
+	 * @return the number of units passed
+	 */
 	public static long difference(Calendar c1, Calendar c2, Unit unit) {
 
 		Calendar first = (Calendar) c1.clone();
@@ -59,6 +117,20 @@ public class CalendarUtils {
 		return total;
 	}
 
+	/**
+	 * Find the number of units passed between two {@link Date} objects.
+	 * 
+	 * @param d1
+	 *            The first occurring {@link Date}
+	 * 
+	 * @param d2
+	 *            The later occurring {@link Date}
+	 * 
+	 * @param unit
+	 *            The unit to calculate the difference in
+	 * 
+	 * @return the number of units passed
+	 */
 	public static long difference(Date d1, Date d2, Unit unit) {
 		Calendar c1 = Calendar.getInstance();
 		c1.setTime(d1);
@@ -69,6 +141,21 @@ public class CalendarUtils {
 		return difference(c1, c2, unit);
 	}
 
+	/**
+	 * Find the number of units, including a fraction, passed between two
+	 * {@link Calendar} objects.
+	 * 
+	 * @param c1
+	 *            The first occurring {@link Calendar}
+	 * 
+	 * @param c2
+	 *            The later occurring {@link Calendar}
+	 * 
+	 * @param unit
+	 *            The unit to calculate the difference in
+	 * 
+	 * @return the number of units passed
+	 */
 	public static double exactDifference(Calendar c1, Calendar c2, Unit unit) {
 		long unitDifference = difference(c1, c2, unit);
 		Calendar mid = (Calendar) c1.clone();
@@ -85,10 +172,40 @@ public class CalendarUtils {
 		return unitDifference + remainder;
 	}
 
+	/**
+	 * Find the number of units passed between two {@link Calendar} objects in
+	 * all units. This would return a result like 1 year, 2 months and 3 days.
+	 * 
+	 * This method assumes you want the difference broken down in all available
+	 * units.S
+	 * 
+	 * @param c1
+	 *            The first occurring {@link Calendar}
+	 * 
+	 * @param c2
+	 *            The later occurring {@link Calendar}
+	 * 
+	 * @return the number of units passed without overlap
+	 */
 	public static Map<Unit, Long> tieredDifference(Calendar c1, Calendar c2) {
 		return tieredDifference(c1, c2, Arrays.asList(Unit.values()));
 	}
 
+	/**
+	 * Find the number of units passed between two {@link Calendar} objects in
+	 * all units. This would return a result like 1 year, 2 months and 3 days.
+	 * 
+	 * @param c1
+	 *            The first occurring {@link Calendar}
+	 * 
+	 * @param c2
+	 *            The later occurring {@link Calendar}
+	 * 
+	 * @param units
+	 *            The list of units to calculate the difference in
+	 * 
+	 * @return the number of units passed without overlap
+	 */
 	public static Map<Unit, Long> tieredDifference(Calendar c1, Calendar c2, List<Unit> units) {
 		Calendar first = (Calendar) c1.clone();
 		Calendar last = (Calendar) c2.clone();

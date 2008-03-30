@@ -35,6 +35,10 @@ import com.gadberry.utility.expression.symbol.MultiplicationSymbol;
 import com.gadberry.utility.expression.symbol.OrSymbol;
 import com.gadberry.utility.expression.symbol.SubtractionSymbol;
 
+/**
+ * @author Aaron Gadberry
+ */
+
 public class OperatorSet {
 
 	private static OperatorSet standardOperatorSet = null;
@@ -97,6 +101,17 @@ public class OperatorSet {
 
 	private Map<String, Class<? extends Operator>> operators = new HashMap<String, Class<? extends Operator>>();
 
+	/**
+	 * Add an {@link Operator} to this OperatorSet with a given delimiter
+	 * 
+	 * @param delimiter
+	 *            The symbol to use to parse this {@link Operator}, such as "+"
+	 *            or "cos".
+	 * 
+	 * @param c
+	 *            The class implementing {@link Operator} to add to this
+	 *            OperatorSet.
+	 */
 	public void addOperator(String delimiter, Class<? extends Operator> c) {
 		operators.put(delimiter, c);
 	}

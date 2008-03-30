@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * @author Aaron Gadberry
+ */
+
 public abstract class OperatorImpl implements Operator {
 
 	private List<Argument> arguments = null;

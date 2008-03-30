@@ -3,6 +3,9 @@ package com.gadberry.utility.expression;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Aaron Gadberry
+ */
 public class Expression {
 
 	private static OperatorSet defaultOperatorSet = OperatorSet.getStandardOperatorSet();
@@ -11,14 +14,41 @@ public class Expression {
 
 	static final String LITERAL_CHARACTER = "'";
 
+	/**
+	 * This is a publicly accessible static method to cover general use of the
+	 * class without the need to instantiate individual Expression objects.
+	 * 
+	 * @param stringExpression
+	 *            The expression to evaluate.
+	 * 
+	 * @return result from the evaluation of the expression. The result is
+	 *         returned in the form of an {@link Argument}.
+	 * 
+	 * @throws InvalidExpressionException
+	 */
 	public static Argument evaluate(String stringExpression) throws InvalidExpressionException {
 		return new Expression(stringExpression).evaluate();
 	}
 
+	/**
+	 * Get the default operator set. Unless previously set by
+	 * setDefaultOperatorSet(), this is the same set of operators returned by
+	 * {@link OperatorSet}.getStandardOperatorSet().
+	 * 
+	 * @return {@link OperatorSet} utilized in expression evaluation unless
+	 *         otherwise specified.
+	 */
 	public static OperatorSet getDefaultOperatorSet() {
 		return defaultOperatorSet;
 	}
 
+	/**
+	 * Get the default resolver. This is null by default, as there is no
+	 * standard resolver.
+	 * 
+	 * @return {@link Resolver} utilized in expression evaluation unless
+	 *         otherwise specified.
+	 */
 	public static Resolver getDefaultResolver() {
 		return defaultResolver;
 	}
@@ -54,10 +84,22 @@ public class Expression {
 		return true;
 	}
 
+	/**
+	 * Set the {@link OperatorSet} to be used by default when evaluating
+	 * expressions.
+	 * 
+	 * @param defaultOperatorSet
+	 */
 	public static void setDefaultOperatorSet(OperatorSet defaultOperatorSet) {
 		Expression.defaultOperatorSet = defaultOperatorSet;
 	}
 
+	/**
+	 * Set the {@link Resolver} to be used by default when evaluating
+	 * expressions.
+	 * 
+	 * @param defaultResolver
+	 */
 	public static void setDefaultResolver(Resolver defaultResolver) {
 		Expression.defaultResolver = defaultResolver;
 	}
@@ -120,6 +162,12 @@ public class Expression {
 
 	private String stringExpression = null;
 
+	/**
+	 * Create an Expression for evaluation of the string argument.
+	 * 
+	 * @param stringExpression
+	 *            The expression to evaluate.
+	 */
 	public Expression(String stringExpression) {
 		this.stringExpression = stringExpression;
 	}
@@ -130,11 +178,11 @@ public class Expression {
 	}
 
 	/**
-	 * This is an access method for evaluating an expression with a resolver.
-	 * Use this if you have variables in your expression.
+	 * This method interprets the expression into a result.
 	 * 
-	 * @param expression
-	 * @return Argument result
+	 * @return result from the evaluation of the expression. The result is
+	 *         returned in the form of an {@link Argument}.
+	 * 
 	 * @throws InvalidExpressionException
 	 */
 	public Argument evaluate() throws InvalidExpressionException {
@@ -153,14 +201,9 @@ public class Expression {
 	}
 
 	/**
-	 * This is an access method for evaluating an expression. It is equilivent
-	 * to Expression.evaluate(stringExpression, null). Use this if you have no
-	 * variables in your expression.
+	 * Get the {@link OperatorSet} to be used for evaluation of this expression.
 	 * 
-	 * @param expression
-	 * @return
-	 * @throws InvalidExpressionException
-	 * @throws ArgumentCastException
+	 * @return {@link OperatorSet}
 	 */
 	public OperatorSet getOperatorSet() {
 		return opSet;
@@ -191,14 +234,29 @@ public class Expression {
 		return potentialDelimeters;
 	}
 
+	/**
+	 * Get the {@link Resolver} to be used for evaluation of this expression.
+	 * 
+	 * @return {@link Resolver}
+	 */
 	public Resolver getResolver() {
 		return resolver;
 	}
 
+	/**
+	 * Set the {@link OperatorSet} to be used for evaluation of this expression.
+	 * 
+	 * @param operators
+	 */
 	public void setOperatorSet(OperatorSet operators) {
 		opSet = operators;
 	}
 
+	/**
+	 * Set the {@link Resolver} to be used for evaluation of this expression.
+	 * 
+	 * @param resolver
+	 */
 	public void setResolver(Resolver resolver) {
 		this.resolver = resolver;
 	}
