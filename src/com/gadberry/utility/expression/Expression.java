@@ -9,14 +9,10 @@ public class Expression {
 
 	private static Resolver defaultResolver = null;
 
-	public static final String LITERAL_CHARACTER = "'";
+	static final String LITERAL_CHARACTER = "'";
 
 	public static Argument evaluate(String stringExpression) throws InvalidExpressionException {
 		return new Expression(stringExpression).evaluate();
-	}
-
-	public static double evaluateToDouble(String stringExpression) throws InvalidExpressionException {
-		return new Expression(stringExpression).evaluateToDouble();
 	}
 
 	public static OperatorSet getDefaultOperatorSet() {
@@ -109,7 +105,7 @@ public class Expression {
 		return tokens;
 	}
 
-	public static String trim(String expression) {
+	static String trim(String expression) {
 		if (expression.startsWith("(") && expression.endsWith(")")) {
 			if (hasValidParenthesees(expression.substring(1, expression.length() - 1))) {
 				return trim(expression.substring(1, expression.length() - 1));
@@ -166,10 +162,6 @@ public class Expression {
 	 * @throws InvalidExpressionException
 	 * @throws ArgumentCastException
 	 */
-	public Double evaluateToDouble() throws InvalidExpressionException, ArgumentCastException {
-		return new Double(evaluate().toDouble());
-	}
-
 	public OperatorSet getOperatorSet() {
 		return opSet;
 	}
@@ -181,12 +173,10 @@ public class Expression {
 
 		for (int i = 0; i < tokens.size(); i++) {
 			String token = tokens.get(i);
-			Operator operator = opSet.findOperator(token);
+			Operator operator = opSet.findOperator(token, this);
 
 			if (operator != null) {
-				operator.setResolver(resolver);
-
-				List<Argument> args = operator.parseArgs(tokens, i, resolver);
+				List<Argument> args = operator.parseArgs(tokens, i);
 
 				try {
 					operator.setArguments(args);
