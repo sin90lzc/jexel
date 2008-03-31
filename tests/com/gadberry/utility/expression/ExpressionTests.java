@@ -13,6 +13,9 @@ import junit.framework.TestCase;
  */
 public class ExpressionTests extends TestCase {
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testConstructor() {
 		try {
@@ -23,6 +26,9 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testEvaluate() {
 		try {
@@ -33,6 +39,9 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testEvaluateExpressionWithInvalidArguments() {
 		try {
@@ -43,6 +52,9 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testEvaluateInvalidExpression() {
 		try {
@@ -52,6 +64,9 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testEvaluateNonExpression() {
 		try {
@@ -63,6 +78,9 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetOperatorSet() {
 		OperatorSet operatorSet = new OperatorSet();
@@ -75,6 +93,9 @@ public class ExpressionTests extends TestCase {
 		assertEquals(expression.getOperatorSet(), operatorSet);
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetResolver() {
 		Resolver resolver = new MockResolver();
@@ -85,6 +106,9 @@ public class ExpressionTests extends TestCase {
 		assertEquals(expression.getResolver(), resolver);
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testLiterals() {
 		try {
@@ -102,6 +126,9 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testParenthesees() {
 		try {
@@ -121,6 +148,9 @@ public class ExpressionTests extends TestCase {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testSetOperatorSet() {
 		OperatorSet operatorSet = new OperatorSet();
@@ -133,6 +163,9 @@ public class ExpressionTests extends TestCase {
 		assertEquals(expression.getOperatorSet(), operatorSet);
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testSetResolver() {
 		Resolver resolver = new MockResolver();
@@ -143,6 +176,9 @@ public class ExpressionTests extends TestCase {
 		assertEquals(expression.getResolver(), resolver);
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testStaticEvaluate() {
 		try {

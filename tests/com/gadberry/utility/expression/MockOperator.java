@@ -9,6 +9,10 @@ import java.util.List;
 
 public class MockOperator extends OperatorImpl {
 
+	MockOperator(Expression expression) {
+		super(expression);
+	}
+
 	@Override
 	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {
 	}

@@ -13,8 +13,15 @@ import org.junit.Test;
 
 import com.gadberry.utility.CalendarUtils.Unit;
 
+/**
+ * @author Aaron Gadberry
+ *
+ */
 public class CalendarUtilsTests {
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testAdd() {
 		Calendar c1 = Calendar.getInstance();

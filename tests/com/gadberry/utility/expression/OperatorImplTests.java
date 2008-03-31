@@ -10,20 +10,30 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.gadberry.utility.expression.symbol.AdditionSymbol;
-import com.gadberry.utility.expression.symbol.SubtractionSymbol;
-
+/**
+ * @author Aaron Gadberry
+ *
+ */
 public class OperatorImplTests {
 
+	/**
+	 * 
+	 */
 	public static double TOLERANCE = .0001;
 
 	private Operator op = null;
 
+	/**
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		op = new MockOperator();
+		op = new MockOperator(null);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		op = null;

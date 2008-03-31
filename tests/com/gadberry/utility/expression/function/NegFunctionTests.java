@@ -15,15 +15,25 @@ import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
+/**
+ * @author Aaron Gadberry
+ *
+ */
 public class NegFunctionTests {
 
 	private NegFunction op = null;
 
+	/**
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		op = new NegFunction();
+		op = new NegFunction(null);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		op = null;

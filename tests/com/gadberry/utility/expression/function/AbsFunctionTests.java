@@ -15,15 +15,25 @@ import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
+/**
+ * @author Aaron Gadberry
+ *
+ */
 public class AbsFunctionTests {
 
 	private AbsFunction op = null;
 
+	/**
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		op = new AbsFunction();
+		op = new AbsFunction(null);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		op = null;

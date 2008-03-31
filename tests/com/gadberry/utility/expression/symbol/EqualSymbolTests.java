@@ -16,15 +16,25 @@ import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
+/**
+ * @author Aaron Gadberry
+ *
+ */
 public class EqualSymbolTests {
 
 	private EqualSymbol op = null;
 
+	/**
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		op = new EqualSymbol();
+		op = new EqualSymbol(null);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		op = null;

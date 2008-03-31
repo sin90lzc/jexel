@@ -10,18 +10,27 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.gadberry.utility.expression.Argument;
-import com.gadberry.utility.expression.Resolver;
 import com.gadberry.utility.expression.Symbol;
 
+/**
+ * @author Aaron Gadberry
+ *
+ */
 public class SymbolTests {
 
 	private Symbol op = null;
 
+	/**
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		op = new MockSymbol();
+		op = new MockSymbol(null);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		op = null;

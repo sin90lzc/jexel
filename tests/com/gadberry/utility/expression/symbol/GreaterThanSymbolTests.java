@@ -16,15 +16,25 @@ import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.ArgumentCastException;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
+/**
+ * @author Aaron Gadberry
+ *
+ */
 public class GreaterThanSymbolTests {
 
 	private GreaterThanSymbol op = null;
 
+	/**
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		op = new GreaterThanSymbol();
+		op = new GreaterThanSymbol(null);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		op = null;

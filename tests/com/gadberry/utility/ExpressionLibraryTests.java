@@ -9,8 +9,15 @@ import com.gadberry.utility.expression.Expression;
 import com.gadberry.utility.expression.InvalidExpressionException;
 import com.gadberry.utility.expression.SimpleResolver;
 
+/**
+ * @author Aaron Gadberry
+ *
+ */
 public class ExpressionLibraryTests {
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testOperators() {
 		try {

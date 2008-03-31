@@ -7,6 +7,10 @@ import java.util.Date;
 import com.gadberry.utility.CalendarUtils;
 import com.gadberry.utility.CalendarUtils.Unit;
 
+/**
+ * @author Aaron Gadberry
+ *
+ */
 public class SimpleResolver implements Resolver {
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");

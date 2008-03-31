@@ -11,17 +11,26 @@ import org.junit.Test;
 
 import com.gadberry.utility.expression.Argument;
 import com.gadberry.utility.expression.Function;
-import com.gadberry.utility.expression.Resolver;
 
+/**
+ * @author Aaron Gadberry
+ *
+ */
 public class FunctionTests {
 
 	private Function op = null;
 
+	/**
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		op = new MockFunction();
+		op = new MockFunction(null);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		op = null;

@@ -10,6 +10,10 @@ import org.junit.Test;
 
 import com.gadberry.utility.FuzzyEquals;
 
+/**
+ * @author Aaron Gadberry
+ *
+ */
 public class ArgumentTests {
 
 	private Argument arg = null;
@@ -26,6 +30,9 @@ public class ArgumentTests {
 		assertEquals(arg.getObject(), "abc");
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testConstructor2() {
 		Object o = new Integer(0);
@@ -35,6 +42,9 @@ public class ArgumentTests {
 		assertEquals(arg.getObject(), o);
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testEquals() {
 		Argument arg2;
@@ -64,6 +74,9 @@ public class ArgumentTests {
 		assertFalse(arg.equals(s));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testIsDouble() {
 		arg = new Argument(new Integer(0), new MockResolver());
@@ -79,6 +92,9 @@ public class ArgumentTests {
 		assertFalse(arg.isDouble());
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testToBoolean() {
 		arg = new Argument(new Boolean(true), new MockResolver());
@@ -95,6 +111,9 @@ public class ArgumentTests {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testToDouble() {
 		arg = new Argument(new Integer(0), new MockResolver());
@@ -145,6 +164,9 @@ public class ArgumentTests {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testToInteger() {
 		arg = new Argument(new Integer(0), null);
@@ -195,6 +217,9 @@ public class ArgumentTests {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testToString() {
 		arg = new Argument(new Integer(0), new MockResolver());

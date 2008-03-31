@@ -11,20 +11,33 @@ import org.junit.Test;
 import com.gadberry.utility.expression.symbol.AdditionSymbol;
 import com.gadberry.utility.expression.symbol.SubtractionSymbol;
 
+/**
+ * @author Aaron Gadberry
+ *
+ */
 public class OperatorSetTests {
 
 	private OperatorSet opSet = null;
 
+	/**
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		opSet = OperatorSet.getStandardOperatorSet();
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		opSet = null;
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testAddOperator() {
 		Operator op = null;
@@ -48,6 +61,9 @@ public class OperatorSetTests {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testFindOperator() {
 		Operator op = null;
@@ -68,6 +84,9 @@ public class OperatorSetTests {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetSymbols() {
 		opSet = new OperatorSet();
