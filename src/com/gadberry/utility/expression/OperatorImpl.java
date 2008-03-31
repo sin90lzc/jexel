@@ -10,6 +10,10 @@ import java.util.List;
 
 public abstract class OperatorImpl implements Operator {
 
+	OperatorImpl(Expression expression) {
+		parentExpression = expression;
+	}
+
 	private List<Argument> arguments = null;
 
 	protected Expression parentExpression = null;
@@ -45,7 +49,7 @@ public abstract class OperatorImpl implements Operator {
 	}
 
 	private OperatorSet getOperatorSet() {
-		if(parentExpression != null){
+		if (parentExpression != null) {
 			return parentExpression.getOperatorSet();
 		}
 		return Expression.getDefaultOperatorSet();
@@ -57,14 +61,14 @@ public abstract class OperatorImpl implements Operator {
 		arguments = resolvedArgs;
 	}
 
-	public void setExpression(Expression expression) {
-		parentExpression = expression;
-	}
-	
-	protected Resolver getResolver(){
-		if(parentExpression != null){
+	protected Resolver getResolver() {
+		if (parentExpression != null) {
 			return parentExpression.getResolver();
 		}
 		return null;
+	}
+
+	protected Expression getExpression() {
+		return parentExpression;
 	}
 }

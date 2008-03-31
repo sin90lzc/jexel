@@ -66,14 +66,4 @@ public interface Operator {
 	 *             throw this exception.
 	 */
 	void setArguments(List<Argument> args) throws InvalidArgumentsException;
-
-	/**
-	 * This method should always be called upon Operator instantiation. It sets
-	 * the parent {@link Expression} and subsequently allows the forwarding of
-	 * the {@link Resolver} and {@link OperatorSet} to any children created.
-	 * 
-	 * @param expression
-	 *            the parent Expression
-	 */
-	abstract void setExpression(Expression expression);
 }

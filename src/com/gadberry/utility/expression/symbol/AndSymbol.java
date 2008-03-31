@@ -3,6 +3,7 @@ package com.gadberry.utility.expression.symbol;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Expression;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 import com.gadberry.utility.expression.Symbol;
 
@@ -11,6 +12,16 @@ import com.gadberry.utility.expression.Symbol;
  */
 
 public class AndSymbol extends Symbol {
+
+	/**
+	 * Create an AndSymbol with a given parent expression.
+	 * 
+	 * @param expression
+	 *            parent
+	 */
+	public AndSymbol(Expression expression) {
+		super(expression);
+	}
 
 	@Override
 	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {

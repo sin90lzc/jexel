@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Expression;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 import com.gadberry.utility.expression.Symbol;
 
@@ -12,6 +13,16 @@ import com.gadberry.utility.expression.Symbol;
  */
 
 public class GreaterThanSymbol extends Symbol {
+
+	/**
+	 * Create a GreaterThanSymbol with a given parent expression.
+	 * 
+	 * @param expression
+	 *            parent
+	 */
+	public GreaterThanSymbol(Expression expression) {
+		super(expression);
+	}
 
 	@Override
 	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {

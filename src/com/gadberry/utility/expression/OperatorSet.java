@@ -1,5 +1,6 @@
 package com.gadberry.utility.expression;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -118,8 +119,7 @@ public class OperatorSet {
 
 	private Operator createOperator(Class<? extends Operator> c, Expression expression) {
 		try {
-			Operator o = c.newInstance();
-			o.setExpression(expression);
+			Operator o = c.getConstructor(Expression.class).newInstance(expression);
 			return o;
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -128,6 +128,10 @@ public class OperatorSet {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		}
 		return null;

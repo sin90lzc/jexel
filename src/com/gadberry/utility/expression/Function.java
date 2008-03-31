@@ -8,7 +8,17 @@ import java.util.List;
  */
 
 public abstract class Function extends OperatorImpl {
-	
+
+	/**
+	 * Create a function with a given parent expression.
+	 * 
+	 * @param expression
+	 *            parent
+	 */
+	public Function(Expression expression) {
+		super(expression);
+	}
+
 	private static List<String> tokenize(String expression, char splitChar) {
 		expression = Expression.trim(expression);
 		int parentheticalDepth = 0;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Expression;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 import com.gadberry.utility.expression.Symbol;
 
@@ -12,6 +13,16 @@ import com.gadberry.utility.expression.Symbol;
  */
 
 public class GreaterThanOrEqualSymbol extends Symbol {
+
+	/**
+	 * Create a GreaterThanOrEqualSymbol with a given parent expression.
+	 * 
+	 * @param expression
+	 *            parent
+	 */
+	public GreaterThanOrEqualSymbol(Expression expression) {
+		super(expression);
+	}
 
 	@Override
 	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {
@@ -32,17 +43,15 @@ public class GreaterThanOrEqualSymbol extends Symbol {
 		args.add(lhs);
 		args.add(rhs);
 
-		GreaterThanSymbol gts = new GreaterThanSymbol();
+		GreaterThanSymbol gts = new GreaterThanSymbol(getExpression());
 		try {
-			gts.setExpression(parentExpression);
 			gts.setArguments(args);
 		} catch (InvalidArgumentsException e) {
 		}
 		boolean greaterThan = gts.resolve().toBoolean();
 
-		EqualSymbol es = new EqualSymbol();
+		EqualSymbol es = new EqualSymbol(getExpression());
 		try {
-			es.setExpression(parentExpression);
 			es.setArguments(args);
 		} catch (InvalidArgumentsException e) {
 		}

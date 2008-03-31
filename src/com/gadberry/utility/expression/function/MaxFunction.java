@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Expression;
 import com.gadberry.utility.expression.Function;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
@@ -12,6 +13,16 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
  */
 
 public class MaxFunction extends Function {
+
+	/**
+	 * Create a MaxFunction with a given parent expression.
+	 * 
+	 * @param expression
+	 *            parent
+	 */
+	public MaxFunction(Expression expression) {
+		super(expression);
+	}
 
 	@Override
 	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {

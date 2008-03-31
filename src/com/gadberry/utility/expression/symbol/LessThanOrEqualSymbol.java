@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Expression;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 import com.gadberry.utility.expression.Symbol;
 
@@ -12,6 +13,16 @@ import com.gadberry.utility.expression.Symbol;
  */
 
 public class LessThanOrEqualSymbol extends Symbol {
+
+	/**
+	 * Create a LessThanOrEqualSymbol with a given parent expression.
+	 * 
+	 * @param expression
+	 *            parent
+	 */
+	public LessThanOrEqualSymbol(Expression expression) {
+		super(expression);
+	}
 
 	@Override
 	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {
@@ -32,17 +43,15 @@ public class LessThanOrEqualSymbol extends Symbol {
 		args.add(lhs);
 		args.add(rhs);
 
-		LessThanSymbol lts = new LessThanSymbol();
+		LessThanSymbol lts = new LessThanSymbol(getExpression());
 		try {
-			lts.setExpression(parentExpression);
 			lts.setArguments(args);
 		} catch (InvalidArgumentsException e) {
 		}
 		boolean lessThan = lts.resolve().toBoolean();
 
-		EqualSymbol es = new EqualSymbol();
+		EqualSymbol es = new EqualSymbol(getExpression());
 		try {
-			es.setExpression(parentExpression);
 			es.setArguments(args);
 		} catch (InvalidArgumentsException e) {
 		}

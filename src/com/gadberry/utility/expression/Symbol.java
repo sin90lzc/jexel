@@ -9,6 +9,16 @@ import java.util.List;
 
 public abstract class Symbol extends OperatorImpl {
 
+	/**
+	 * Create a symbol with a given parent expression.
+	 * 
+	 * @param expression
+	 *            parent
+	 */
+	public Symbol(Expression expression) {
+		super(expression);
+	}
+
 	public List<Argument> parseArgs(List<String> tokens, int position) {
 		List<Argument> args = new ArrayList<Argument>();
 		if (position > 0) {

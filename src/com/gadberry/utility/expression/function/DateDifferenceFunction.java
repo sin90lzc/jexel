@@ -6,6 +6,7 @@ import java.util.List;
 import com.gadberry.utility.CalendarUtils;
 import com.gadberry.utility.CalendarUtils.Unit;
 import com.gadberry.utility.expression.Argument;
+import com.gadberry.utility.expression.Expression;
 import com.gadberry.utility.expression.Function;
 import com.gadberry.utility.expression.InvalidArgumentsException;
 
@@ -14,6 +15,16 @@ import com.gadberry.utility.expression.InvalidArgumentsException;
  */
 
 public class DateDifferenceFunction extends Function {
+
+	/**
+	 * Create a DateDifferenceFunction with a given parent expression.
+	 * 
+	 * @param expression
+	 *            parent
+	 */
+	public DateDifferenceFunction(Expression expression) {
+		super(expression);
+	}
 
 	@Override
 	protected void checkArgs(List<Argument> args) throws InvalidArgumentsException {
