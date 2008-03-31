@@ -16,6 +16,7 @@ Updated Operator, OperatorImpl, Function and Symbol abstract method structure to
 Updated OperatorSet to store class definitions instead of instances of member operators.
 Removed OperatorSet and Resolver from Operator and instead store the parent Expression from which these variables are retrieved.
 Removed evaluateToDouble methods from Expression because they are unnecessary and duplicated.
+Removed default constructor from OperatorImpl and therefore all Functions and Symbols.  Constructor now requires the parent Expression as an argument.
 
 ################################################
 ############## JExel-1_0_0-beta_5 ##############
